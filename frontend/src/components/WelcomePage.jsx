@@ -19,7 +19,7 @@ function WelcomePage() {
                 Manage your personal finances easily and efficiently.
               </p>
               <span className="mt-20 inline-block">
-                <img src="src/images/illustration-mobile.svg" alt="illustration" />
+                <img className="w-[350px] h-[350px]" src="src/images/mobile-illustration.svg" alt="illustration" />
               </span>
             </div>
             {/*Parte derecha del incicio de sesión*/}
