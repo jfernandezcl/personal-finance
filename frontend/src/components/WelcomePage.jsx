@@ -12,7 +12,7 @@ function WelcomePage() {
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="px-26 py-17.5 text-center">
               <a className="mb-5.5 flex items-center justify-center gap-2">
-                <img className="hidden dark:block w-10 h-auto" src="src/images/logo.svg" alt="logo" />
+                <img className="hidden w-10 h-auto" src="src/images/logo.svg" alt="logo" />
                 <span className="text-lg font-semibold">Personal finances</span>
               </a>
               <p className="font-medium 2xl:px-20 mt-6">
