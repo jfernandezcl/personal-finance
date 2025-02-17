@@ -3,13 +3,7 @@ import { register, login } from '../controllers/authController.js';
 
 const router = express.Router();
 
-router.post('/register', (req, res) => {
-  res.send('Registro de usuario');
-});
-
-router.post('/login', (req, res) => {
-  res.send('Inicio de sesión');
-});
+router.post('/register', register);  // Usando la función register del controlador
+router.post('/login', login);        // Usando la función login del controlador
 
 export default router;
-
