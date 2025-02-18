@@ -95,7 +95,7 @@ function SignUpPage() {
                 <div className="mt-6 text-center">
                   <p className="font-medium text-[#788596]">
                     Already have an account?
-                    <a href="#"> Sign in</a>
+                    <a href="/" className="text-blue-500 underline cursor-pointer"> Sign in</a>
                   </p>
                 </div>
               </form>
