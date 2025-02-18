@@ -72,7 +72,7 @@ function WelcomePage() {
                 <div className="mt-6 text-center">
                   <p className="font-medium text-[#788596]">
                     Don't have any account?
-                    <a href="#"> Sign Up</a>
+                    <a href="/signup" className="text-blue-500 underline cursor-pointer"> Sign Up</a>
                   </p>
                 </div>
               </form>
