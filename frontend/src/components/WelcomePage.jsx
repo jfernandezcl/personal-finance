@@ -46,7 +46,7 @@ function WelcomePage() {
                   </div>
                 </div>
                 <div className="mb-6">
-                  <label className="mb-2.5 block font-medium text-black">Re-type Password</label>
+                  <label className="mb-2.5 block font-medium text-black">Password</label>
                   <div className="relative">
                     <input type="password" placeholder="6+ Characters, 1 Capital letter" className="w-full rounded-lg border 
                     border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary 
