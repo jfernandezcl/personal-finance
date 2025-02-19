@@ -14,7 +14,7 @@ export const register = async (req, res) => {
     // verificar si existe el usuario
     const [existinUser] = await pool.execute('SELECT * FROM users WHERE email = ?', [email]);
     if (existinUser.length > 0) {
-      return res.status(400).json({ msg: 'The user already exists' });
+      return res.status(409).json({ msg: 'The user already exists' });
     }
 
     // encriptar contraseña
