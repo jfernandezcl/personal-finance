@@ -3,8 +3,56 @@ import iconEmail from '../images/icon-email.svg'
 import iconPassword from '../images/icon-password.svg'
 import iconGoogle from '../images/icon-google.svg'
 import iconUser from '../images/icon-user.svg'
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 
 function SignUpPage() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validar las contraseñas
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3001/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        navigate("/");
+      } else {
+        setError("Registration failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setError("Server error");
+    }
+  }
 
   return (
     <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10 mt-20">
@@ -34,13 +82,20 @@ function SignUpPage() {
               <h2 className="mb-9 text-2xl font-bold text-black sm:text-title-xl2">
                 Sign Up to Personal finances
               </h2>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black">Name</label>
                   <div className="relative">
-                    <input type="text" placeholder="Enter your full name" className="w-full rounded-lg border 
+                    <input
+                      type="text"
+                      name='username'
+                      placeholder="Enter your full name"
+                      className="w-full rounded-lg border 
                               border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary 
-                              focus-visible:shadow-none"/>
+                              focus-visible:shadow-none"
+                      onChange={handleChange}
+                      value={formData.username}
+                    />
                     <span className="absolute right-4 top-4">
                       <img className="fill-current" width="22" height="22" src={iconUser} />
                     </span>
@@ -49,9 +104,16 @@ function SignUpPage() {
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black">Email</label>
                   <div className="relative">
-                    <input type="email" placeholder="Enter your email" className="w-full rounded-lg border 
+                    <input
+                      type="email"
+                      name='email'
+                      placeholder="Enter your email"
+                      className="w-full rounded-lg border 
                               border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary 
-                              focus-visible:shadow-none"/>
+                              focus-visible:shadow-none"
+                      onChange={handleChange}
+                      value={formData.email}
+                    />
                     <span className="absolute right-4 top-4">
                       <img className="fill-current" width="22" height="22" src={iconEmail} />
                     </span>
@@ -60,9 +122,16 @@ function SignUpPage() {
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black">Password</label>
                   <div className="relative">
-                    <input type="password" placeholder="Enter your password" className="w-full rounded-lg border 
+                    <input
+                      type="password"
+                      name='password'
+                      placeholder="Enter your password"
+                      className="w-full rounded-lg border 
                               border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary 
-                              focus-visible:shadow-none" />
+                              focus-visible:shadow-none"
+                      onChange={handleChange}
+                      value={formData.password}
+                    />
                     <span className="absolute right-4 top-4">
                       <img className="fill-current" width="22" height="22" src={iconPassword} />
                     </span>
@@ -71,18 +140,25 @@ function SignUpPage() {
                 <div className="mb-6">
                   <label className="mb-2.5 block font-medium text-black">Re-type Password</label>
                   <div className="relative">
-                    <input type="password" placeholder="Re-enter your password" className="w-full rounded-lg border 
+                    <input
+                      type="password"
+                      name='confirmPassword'
+                      placeholder="Re-enter your password"
+                      className="w-full rounded-lg border 
                               border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary 
-                              focus-visible:shadow-none" />
+                              focus-visible:shadow-none"
+                      onChange={handleChange}
+                      value={formData.confirmPassword}
+                    />
                     <span className="absolute right-4 top-4">
                       <img className="fill-current" width="22" height="22" src={iconPassword} />
                     </span>
                   </div>
                 </div>
                 <div className="mb-5">
-                  <input type="submit" value="Create account" className="w-full cursor-pointer rounded-lg 
-                              border border-[#3c50e0] bg-[#3c50e0] p-4 font-medium text-white transition 
-                              hover:bg-opacity-90"/>
+                  <button type="submit" className="w-full cursor-pointer rounded-lg border border-[#3c50e0] bg-[#3c50e0] p-4 font-medium text-white transition hover:bg-opacity-90">
+                    Create account
+                  </button>
                 </div>
                 <button className="flex w-full items-center justify-center gap-3.5 rounded-lg 
                             border border-[#D1D5DB] bg-[#E2E8F0] p-4 font-medium text-[#788596] 
