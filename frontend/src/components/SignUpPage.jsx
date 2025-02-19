@@ -5,17 +5,18 @@ import iconGoogle from '../images/icon-google.svg'
 import iconUser from '../images/icon-user.svg'
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import ErrorAlert from '../alerts/ErrorAlert'
 
 
 function SignUpPage() {
   const navigate = useNavigate();
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
     confirmPassword: ""
   });
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,6 +28,7 @@ function SignUpPage() {
     // Validar las contraseñas
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
+      setTimeout(() => setError(""), 3000);
       return;
     }
 
@@ -43,14 +45,17 @@ function SignUpPage() {
         }),
       });
       const data = await response.json();
-      if (response.ok) {
-        navigate("/");
-      } else {
-        setError("Registration failed");
+
+      if (!response.ok) {
+        setError(data.message || "The user already exists, enter other data");
+        setTimeout(() => setError(""), 3000);
+        return;
       }
+
+      navigate("/");
     } catch (error) {
-      console.error("Error:", error);
-      setError("Server error");
+      setError("Error del servidor");
+      setTimeout(() => setError(""), 3000);
     }
   }
 
@@ -73,6 +78,8 @@ function SignUpPage() {
             </div>
           </div>
 
+          <ErrorAlert error={error} onClose={() => setError("")} />
+
           {/*Registro de usuarios*/}
           <div className="w-full border-stroke xl:w-1/2 xl:border-l-2 px-[70px]">
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
@@ -82,6 +89,8 @@ function SignUpPage() {
               <h2 className="mb-9 text-2xl font-bold text-black sm:text-title-xl2">
                 Sign Up to Personal finances
               </h2>
+
+              {/*Formulario de registro*/}
               <form onSubmit={handleSubmit}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black">Name</label>
