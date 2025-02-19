@@ -6,11 +6,13 @@ import iconUser from '../images/icon-user.svg'
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ErrorAlert from '../alerts/ErrorAlert'
+import SuccessAlert from '../alerts/SuccessAlert'
 
 
 function SignUpPage() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -52,7 +54,16 @@ function SignUpPage() {
         return;
       }
 
-      navigate("/");
+      // Mostrar mensaje de éxito
+      setSuccessMessage("Registration successful!");
+      console.log("Success message set:", "Registration successful!"); // Verifica si se ejecuta
+
+      // Tiempo para mostrar el mensaje de éxito
+      setTimeout(() => {
+        setSuccessMessage("");
+        navigate("/");
+      }, 2000); // 5 segundos para ver el mensaje
+
     } catch (error) {
       setError("Error del servidor");
       setTimeout(() => setError(""), 3000);
@@ -77,8 +88,6 @@ function SignUpPage() {
               </span>
             </div>
           </div>
-
-          <ErrorAlert error={error} onClose={() => setError("")} />
 
           {/*Registro de usuarios*/}
           <div className="w-full border-stroke xl:w-1/2 xl:border-l-2 px-[70px]">
@@ -184,6 +193,9 @@ function SignUpPage() {
                   </p>
                 </div>
               </form>
+
+              <ErrorAlert error={error} onClose={() => setError("")} />
+              {successMessage && <SuccessAlert message={successMessage} onClose={() => setSuccessMessage("")} />}
             </div>
           </div>
         </div>
