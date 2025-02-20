@@ -5,10 +5,12 @@ import iconGoogle from "../images/icon-google.svg";
 import logo from "../images/logo.svg";
 import ErrorAlert from "../alerts/ErrorAlert";
 import SuccessAlert from "../alerts/SuccessAlert";
+import { useNavigate } from "react-router";
 
 function WelcomePage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -36,8 +38,12 @@ function WelcomePage() {
         return;
       }
 
+      localStorage.setItem("token", data.token);
       setSuccess("Login successful!");
-      setTimeout(() => setSuccess(""), 3000);
+      setTimeout(() => {
+        setSuccess("");
+        navigate("/dashboard"); // Redirigir al dashboard
+      }, 1000);
     } catch (err) {
       setError("Server error. Please try again later.");
       setTimeout(() => setError(""), 3000);
