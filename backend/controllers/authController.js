@@ -42,6 +42,8 @@ export const login = async (req, res) => {
   try {
     // verificar si existe el usuario
     const [existingUser] = await pool.execute('SELECT * FROM users WHERE email = ?', [email]);
+    console.log("Usuario encontrado:", existingUser);
+
     if (existingUser.length === 0) {
       return res.status(401).json({ msg: 'Email or password is incorrect' });
     }
@@ -57,7 +59,9 @@ export const login = async (req, res) => {
     const token = jwt.sign({ id: user.id, username: user.username, email: user.email },
       process.env.JWT_SECRET, { expiresIn: '1h' });
 
-    res.status(200).json({ token });
+    console.log("Usuario autenticado:", { token, username: user.username });
+
+    res.status(200).json({ token, username: user.username });
 
   } catch (error) {
     console.log(error);
