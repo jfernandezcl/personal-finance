@@ -39,11 +39,13 @@ function WelcomePage() {
       }
 
       localStorage.setItem("token", data.token);
+      localStorage.setItem("username", data.username);
+
       setSuccess("Login successful!");
       setTimeout(() => {
         setSuccess("");
         navigate("/dashboard"); // Redirigir al dashboard
-      }, 1000);
+      });
     } catch (err) {
       setError("Server error. Please try again later.");
       setTimeout(() => setError(""), 3000);
