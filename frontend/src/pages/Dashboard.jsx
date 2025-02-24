@@ -4,13 +4,19 @@ import { useNavigate } from "react-router";
 function Dashboard() {
   let userName = localStorage.getItem("username");
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    navigate("/", { replace: true });
+    return null;
+  }
 
   const handleLogout = () => {
     //Eliminar datos del localStorage
     localStorage.removeItem("username");
     localStorage.removeItem("token");
 
-    navigate("/");
+    navigate("/", { replace: true });
   }
 
   return (
