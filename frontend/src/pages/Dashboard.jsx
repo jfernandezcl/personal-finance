@@ -76,10 +76,13 @@ function Dashboard() {
         <button
           onClick={handleLogout}
           className="px-4 py-2 bg-blue-500 text-white rounded"
-        >Log out</button>
+        >
+          Log out
+        </button>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 mb-6 items-center w-full max-w-3xl">
+      {/* Fila superior: tarjeta de input y tarjeta de gráfica, con misma altura */}
+      <div className="grid grid-cols-2 gap-4 mb-6 items-stretch w-full max-w-3xl">
         <div className="p-4 bg-white shadow rounded-lg text-center w-full">
           <h2 className="text-xl font-semibold">Añadir Monto</h2>
           <input
@@ -109,9 +112,11 @@ function Dashboard() {
           <button
             onClick={handleAgregar}
             className="mt-2 px-4 py-2 bg-green-500 text-white rounded w-full"
-          >Añadir</button>
+          >
+            Añadir
+          </button>
         </div>
-        <div className="p-4 bg-white shadow rounded-lg flex justify-center items-center w-40 h-40">
+        <div className="p-4 bg-white shadow rounded-lg flex justify-center items-center w-full">
           <Doughnut data={doughnutData} options={{ maintainAspectRatio: false }} />
         </div>
       </div>
@@ -119,11 +124,15 @@ function Dashboard() {
       <div className="grid grid-cols-2 gap-4 mb-6 w-full max-w-3xl">
         <div className="p-4 bg-white shadow rounded-lg text-center">
           <h2 className="text-xl font-semibold text-green-600">Ingresos</h2>
-          <p className="text-2xl font-bold">${ingresos.reduce((acc, val) => acc + val, 0).toFixed(2)}</p>
+          <p className="text-2xl font-bold">
+            ${ingresos.reduce((acc, val) => acc + val, 0).toFixed(2)}
+          </p>
         </div>
         <div className="p-4 bg-white shadow rounded-lg text-center">
           <h2 className="text-xl font-semibold text-red-600">Gastos</h2>
-          <p className="text-2xl font-bold">${gastos.reduce((acc, val) => acc + val, 0).toFixed(2)}</p>
+          <p className="text-2xl font-bold">
+            ${gastos.reduce((acc, val) => acc + val, 0).toFixed(2)}
+          </p>
         </div>
       </div>
 
