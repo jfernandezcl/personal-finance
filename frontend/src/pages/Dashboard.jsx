@@ -44,15 +44,15 @@ function Dashboard() {
   };
 
   const barData = {
-    labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
     datasets: [
       {
-        label: "Ingresos",
+        label: "Income",
         data: ingresos,
         backgroundColor: "#34D399",
       },
       {
-        label: "Gastos",
+        label: "Expenditure",
         data: gastos,
         backgroundColor: "#EF4444",
       },
@@ -60,7 +60,7 @@ function Dashboard() {
   };
 
   const doughnutData = {
-    labels: ["Ingresos", "Gastos"],
+    labels: ["Income", "Expenditure"],
     datasets: [
       {
         data: [ingresos.reduce((acc, val) => acc + val, 0), gastos.reduce((acc, val) => acc + val, 0)],
@@ -72,7 +72,7 @@ function Dashboard() {
   return (
     <div className="p-6 min-h-screen bg-gray-100 flex flex-col items-center justify-center">
       <div className="flex justify-between items-center mb-6 w-full max-w-3xl">
-        <h1 className="text-2xl font-bold">Bienvenido {userName || "al Dashboard"}</h1>
+        <h1 className="text-2xl font-bold">Personal account of {userName || "al Dashboard"}</h1>
         <button
           onClick={handleLogout}
           className="px-4 py-2 bg-blue-500 text-white rounded"
@@ -84,7 +84,7 @@ function Dashboard() {
       {/* Fila superior: tarjeta de input y tarjeta de gráfica, con misma altura */}
       <div className="grid grid-cols-2 gap-4 mb-6 items-stretch w-full max-w-3xl">
         <div className="p-4 bg-white shadow rounded-lg text-center w-full">
-          <h2 className="text-xl font-semibold">Añadir Monto</h2>
+          <h2 className="text-xl font-semibold">Add</h2>
           <input
             type="text"
             value={inputValor}
@@ -97,8 +97,8 @@ function Dashboard() {
             onChange={(e) => setTipo(e.target.value)}
             className="mt-2 p-2 border rounded w-full"
           >
-            <option value="ingreso">Ingreso</option>
-            <option value="gasto">Gasto</option>
+            <option value="ingreso">Income</option>
+            <option value="gasto">Expenditure</option>
           </select>
           <select
             value={mes}
@@ -113,7 +113,7 @@ function Dashboard() {
             onClick={handleAgregar}
             className="mt-2 px-4 py-2 bg-green-500 text-white rounded w-full"
           >
-            Añadir
+            Add
           </button>
         </div>
         <div className="p-4 bg-white shadow rounded-lg flex justify-center items-center w-full">
@@ -123,13 +123,13 @@ function Dashboard() {
 
       <div className="grid grid-cols-2 gap-4 mb-6 w-full max-w-3xl">
         <div className="p-4 bg-white shadow rounded-lg text-center">
-          <h2 className="text-xl font-semibold text-green-600">Ingresos</h2>
+          <h2 className="text-xl font-semibold text-green-600">Income</h2>
           <p className="text-2xl font-bold">
             ${ingresos.reduce((acc, val) => acc + val, 0).toFixed(2)}
           </p>
         </div>
         <div className="p-4 bg-white shadow rounded-lg text-center">
-          <h2 className="text-xl font-semibold text-red-600">Gastos</h2>
+          <h2 className="text-xl font-semibold text-red-600">Expenditure</h2>
           <p className="text-2xl font-bold">
             ${gastos.reduce((acc, val) => acc + val, 0).toFixed(2)}
           </p>
@@ -137,7 +137,7 @@ function Dashboard() {
       </div>
 
       <div className="p-4 bg-white shadow rounded-lg w-full max-w-3xl">
-        <h2 className="text-lg font-semibold mb-2">Ingresos vs Gastos</h2>
+        <h2 className="text-lg font-semibold mb-2">Income vs Expenditure</h2>
         <Bar data={barData} />
       </div>
     </div>
