@@ -10,10 +10,11 @@ function Dashboard() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-  const [ingresos, setIngresos] = useState(0);
-  const [gastos, setGastos] = useState(0);
+  const [ingresos, setIngresos] = useState(new Array(12).fill(0));
+  const [gastos, setGastos] = useState(new Array(12).fill(0));
   const [inputValor, setInputValor] = useState("");
   const [tipo, setTipo] = useState("ingreso");
+  const [mes, setMes] = useState(0);
 
   if (!token) {
     navigate("/", { replace: true });
@@ -30,9 +31,13 @@ function Dashboard() {
     const valor = parseFloat(inputValor.replace(/[^0-9.,]/g, "").replace(",", "."));
     if (!isNaN(valor)) {
       if (tipo === "ingreso") {
-        setIngresos(ingresos + valor);
+        const nuevosIngresos = [...ingresos];
+        nuevosIngresos[mes] += valor;
+        setIngresos(nuevosIngresos);
       } else {
-        setGastos(gastos + valor);
+        const nuevosGastos = [...gastos];
+        nuevosGastos[mes] += valor;
+        setGastos(nuevosGastos);
       }
     }
     setInputValor("");
@@ -43,12 +48,12 @@ function Dashboard() {
     datasets: [
       {
         label: "Ingresos",
-        data: new Array(12).fill(ingresos),
+        data: ingresos,
         backgroundColor: "#34D399",
       },
       {
         label: "Gastos",
-        data: new Array(12).fill(gastos),
+        data: gastos,
         backgroundColor: "#EF4444",
       },
     ],
@@ -58,15 +63,15 @@ function Dashboard() {
     labels: ["Ingresos", "Gastos"],
     datasets: [
       {
-        data: [ingresos, gastos],
+        data: [ingresos.reduce((acc, val) => acc + val, 0), gastos.reduce((acc, val) => acc + val, 0)],
         backgroundColor: ["#34D399", "#EF4444"],
       },
     ],
   };
 
   return (
-    <div className="p-6 min-h-screen bg-gray-100">
-      <div className="flex justify-between items-center mb-6">
+    <div className="p-6 min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+      <div className="flex justify-between items-center mb-6 w-full max-w-3xl">
         <h1 className="text-2xl font-bold">Bienvenido {userName || "al Dashboard"}</h1>
         <button
           onClick={handleLogout}
@@ -74,8 +79,8 @@ function Dashboard() {
         >Log out</button>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 mb-6 items-center">
-        <div className="p-4 bg-white shadow rounded-lg text-center">
+      <div className="grid grid-cols-2 gap-4 mb-6 items-center w-full max-w-3xl">
+        <div className="p-4 bg-white shadow rounded-lg text-center w-full">
           <h2 className="text-xl font-semibold">Añadir Monto</h2>
           <input
             type="text"
@@ -92,6 +97,15 @@ function Dashboard() {
             <option value="ingreso">Ingreso</option>
             <option value="gasto">Gasto</option>
           </select>
+          <select
+            value={mes}
+            onChange={(e) => setMes(parseInt(e.target.value))}
+            className="mt-2 p-2 border rounded w-full"
+          >
+            {barData.labels.map((mes, index) => (
+              <option key={index} value={index}>{mes}</option>
+            ))}
+          </select>
           <button
             onClick={handleAgregar}
             className="mt-2 px-4 py-2 bg-green-500 text-white rounded w-full"
@@ -102,18 +116,18 @@ function Dashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 mb-6">
+      <div className="grid grid-cols-2 gap-4 mb-6 w-full max-w-3xl">
         <div className="p-4 bg-white shadow rounded-lg text-center">
           <h2 className="text-xl font-semibold text-green-600">Ingresos</h2>
-          <p className="text-2xl font-bold">${ingresos.toFixed(2)}</p>
+          <p className="text-2xl font-bold">${ingresos.reduce((acc, val) => acc + val, 0).toFixed(2)}</p>
         </div>
         <div className="p-4 bg-white shadow rounded-lg text-center">
           <h2 className="text-xl font-semibold text-red-600">Gastos</h2>
-          <p className="text-2xl font-bold">${gastos.toFixed(2)}</p>
+          <p className="text-2xl font-bold">${gastos.reduce((acc, val) => acc + val, 0).toFixed(2)}</p>
         </div>
       </div>
 
-      <div className="p-4 bg-white shadow rounded-lg">
+      <div className="p-4 bg-white shadow rounded-lg w-full max-w-3xl">
         <h2 className="text-lg font-semibold mb-2">Ingresos vs Gastos</h2>
         <Bar data={barData} />
       </div>
