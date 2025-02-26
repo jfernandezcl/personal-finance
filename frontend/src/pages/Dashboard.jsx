@@ -1,147 +1,159 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router";
-import { Bar, Doughnut } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, ArcElement, Tooltip, Legend } from "chart.js";
+import React from "react";
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, ArcElement, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-function Dashboard() {
-  let userName = localStorage.getItem("username");
-  const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+// Datos de ejemplo para la gráfica de barras:
+// Valores positivos para Income y negativos para Expense.
+const dataBar = {
+  labels: [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ],
+  datasets: [
+    {
+      label: "Income",
+      data: [5000, 7000, 6500, 8000, 7500, 9000, 8500, 9500, 9000, 10000, 11000, 10500],
+      backgroundColor: "#10B981",
+    },
+    {
+      label: "Expense",
+      data: [-3000, -4000, -3500, -4500, -4200, -4800, -4700, -5000, -4600, -5100, -5300, -5200],
+      backgroundColor: "#EF4444",
+    },
+  ],
+};
 
-  const [ingresos, setIngresos] = useState(new Array(12).fill(0));
-  const [gastos, setGastos] = useState(new Array(12).fill(0));
-  const [inputValor, setInputValor] = useState("");
-  const [tipo, setTipo] = useState("ingreso");
-  const [mes, setMes] = useState(0);
-
-  if (!token) {
-    navigate("/", { replace: true });
-    return null;
-  }
-
-  const handleLogout = () => {
-    localStorage.removeItem("username");
-    localStorage.removeItem("token");
-    navigate("/", { replace: true });
-  };
-
-  const handleAgregar = () => {
-    const valor = parseFloat(inputValor.replace(/[^0-9.,]/g, "").replace(",", "."));
-    if (!isNaN(valor)) {
-      if (tipo === "ingreso") {
-        const nuevosIngresos = [...ingresos];
-        nuevosIngresos[mes] += valor;
-        setIngresos(nuevosIngresos);
-      } else {
-        const nuevosGastos = [...gastos];
-        nuevosGastos[mes] += valor;
-        setGastos(nuevosGastos);
-      }
-    }
-    setInputValor("");
-  };
-
-  const barData = {
-    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-    datasets: [
-      {
-        label: "Income",
-        data: ingresos,
-        backgroundColor: "#34D399",
+const optionsBar = {
+  responsive: true,
+  scales: {
+    y: {
+      // Con datos negativos, Chart.js ajusta automáticamente el eje
+      beginAtZero: true,
+      ticks: {
+        color: "#4B5563",
       },
-      {
-        label: "Expenditure",
-        data: gastos,
-        backgroundColor: "#EF4444",
+      grid: {
+        color: "#E5E7EB",
       },
-    ],
-  };
-
-  const doughnutData = {
-    labels: ["Income", "Expenditure"],
-    datasets: [
-      {
-        data: [ingresos.reduce((acc, val) => acc + val, 0), gastos.reduce((acc, val) => acc + val, 0)],
-        backgroundColor: ["#34D399", "#EF4444"],
+    },
+    x: {
+      ticks: {
+        color: "#4B5563",
       },
-    ],
-  };
+      grid: {
+        display: false,
+      },
+    },
+  },
+  plugins: {
+    legend: {
+      display: true,
+    },
+  },
+};
 
+export default function Dashboard() {
   return (
-    <div className="p-6 min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-      <div className="flex justify-between items-center mb-6 w-full max-w-3xl">
-        <h1 className="text-2xl font-bold">Personal account of {userName || "al Dashboard"}</h1>
-        <button
-          onClick={handleLogout}
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-        >
-          Log out
-        </button>
-      </div>
-
-      {/* Fila superior: tarjeta de input y tarjeta de gráfica, con misma altura */}
-      <div className="grid grid-cols-2 gap-4 mb-6 items-stretch w-full max-w-3xl">
-        <div className="p-4 bg-white shadow rounded-lg text-center w-full">
-          <h2 className="text-xl font-semibold">Add</h2>
-          <input
-            type="text"
-            value={inputValor}
-            onChange={(e) => setInputValor(e.target.value)}
-            className="mt-2 p-2 border rounded w-full"
-            placeholder="Ej: 12,80"
-          />
-          <select
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value)}
-            className="mt-2 p-2 border rounded w-full"
-          >
-            <option value="ingreso">Income</option>
-            <option value="gasto">Expenditure</option>
-          </select>
-          <select
-            value={mes}
-            onChange={(e) => setMes(parseInt(e.target.value))}
-            className="mt-2 p-2 border rounded w-full"
-          >
-            {barData.labels.map((mes, index) => (
-              <option key={index} value={index}>{mes}</option>
-            ))}
-          </select>
-          <button
-            onClick={handleAgregar}
-            className="mt-2 px-4 py-2 bg-green-500 text-white rounded w-full"
-          >
-            Add
+    <div className="min-h-screen bg-gray-50 p-6">
+      {/* Header con nombre de usuario y botón de Log Out */}
+      <header className="max-w-6xl mx-auto flex items-center justify-end mb-8">
+        <div className="flex items-center space-x-4">
+          <span className="text-gray-700 font-semibold">Javi</span>
+          <button className="px-4 py-2 bg-red-500 text-white rounded-md">
+            Log Out
           </button>
         </div>
-        <div className="p-4 bg-white shadow rounded-lg flex justify-center items-center w-full">
-          <Doughnut data={doughnutData} options={{ maintainAspectRatio: false }} />
+      </header>
+
+      {/* Tarjeta Superior */}
+      <div className="bg-green-700 text-white p-6 max-w-6xl mx-auto rounded-lg shadow mb-8">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold">€320,845.20</h1>
+            <p className="text-sm text-green-200">15.9% ↑</p>
+          </div>
+          <div className="space-x-3">
+            <button className="bg-green-800 hover:bg-green-900 transition px-4 py-2 rounded-md">
+              + Add
+            </button>
+            <button className="bg-green-800 hover:bg-green-900 transition px-4 py-2 rounded-md">
+              Send
+            </button>
+            <button className="bg-green-800 hover:bg-green-900 transition px-4 py-2 rounded-md">
+              Request
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 mb-6 w-full max-w-3xl">
-        <div className="p-4 bg-white shadow rounded-lg text-center">
-          <h2 className="text-xl font-semibold text-green-600">Income</h2>
-          <p className="text-2xl font-bold">
-            {ingresos.reduce((acc, val) => acc + val, 0).toFixed(2)} €
-          </p>
-        </div>
-        <div className="p-4 bg-white shadow rounded-lg text-center">
-          <h2 className="text-xl font-semibold text-red-600">Expenditure</h2>
-          <p className="text-2xl font-bold">
-            {gastos.reduce((acc, val) => acc + val, 0).toFixed(2)} €
-          </p>
-        </div>
-      </div>
+      {/* Contenedor Principal */}
+      <main className="max-w-6xl mx-auto space-y-8">
+        {/* Sección de Cash Flow e Income/Expense */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Gráfica de Barras */}
+          <div className="bg-white rounded-lg shadow p-6 col-span-2">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-gray-700">Cash Flow</h2>
+              <div className="flex space-x-2 text-sm text-gray-500">
+                <button className="px-3 py-1 bg-gray-100 rounded hover:bg-gray-200">
+                  Weekly
+                </button>
+                <button className="px-3 py-1 bg-gray-100 rounded hover:bg-gray-200">
+                  Daily
+                </button>
+                <button className="px-3 py-1 bg-gray-100 rounded hover:bg-gray-200">
+                  Manage
+                </button>
+              </div>
+            </div>
+            <Bar data={dataBar} options={optionsBar} />
+          </div>
 
-      <div className="p-4 bg-white shadow rounded-lg w-full max-w-3xl">
-        <h2 className="text-lg font-semibold mb-2">Income vs Expenditure</h2>
-        <Bar data={barData} />
-      </div>
+          {/* Income & Expense - dividido en dos tarjetas apiladas */}
+          <div className="flex flex-col gap-6">
+            <div className="bg-white rounded-lg shadow p-6">
+              <p className="text-sm font-semibold text-gray-400">Income</p>
+              <h3 className="text-xl font-bold text-gray-800">€12,378.20</h3>
+              <span className="text-sm text-green-500 font-semibold">+450%</span>
+            </div>
+            <div className="bg-white rounded-lg shadow p-6">
+              <p className="text-sm font-semibold text-gray-400">Expense</p>
+              <h3 className="text-xl font-bold text-gray-800">€5,788.21</h3>
+              <span className="text-sm text-red-500 font-semibold">-10%</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Tarjetas inferiores */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white rounded-lg shadow p-6">
+            <p className="text-sm text-gray-400">Business account</p>
+            <h4 className="text-lg font-semibold text-gray-700">€8,672.20</h4>
+            <p className="text-sm text-gray-400 mt-1">Last 30 days</p>
+          </div>
+          <div className="bg-white rounded-lg shadow p-6">
+            <p className="text-sm text-gray-400">Total Saving</p>
+            <h4 className="text-lg font-semibold text-gray-700">€3,765.35</h4>
+            <p className="text-sm text-gray-400 mt-1">vs. 4,116.50 Last Period</p>
+          </div>
+          <div className="bg-white rounded-lg shadow p-6">
+            <p className="text-sm text-gray-400">Tax Reserve</p>
+            <h4 className="text-lg font-semibold text-gray-700">€14,376.16</h4>
+            <p className="text-sm text-gray-400 mt-1">vs. 10,325.46 Last Period</p>
+          </div>
+        </div>
+      </main>
     </div>
+
   );
 }
-
-export default Dashboard;
