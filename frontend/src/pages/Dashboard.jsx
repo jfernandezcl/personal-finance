@@ -90,7 +90,7 @@ function Dashboard() {
             value={inputValor}
             onChange={(e) => setInputValor(e.target.value)}
             className="mt-2 p-2 border rounded w-full"
-            placeholder="Ej: 12,80€"
+            placeholder="Ej: 12,80"
           />
           <select
             value={tipo}
@@ -125,13 +125,13 @@ function Dashboard() {
         <div className="p-4 bg-white shadow rounded-lg text-center">
           <h2 className="text-xl font-semibold text-green-600">Income</h2>
           <p className="text-2xl font-bold">
-            ${ingresos.reduce((acc, val) => acc + val, 0).toFixed(2)}
+            {ingresos.reduce((acc, val) => acc + val, 0).toFixed(2)} €
           </p>
         </div>
         <div className="p-4 bg-white shadow rounded-lg text-center">
           <h2 className="text-xl font-semibold text-red-600">Expenditure</h2>
           <p className="text-2xl font-bold">
-            ${gastos.reduce((acc, val) => acc + val, 0).toFixed(2)}
+            {gastos.reduce((acc, val) => acc + val, 0).toFixed(2)} €
           </p>
         </div>
       </div>
