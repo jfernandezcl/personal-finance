@@ -58,7 +58,7 @@ function WelcomePage() {
       {error && <ErrorAlert error={error} onClose={() => setError("")} />}
       {success && <SuccessAlert message={success} onClose={() => setSuccess("")} />}
 
-      <div className="rounded-sm border border-stroke bg-white shadow-default">
+      <div className="rounded-sm bg-white shadow-default">
         <div className="flex flex-wrap items-center mt-10 pb-10">
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="px-26 py-17.5 text-center">
