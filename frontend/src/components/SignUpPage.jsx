@@ -72,7 +72,7 @@ function SignUpPage() {
 
   return (
     <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10 mt-20">
-      <div className="rounded-sm border border-stroke bg-white shadow-default">
+      <div className="rounded-sm bg-white shadow-default">
         <div className="flex flex-wrap items-center mt-10 pb-10">
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="px-26 py-17.5 text-center">
