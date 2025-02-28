@@ -123,9 +123,10 @@ function WelcomePage() {
                     type="submit"
                     value="Sign In"
                     className="w-full cursor-pointer rounded-lg 
-                    border border-[#3c50e0] bg-[#3c50e0] p-4 font-medium text-white transition 
+                    border border-[#025963] bg-[#025963] p-4 font-medium text-white transition 
                     hover:bg-opacity-90"
                   />
+
                 </div>
                 <button className="flex w-full items-center justify-center gap-3.5 rounded-lg 
                   border border-[#D1D5DB] bg-[#E2E8F0] p-4 font-medium text-[#788596] 
@@ -138,7 +139,7 @@ function WelcomePage() {
                 <div className="mt-6 text-center">
                   <p className="font-medium text-[#788596]">
                     Don't have any account?
-                    <a href="/signup" className="text-blue-500 underline cursor-pointer"> Sign Up</a>
+                    <a href="/signup" className="text-[#025963] underline cursor-pointer"> Sign Up</a>
                   </p>
                 </div>
               </form>

@@ -174,9 +174,10 @@ function SignUpPage() {
                   </div>
                 </div>
                 <div className="mb-5">
-                  <button type="submit" className="w-full cursor-pointer rounded-lg border border-[#3c50e0] bg-[#3c50e0] p-4 font-medium text-white transition hover:bg-opacity-90">
+                  <button type="submit" className="w-full cursor-pointer rounded-lg border border-[#025963] bg-[#025963] p-4 font-medium text-white transition hover:bg-opacity-90">
                     Create account
                   </button>
+
                 </div>
                 <button className="flex w-full items-center justify-center gap-3.5 rounded-lg 
                             border border-[#D1D5DB] bg-[#E2E8F0] p-4 font-medium text-[#788596] 
@@ -189,7 +190,7 @@ function SignUpPage() {
                 <div className="mt-6 text-center">
                   <p className="font-medium text-[#788596]">
                     Already have an account?
-                    <a href="/" className="text-blue-500 underline cursor-pointer"> Sign in</a>
+                    <a href="/" className="text-[#025963] underline cursor-pointer"> Sign in</a>
                   </p>
                 </div>
               </form>
