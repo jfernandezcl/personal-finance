@@ -15,12 +15,6 @@ export default function BalanceCard() {
           <button className="bg-[#00d57d] hover:bg-[#1f5b63] transition px-4 py-2 rounded-md">
             + Add
           </button>
-          <button className="bg-[#29737e] hover:bg-[#1f5b63] transition px-4 py-2 rounded-md">
-            Send
-          </button>
-          <button className="bg-[#29737e] hover:bg-[#1f5b63] transition px-4 py-2 rounded-md">
-            Request
-          </button>
         </div>
       </div>
     </div>
