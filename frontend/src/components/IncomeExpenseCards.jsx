@@ -1,4 +1,5 @@
 import React from "react";
+import TotalCardDay from "./TotalCardDay";
 
 export default function IncomeExpenseCards() {
   return (
@@ -13,6 +14,7 @@ export default function IncomeExpenseCards() {
         <h3 className="text-xl font-bold text-black">5,788.21 €</h3>
         <span className="text-sm text-red-500 font-semibold">-10%</span>
       </div>
+      < TotalCardDay />
     </div>
   );
 }
