@@ -34,12 +34,6 @@ export default function CashFlowChart() {
     <div className="bg-white rounded-lg shadow p-6 col-span-2">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-black">Cash Flow</h2>
-        <div className="flex space-x-2 text-sm text-gray-500">
-          <button className="px-3 py-1 bg-gray-100 text-black rounded hover:bg-gray-200">Weekly</button>
-          <button className="px-3 py-1 bg-gray-100 text-black rounded hover:bg-gray-200">Daily</button>
-          <button className="px-3 py-1 bg-gray-100 text-black rounded hover:bg-gray-200">Manage</button>
-
-        </div>
       </div>
       <Bar data={dataBar} options={optionsBar} />
     </div>
