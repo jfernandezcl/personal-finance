@@ -19,7 +19,6 @@ export default function Dashboard() {
             <CashFlowChart />
             <IncomeExpenseCards />
           </div>
-          <SummaryCards />
           {/* Calendario de transacciones */}
           <Calendar />
         </main>
