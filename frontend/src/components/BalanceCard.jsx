@@ -1,10 +1,13 @@
 import { useState } from "react";
 import TransactionModal from "./TransactionModal";
+import { useDashboardContext } from "./DashboardContext";  // Creamos un Context para el Dashboard
 
 export default function BalanceCard() {
+  const { transactions, setTransactions } = useDashboardContext();  // Obtenemos y actualizamos las transacciones
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSave = (transaction) => {
+    setTransactions((prevTransactions) => [...prevTransactions, transaction]); // Guardamos la transacción
     setIsModalOpen(false);
   };
 
