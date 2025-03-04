@@ -1,3 +1,5 @@
+// src/components/Dashboard.js
+
 import React from "react";
 import Header from "../components/Header";
 import BalanceCard from "../components/BalanceCard";
@@ -14,10 +16,15 @@ export default function Dashboard() {
         <Header />
         <BalanceCard />
         <main className="max-w-6xl mx-auto space-y-8">
+          {/* Separamos las tarjetas de la gráfica con flexbox */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <CashFlowChart />
-            <IncomeExpenseCards />
-            <TotalCardDay />
+            <div className="lg:col-span-2">
+              <CashFlowChart />
+            </div>
+            <div className="flex flex-col gap-6">
+              <IncomeExpenseCards />
+              <TotalCardDay />
+            </div>
           </div>
           {/* Calendario de transacciones */}
           <Calendar />

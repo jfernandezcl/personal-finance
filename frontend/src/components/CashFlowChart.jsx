@@ -31,7 +31,7 @@ const optionsBar = {
 
 export default function CashFlowChart() {
   return (
-    <div className="bg-white rounded-lg shadow p-6 col-span-2">
+    <div className="bg-white rounded-lg shadow p-6 w-full h-full">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-black">Cash Flow</h2>
       </div>
