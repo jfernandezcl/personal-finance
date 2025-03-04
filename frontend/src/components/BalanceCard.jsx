@@ -1,13 +1,14 @@
+// src/components/BalanceCard.js
 import { useState } from "react";
 import TransactionModal from "./TransactionModal";
-import { useDashboardContext } from "./DashboardContext";  // Creamos un Context para el Dashboard
+import { useDashboardContext } from "./DashboardContext";  // Context para el Dashboard
 
 export default function BalanceCard() {
-  const { transactions, setTransactions } = useDashboardContext();  // Obtenemos y actualizamos las transacciones
+  const { transactions, setTransactions } = useDashboardContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSave = (transaction) => {
-    setTransactions((prevTransactions) => [...prevTransactions, transaction]); // Guardamos la transacción
+    setTransactions((prevTransactions) => [...prevTransactions, transaction]);
     setIsModalOpen(false);
   };
 
@@ -24,13 +25,20 @@ export default function BalanceCard() {
         <div className="space-x-3">
           <button
             className="bg-[#00d57d] hover:bg-[#1f5b63] transition px-4 py-2 rounded-md"
-            onClick={() => setIsModalOpen(true)}
+            onClick={(e) => {
+              e.stopPropagation(); // Evita la propagación del evento
+              setIsModalOpen(true);
+            }}
           >
             + Add
           </button>
         </div>
       </div>
-      <TransactionModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSave={handleSave} />
+      <TransactionModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSave={handleSave}
+      />
     </div>
   );
 }
