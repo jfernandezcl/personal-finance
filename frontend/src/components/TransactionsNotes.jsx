@@ -1,7 +1,7 @@
 import React from "react";
 import { useDashboardContext } from "./DashboardContext"; // Importamos el contexto
 
-export default function TransactionList() {
+export default function TransactionsNotes() {
   const { transactions, setTransactions } = useDashboardContext(); // Obtenemos las transacciones del contexto
 
   // Organizar las transacciones por fecha para mostrarlas en orden sin modificar el estado original

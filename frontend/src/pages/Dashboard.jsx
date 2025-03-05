@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import BalanceCard from "../components/BalanceCard";
 import CashFlowChart from "../components/CashFlowChart";
 import IncomeExpenseCards from "../components/IncomeExpenseCards";
-import Calendar from "../components/Calendar";
+import TransactionsNotes from "../components/TransactionsNotes";
 import { DashboardProvider } from "../components/DashboardContext";  // Importamos el proveedor
 import TotalCardDay from "../components/TotalCardDay";
 
@@ -27,7 +27,7 @@ export default function Dashboard() {
             </div>
           </div>
           {/* Calendario de transacciones */}
-          <Calendar />
+          <TransactionsNotes />
         </main>
       </div>
     </DashboardProvider>
