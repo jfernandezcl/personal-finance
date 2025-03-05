@@ -30,7 +30,7 @@ export default function TransactionsNotes() {
   };
 
   return (
-    <div className="mt-6 p-4 bg-white rounded-lg shadow-md">
+    <div className="mt-6 mb-8 p-4 bg-white rounded-lg shadow-md">
       {/* Encabezado de la tarjeta con título y buscador de fecha a la derecha */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">Transactions</h2>
@@ -66,8 +66,8 @@ export default function TransactionsNotes() {
               <div className="flex items-center gap-4">
                 <div
                   className={`flex items-center gap-1 font-semibold ${transaction.type === "income"
-                      ? "text-green-700"
-                      : "text-red-700"
+                    ? "text-green-700"
+                    : "text-red-700"
                     }`}
                 >
                   {transaction.type === "income" ? "↑" : "↓"}
