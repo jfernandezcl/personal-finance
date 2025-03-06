@@ -1,7 +1,15 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function Header() {
   const [isModalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    navigate("/");
+  }
 
   return (
     <header className="w-full bg-[#025963] shadow-md mb-8 relative">
@@ -36,7 +44,7 @@ export default function Header() {
             <button
               className="flex items-center space-x-2 text-[#025963] font-semibold hover:text-[#02c16a] transition-all"
               onClick={() => {
-                console.log("Cerrar sesión");
+                handleLogout();
                 setModalOpen(false);
               }}
             >
