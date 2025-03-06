@@ -38,7 +38,7 @@ export default function Header() {
           onClick={() => setModalOpen(false)}
         >
           <div
-            className="absolute top-16 right-6 bg-white rounded-md shadow p-6 w-64 border-2 border-[#025963]"
+            className="absolute top-24 right-60 bg-white rounded-md shadow p-6 w-52 border-2 border-[#025963]"
             onClick={(e) => e.stopPropagation()}  // Evita que se cierre al hacer click dentro de la modal
           >
             <button
@@ -58,7 +58,7 @@ export default function Header() {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-8V7" />
               </svg>
-              <span>Cerrar sesión</span>
+              <span>Log out</span>
             </button>
           </div>
         </div>
