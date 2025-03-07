@@ -4,7 +4,7 @@ import TransactionModal from "./TransactionModal";
 import { useDashboardContext } from "./DashboardContext";  // Context para el Dashboard
 
 export default function BalanceCard() {
-  const { transactions, setTransactions } = useDashboardContext();
+  const { transactions, setTransactions, totalBalance } = useDashboardContext();  // Obtenemos el contexto
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSave = (transaction) => {
@@ -18,8 +18,12 @@ export default function BalanceCard() {
         <div>
           Total Balance
           <div className="flex items-baseline space-x-2">
-            <h1 className="text-2xl font-bold">320,845.20 €</h1>
-            <p className="text-sm text-green-200">15.9% ↑</p>
+            {/* Mostramos el totalBalance dinámico */}
+            <h1 className="text-2xl font-bold">
+              {isNaN(totalBalance) ? '0.00' : totalBalance.toFixed(2)} €
+            </h1>
+
+            <p className="text-sm text-green-200">{totalBalance >= 0 ? '↑' : '↓'} {Math.abs(totalBalance).toFixed(2)} </p>
           </div>
         </div>
         <div className="space-x-3">

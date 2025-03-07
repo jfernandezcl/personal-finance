@@ -26,6 +26,17 @@ function TransactionModal({ isOpen, onClose, onSave }) {
 
   if (!isOpen) return null;
 
+  const handleSave = () => {
+    if (!amount || isNaN(amount)) return; // Verificación básica
+
+    onSave({
+      amount: parseFloat(amount),
+      type,
+      date,
+      description
+    });
+  };
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded-lg shadow-lg w-96" onClick={(e) => e.stopPropagation()}>
