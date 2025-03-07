@@ -44,9 +44,9 @@ export default function TransactionsNotes() {
 
       <div className="space-y-4">
         {filteredTransactions.length > 0 ? (
-          filteredTransactions.map((transaction) => (
+          filteredTransactions.map((transaction, index) => (
             <div
-              key={transaction.id}
+              key={transaction.id || index}
               className="p-4 border border-gray-300 rounded-lg shadow-sm flex items-center justify-between"
             >
               {/* Información de la transacción */}
