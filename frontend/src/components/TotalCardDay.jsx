@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import pieChartIcon from "../images/pie-chart.svg"; // Importar la imagen
+import totalCard from "../images/total-card.svg";
 
 export default function TotalCardDay() {
   const [selectedDate, setSelectedDate] = useState("");
@@ -55,9 +55,9 @@ export default function TotalCardDay() {
 
         {/* Imagen en la esquina inferior derecha */}
         <img
-          src={pieChartIcon}
-          alt="Pie Chart"
-          className="absolute bottom-7 right-7 w-20 h-20 opacity-50"
+          src={totalCard}
+          alt="illustration card"
+          className="absolute bottom-7 right-7 w-28 h-28 opacity-70"
         />
       </div>
     </div>
