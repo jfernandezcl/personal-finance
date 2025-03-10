@@ -23,7 +23,7 @@ export default function BalanceCard() {
               {isNaN(totalBalance) ? '0.00' : totalBalance.toFixed(2)} €
             </h1>
 
-            <p className="text-sm text-green-200">{totalBalance >= 0 ? '↑' : '↓'} {Math.abs(totalBalance).toFixed(2)} </p>
+            <p className={`text-sm ${totalBalance >= 0 ? 'text-green-200' : 'text-red-500'}`}>{totalBalance >= 0 ? '↑' : '↓'} {Math.abs(totalBalance).toFixed(2)} </p>
           </div>
         </div>
         <div className="space-x-3">
