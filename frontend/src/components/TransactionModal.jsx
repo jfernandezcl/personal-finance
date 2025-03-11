@@ -70,8 +70,9 @@ function TransactionModal({ isOpen, onClose, onSave }) {
           className="w-full p-2 mb-2 border rounded text-black"
         />
         <div className="flex justify-end space-x-2">
-          <button onClick={onClose} className="px-4 py-2 bg-gray-400 rounded">Cancel</button>
-          <button onClick={() => onSave({ amount, type, date, description })} className="px-4 py-2 bg-[#025963] text-white rounded">Save</button>
+          <button onClick={onClose} className="px-4 py-2 bg-gray-400 rounded hover:bg-gray-300 ">Cancel</button>
+          <button onClick={() => onSave({ amount, type, date, description })}
+            className="px-4 py-2 bg-[#025963] text-white rounded hover:bg-[#025963c5]">Save</button>
         </div>
       </div>
     </div>
