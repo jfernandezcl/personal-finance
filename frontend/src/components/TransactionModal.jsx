@@ -51,7 +51,7 @@ function TransactionModal({ isOpen, onClose, onSave }) {
         <select
           value={type}
           onChange={(e) => setType(e.target.value)}
-          className="w-full p-2 mb-2 border rounded text-black"
+          className="w-full p-2 mb-2 border rounded text-black cursor-pointer"
         >
           <option value="income">Income</option>
           <option value="expense">Expense</option>
@@ -60,7 +60,7 @@ function TransactionModal({ isOpen, onClose, onSave }) {
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="w-full p-2 mb-2 border rounded text-black"
+          className="w-full p-2 mb-2 border rounded text-black cursor-pointer"
         />
         <input
           type="text"
