@@ -28,7 +28,7 @@ export default function BalanceCard() {
         </div>
         <div className="space-x-3">
           <button
-            className="bg-[#00d57d] hover:bg-[#1f5b63] transition px-4 py-2 rounded-md"
+            className="bg-[#00d57d] hover:bg-[#00b569] transition px-4 py-2 rounded-md"
             onClick={(e) => {
               e.stopPropagation(); // Evita la propagación del evento
               setIsModalOpen(true);
