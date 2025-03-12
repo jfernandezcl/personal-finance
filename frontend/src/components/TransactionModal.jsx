@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useDashboardContext } from "../components/DashboardContext";
 
-function TransactionModal({ isOpen, onClose, onSave }) {
+function TransactionModal({ isOpen, onClose }) {
+  const { addTransaction } = useDashboardContext();
   const [amount, setAmount] = useState("");
   const [type, setType] = useState("income");
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
 
-  // Restablecer los valores cuando la modal se abra o se recargue
   useEffect(() => {
     if (!isOpen) {
       setAmount("");
@@ -16,25 +17,19 @@ function TransactionModal({ isOpen, onClose, onSave }) {
     }
   }, [isOpen]);
 
-  // También restablecer los valores cuando la página se recargue
-  useEffect(() => {
-    setAmount("");
-    setType("income");
-    setDate("");
-    setDescription("");
-  }, []);
-
   if (!isOpen) return null;
 
   const handleSave = () => {
-    if (!amount || isNaN(amount)) return; // Verificación básica
+    if (!amount || isNaN(amount)) return;
 
-    onSave({
+    addTransaction({
       amount: parseFloat(amount),
       type,
       date,
-      description
+      description,
     });
+
+    onClose(); // Cerrar la modal después de guardar
   };
 
   return (
@@ -70,14 +65,12 @@ function TransactionModal({ isOpen, onClose, onSave }) {
           className="w-full p-2 mb-2 border rounded text-black"
         />
         <div className="flex justify-end space-x-2">
-          <button onClick={onClose} className="px-4 py-2 bg-gray-400 rounded hover:bg-gray-500 ">Cancel</button>
-          <button onClick={() => onSave({ amount, type, date, description })}
-            className="px-4 py-2 bg-[#025963] text-white rounded hover:bg-[#013f48] transition-colors">Save</button>
+          <button onClick={onClose} className="px-4 py-2 bg-gray-400 rounded hover:bg-gray-500">Cancel</button>
+          <button onClick={handleSave} className="px-4 py-2 bg-[#025963] text-white rounded hover:bg-[#013f48] transition-colors">Save</button>
         </div>
       </div>
     </div>
   );
 }
-
 
 export default TransactionModal;
