@@ -23,6 +23,7 @@ function TransactionModal({ isOpen, onClose }) {
     if (!amount || isNaN(amount)) return;
 
     addTransaction({
+      id: Date.now(),
       amount: parseFloat(amount),
       type,
       date,
