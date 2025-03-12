@@ -23,10 +23,9 @@ export default function TransactionsNotes() {
 
   // Función para eliminar una transacción
   const handleDelete = (id) => {
-    const updatedTransactions = transactions.filter(
-      (transaction) => transaction.id !== id
+    setTransactions((prevTransactions) =>
+      prevTransactions.filter((transaction) => transaction.id !== id)
     );
-    setTransactions(updatedTransactions);
   };
 
   return (
