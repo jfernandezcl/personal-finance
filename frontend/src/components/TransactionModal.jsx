@@ -19,16 +19,17 @@ function TransactionModal({ isOpen, onClose }) {
 
   if (!isOpen) return null;
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!amount || isNaN(amount)) return;
 
-    addTransaction({
-      id: Date.now(),
+    const newTransaction = {
       amount: parseFloat(amount),
       type,
       date,
       description,
-    });
+    };
+
+    await addTransaction(newTransaction);
 
     onClose(); // Cerrar la modal después de guardar
   };
