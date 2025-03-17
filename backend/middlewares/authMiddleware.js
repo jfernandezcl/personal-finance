@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { stringify } from 'uuid';
 
 dotenv.config();
 
@@ -18,7 +19,10 @@ const authMiddleware = (req, res, next) => {
         message: 'Forbidden'
       });
     }
-    req.userId = user.id;
+
+    // convertir user.id a string
+    req.userId = Buffer.isBuffer(user.id) ? stringify(user.id) : user.id;
+
     next();
   });
 };
