@@ -2,7 +2,7 @@ import pool from '../database/db.js';
 
 //Agregar una nueva transacción
 export const addTransaction = async (req, res) => {
-  const { type, amount, description } = req.body;
+  const { type, amount, description, date } = req.body;
   const user_id = Buffer.from(req.userId, 'hex'); // Lo obtenemos del middleware de autenticación
 
   if (!type || !amount || !description) {
@@ -11,8 +11,8 @@ export const addTransaction = async (req, res) => {
 
   try {
     await pool.execute(
-      "INSERT INTO transactions (user_id, type, amount, description) VALUES (?, ?, ?, ?)",
-      [user_id, type, amount, description]
+      "INSERT INTO transactions (user_id, type, amount, description, date) VALUES (?, ?, ?, ?, ?)",
+      [user_id, type, amount, description, date]
     );
 
     res.status(201).json({ msg: "Transaction added successfully" });
