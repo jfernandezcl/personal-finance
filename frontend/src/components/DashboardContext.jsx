@@ -51,8 +51,7 @@ export const DashboardProvider = ({ children }) => {
         throw new Error('Error al agregar la transacción');
       }
 
-      const savedTransaction = await response.json();
-      setTransactions((prev) => [...prev, savedTransaction]); // Añadir a la lista
+      setTransactions((prev) => [...prev, newTransaction]); // Añadir a la lista
     } catch (error) {
       console.error('Error:', error);
     }
