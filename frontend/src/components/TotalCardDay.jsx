@@ -42,7 +42,7 @@ export default function TotalCardDay() {
         <p className="text-sm font-semibold text-black">Daily Overview</p>
 
         <div className="mt-4">
-          <p className="text-sm font-semibold text-black">Income</p>
+          <p className="text-sm font-semibold text-[#025963f8]">Income</p>
           <h3 className="text-xl font-bold text-black">
             {dailyData.income > 0 ? `${dailyData.income.toFixed(2)} €` : '0.00 €'}
           </h3>
@@ -54,7 +54,7 @@ export default function TotalCardDay() {
         </div>
 
         <div className="mt-4">
-          <p className="text-sm font-semibold text-black">Expense</p>
+          <p className="text-sm font-semibold text-green-500">Expense</p>
           <h3 className="text-xl font-bold text-black">
             {dailyData.expense > 0 ? `${dailyData.expense.toFixed(2)} €` : '0.00 €'}
           </h3>
