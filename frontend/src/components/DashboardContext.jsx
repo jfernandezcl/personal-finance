@@ -11,7 +11,7 @@ export const DashboardProvider = ({ children }) => {
   // Función para obtener las transacciones del usuario desde el backend
   const fetchTransactions = async () => {
     const data = await getTransactions();
-    if (data) return;
+    if (!data) return;
     setTransactions(data);
   };
 
