@@ -17,7 +17,7 @@ export default function IncomeExpenseCards() {
     <div className="flex flex-col gap-6">
       {/* Tarjeta de ingresos */}
       <div className="relative bg-white rounded-lg shadow p-6">
-        <p className="text-sm font-semibold text-green-500">Income</p>
+        <p className="text-sm font-semibold text-[#025963f8]">Income</p>
         <h3 className="text-xl font-bold text-black">{income.toFixed(2)} €</h3>
         <img
           src={illustrationcards}
@@ -28,7 +28,7 @@ export default function IncomeExpenseCards() {
 
       {/* Tarjeta de gastos */}
       <div className="relative bg-white rounded-lg shadow p-6">
-        <p className="text-sm font-semibold text-red-500">Expense</p>
+        <p className="text-sm font-semibold text-[#00d57d]">Expense</p>
         <h3 className="text-xl font-bold text-black">{expense.toFixed(2)} €</h3>
         <img
           src={illustrationcards}
