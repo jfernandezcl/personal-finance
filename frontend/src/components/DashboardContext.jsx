@@ -1,4 +1,5 @@
 import React, { useEffect, useState, createContext, useContext, useMemo } from 'react';
+import { getTransactions } from '../infrastructure/transactions/getTransactions';
 
 const DashboardContext = createContext();
 
@@ -9,27 +10,9 @@ export const DashboardProvider = ({ children }) => {
 
   // Función para obtener las transacciones del usuario desde el backend
   const fetchTransactions = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      if (!token) return;
-
-      const response = await fetch('http://localhost:3001/api/transactions', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Error al obtener las transacciones');
-      }
-
-      const data = await response.json();
-      setTransactions(data);
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    const data = await getTransactions();
+    if (data) return;
+    setTransactions(data);
   };
 
   // Agregar una nueva transacción al backend
