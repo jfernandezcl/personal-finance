@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const RequireAuth = ({ children }) => {
   const navigate = useNavigate();
@@ -7,7 +7,7 @@ const RequireAuth = ({ children }) => {
   useEffect(() => {
     const user = localStorage.getItem("token");
     if (!user) {
-      navigate("/");  // Redirige al WelcomePage si no hay usuario
+      navigate("/"); // Redirige al WelcomePage si no hay usuario
     }
   }, [navigate]);
 

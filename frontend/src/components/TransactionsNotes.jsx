@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDashboardContext } from "./DashboardContext"; // Importamos el contexto
 
 export default function TransactionsNotes() {
@@ -13,12 +13,12 @@ export default function TransactionsNotes() {
   // Filtrar transacciones según la fecha seleccionada
   const filteredTransactions = selectedDate
     ? sortedTransactions.filter((transaction) => {
-      // Extraemos el componente fecha en formato yyyy-mm-dd para la comparación
-      const transactionDate = new Date(transaction.date)
-        .toISOString()
-        .slice(0, 10);
-      return transactionDate === selectedDate;
-    })
+        // Extraemos el componente fecha en formato yyyy-mm-dd para la comparación
+        const transactionDate = new Date(transaction.date)
+          .toISOString()
+          .slice(0, 10);
+        return transactionDate === selectedDate;
+      })
     : sortedTransactions;
 
   // Función para eliminar una transacción
@@ -54,7 +54,8 @@ export default function TransactionsNotes() {
                   {new Date(transaction.date).toLocaleDateString()}
                 </div>
                 <div className="text-sm">
-                  {transaction.type === "income" ? "+" : "-"} {transaction.amount} €
+                  {transaction.type === "income" ? "+" : "-"}{" "}
+                  {transaction.amount} €
                 </div>
                 <div className="text-xs text-gray-500">
                   {transaction.description}
@@ -64,10 +65,11 @@ export default function TransactionsNotes() {
               {/* Contenedor para el indicador y el botón de eliminar */}
               <div className="flex items-center gap-4">
                 <div
-                  className={`flex items-center gap-1 font-semibold ${transaction.type === "income"
-                    ? "text-green-700"
-                    : "text-red-700"
-                    }`}
+                  className={`flex items-center gap-1 font-semibold ${
+                    transaction.type === "income"
+                      ? "text-green-700"
+                      : "text-red-700"
+                  }`}
                 >
                   {transaction.type === "income" ? "↑" : "↓"}
                   {transaction.type === "income" ? "Income" : "Expense"}
@@ -82,9 +84,7 @@ export default function TransactionsNotes() {
             </div>
           ))
         ) : (
-          <p className="text-center text-gray-500">
-            No transactions yet.
-          </p>
+          <p className="text-center text-gray-500">No transactions yet.</p>
         )}
       </div>
     </div>

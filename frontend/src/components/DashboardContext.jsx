@@ -1,5 +1,5 @@
-import React, { useEffect, useState, createContext, useContext, useMemo } from 'react';
-import { getTransactions } from '../infrastructure/transactions/getTransactions';
+import { useEffect, useState, createContext, useContext, useMemo } from "react";
+import { getTransactions } from "../infrastructure/transactions/getTransactions";
 
 const DashboardContext = createContext();
 
@@ -18,25 +18,25 @@ export const DashboardProvider = ({ children }) => {
   // Agregar una nueva transacción al backend
   const addTransaction = async (newTransaction) => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       if (!token) return;
 
-      const response = await fetch('http://localhost:3001/api/transactions', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3001/api/transactions", {
+        method: "POST",
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(newTransaction),
       });
 
       if (!response.ok) {
-        throw new Error('Error al agregar la transacción');
+        throw new Error("Error al agregar la transacción");
       }
 
       setTransactions((prev) => [...prev, newTransaction]); // Añadir a la lista
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
@@ -49,12 +49,14 @@ export const DashboardProvider = ({ children }) => {
   const totalBalance = useMemo(() => {
     return transactions.reduce((total, transaction) => {
       const amt = Number(transaction.amount);
-      return transaction.type === 'income' ? total + amt : total - amt;
+      return transaction.type === "income" ? total + amt : total - amt;
     }, 0);
   }, [transactions]);
 
   return (
-    <DashboardContext.Provider value={{ transactions, setTransactions, addTransaction, totalBalance }}>
+    <DashboardContext.Provider
+      value={{ transactions, setTransactions, addTransaction, totalBalance }}
+    >
       {children}
     </DashboardContext.Provider>
   );

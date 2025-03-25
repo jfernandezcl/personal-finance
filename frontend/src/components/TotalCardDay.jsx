@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import totalCard from "../images/total-card.svg";
 import { useDashboardContext } from "./DashboardContext"; // Obtenemos transacciones desde el contexto
 
@@ -11,7 +11,9 @@ export default function TotalCardDay() {
   useEffect(() => {
     // Filtrar transacciones del día seleccionado
     const filteredTransactions = (transactions || []).filter((transaction) => {
-      const transactionDate = new Date(transaction.date).toISOString().split("T")[0];
+      const transactionDate = new Date(transaction.date)
+        .toISOString()
+        .split("T")[0];
       return transactionDate === selectedDate;
     });
     console.log("Filtered Transactions:", filteredTransactions);
@@ -44,7 +46,9 @@ export default function TotalCardDay() {
         <div className="mt-4">
           <p className="text-sm font-semibold text-[#025963f8]">Income</p>
           <h3 className="text-xl font-bold text-black">
-            {dailyData.income > 0 ? `${dailyData.income.toFixed(2)} €` : '0.00 €'}
+            {dailyData.income > 0
+              ? `${dailyData.income.toFixed(2)} €`
+              : "0.00 €"}
           </h3>
           {dailyData.income > 0 && (
             <span className="text-sm text-green-500 font-semibold">
@@ -56,7 +60,9 @@ export default function TotalCardDay() {
         <div className="mt-4">
           <p className="text-sm font-semibold text-green-500">Expense</p>
           <h3 className="text-xl font-bold text-black">
-            {dailyData.expense > 0 ? `${dailyData.expense.toFixed(2)} €` : '0.00 €'}
+            {dailyData.expense > 0
+              ? `${dailyData.expense.toFixed(2)} €`
+              : "0.00 €"}
           </h3>
           {dailyData.expense > 0 && (
             <span className="text-sm text-red-500 font-semibold">

@@ -1,4 +1,3 @@
-import React from "react";
 import { useDashboardContext } from "./DashboardContext";
 import illustrationcards from "../images/illustration-cards.svg";
 

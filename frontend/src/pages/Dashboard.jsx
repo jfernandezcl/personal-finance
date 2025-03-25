@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "../components/Header";
 import BalanceCard from "../components/BalanceCard";
 import CashFlowChart from "../components/CashFlowChart";

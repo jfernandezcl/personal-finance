@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import iconEmail from "../images/icon-email.svg";
 import iconPassword from "../images/icon-password.svg";
 import iconGoogle from "../images/icon-google.svg";
@@ -56,7 +56,9 @@ function WelcomePage() {
     <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10 mt-20">
       {/* Alertas */}
       {error && <ErrorAlert error={error} onClose={() => setError("")} />}
-      {success && <SuccessAlert message={success} onClose={() => setSuccess("")} />}
+      {success && (
+        <SuccessAlert message={success} onClose={() => setSuccess("")} />
+      )}
 
       <div className="rounded-sm bg-white shadow-default">
         <div className="flex flex-wrap items-center mt-10 pb-10">
@@ -70,7 +72,11 @@ function WelcomePage() {
                 Manage your personal finances easily and efficiently.
               </p>
               <span className="mt-20 inline-block">
-                <img className="w-[350px] h-[350px]" src="src/images/mobile-illustration.svg" alt="illustration" />
+                <img
+                  className="w-[350px] h-[350px]"
+                  src="src/images/mobile-illustration.svg"
+                  alt="illustration"
+                />
               </span>
             </div>
           </div>
@@ -85,7 +91,9 @@ function WelcomePage() {
               {/* Formulario con `onSubmit` */}
               <form onSubmit={handleLogin}>
                 <div className="mb-4">
-                  <label className="mb-2.5 block font-medium text-black">Email</label>
+                  <label className="mb-2.5 block font-medium text-black">
+                    Email
+                  </label>
                   <div className="relative">
                     <input
                       type="email"
@@ -97,12 +105,20 @@ function WelcomePage() {
                       required
                     />
                     <span className="absolute right-4 top-4">
-                      <img className="fill-current" width="22" height="22" src={iconEmail} alt="email icon" />
+                      <img
+                        className="fill-current"
+                        width="22"
+                        height="22"
+                        src={iconEmail}
+                        alt="email icon"
+                      />
                     </span>
                   </div>
                 </div>
                 <div className="mb-6">
-                  <label className="mb-2.5 block font-medium text-black">Password</label>
+                  <label className="mb-2.5 block font-medium text-black">
+                    Password
+                  </label>
                   <div className="relative">
                     <input
                       type="password"
@@ -114,7 +130,13 @@ function WelcomePage() {
                       required
                     />
                     <span className="absolute right-4 top-4">
-                      <img className="fill-current" width="22" height="22" src={iconPassword} alt="password icon" />
+                      <img
+                        className="fill-current"
+                        width="22"
+                        height="22"
+                        src={iconPassword}
+                        alt="password icon"
+                      />
                     </span>
                   </div>
                 </div>
@@ -126,20 +148,33 @@ function WelcomePage() {
                     border border-[#025963] bg-[#025963] p-4 font-medium text-white transition 
                     hover:bg-opacity-90"
                   />
-
                 </div>
-                <button className="flex w-full items-center justify-center gap-3.5 rounded-lg 
+                <button
+                  className="flex w-full items-center justify-center gap-3.5 rounded-lg 
                   border border-[#D1D5DB] bg-[#E2E8F0] p-4 font-medium text-[#788596] 
-                  hover:bg-opacity-70">
+                  hover:bg-opacity-70"
+                >
                   <span>
-                    <img className="fill-current" width="20" height="20" src={iconGoogle} alt="google icon" />
+                    <img
+                      className="fill-current"
+                      width="20"
+                      height="20"
+                      src={iconGoogle}
+                      alt="google icon"
+                    />
                   </span>
                   Sign in with Google
                 </button>
                 <div className="mt-6 text-center">
                   <p className="font-medium text-[#788596]">
                     Don't have any account?
-                    <a href="/signup" className="text-[#025963] underline cursor-pointer"> Sign Up</a>
+                    <a
+                      href="/signup"
+                      className="text-[#025963] underline cursor-pointer"
+                    >
+                      {" "}
+                      Sign Up
+                    </a>
                   </p>
                 </div>
               </form>

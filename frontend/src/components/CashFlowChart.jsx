@@ -1,4 +1,3 @@
-import React, { useMemo } from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -10,8 +9,16 @@ import {
   Legend,
 } from "chart.js";
 import { useDashboardContext } from "../components/DashboardContext";
+import { useMemo } from "react";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export default function CashFlowChart() {
   const { transactions } = useDashboardContext();
@@ -33,7 +40,20 @@ export default function CashFlowChart() {
   }, [transactions]);
 
   const dataBar = {
-    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    labels: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
     datasets: [
       {
         label: "Income",
@@ -44,14 +64,18 @@ export default function CashFlowChart() {
         label: "Expense",
         data: expenseData,
         backgroundColor: "#00d77d",
-      }
+      },
     ],
   };
 
   const optionsBar = {
     responsive: true,
     scales: {
-      y: { beginAtZero: true, ticks: { color: "#085565" }, grid: { color: "#E5E7EB" } },
+      y: {
+        beginAtZero: true,
+        ticks: { color: "#085565" },
+        grid: { color: "#E5E7EB" },
+      },
       x: { ticks: { color: "#085565" }, grid: { display: false } },
     },
     plugins: { legend: { display: true } },

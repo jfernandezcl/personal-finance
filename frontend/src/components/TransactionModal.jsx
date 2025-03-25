@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDashboardContext } from "../components/DashboardContext";
 
 function TransactionModal({ isOpen, onClose }) {
@@ -36,7 +36,10 @@ function TransactionModal({ isOpen, onClose }) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-96" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="bg-white p-6 rounded-lg shadow-lg w-96"
+        onClick={(e) => e.stopPropagation()}
+      >
         <h2 className="text-lg font-bold mb-4 text-black">Add Transaction</h2>
         <input
           type="number"
@@ -67,8 +70,18 @@ function TransactionModal({ isOpen, onClose }) {
           className="w-full p-2 mb-2 border rounded text-black"
         />
         <div className="flex justify-end space-x-2">
-          <button onClick={onClose} className="px-4 py-2 bg-gray-400 rounded hover:bg-gray-500">Cancel</button>
-          <button onClick={handleSave} className="px-4 py-2 bg-[#025963] text-white rounded hover:bg-[#013f48] transition-colors">Save</button>
+          <button
+            onClick={onClose}
+            className="px-4 py-2 bg-gray-400 rounded hover:bg-gray-500"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleSave}
+            className="px-4 py-2 bg-[#025963] text-white rounded hover:bg-[#013f48] transition-colors"
+          >
+            Save
+          </button>
         </div>
       </div>
     </div>
