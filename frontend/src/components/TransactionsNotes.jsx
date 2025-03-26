@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDashboardContext } from "./DashboardContext"; // Importamos el contexto
+import { useDashboardContext } from "../context/DashboardContext"; // Importamos el contexto
 
 export default function TransactionsNotes() {
   const { transactions, setTransactions } = useDashboardContext(); // Obtenemos las transacciones del contexto

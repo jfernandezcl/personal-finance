@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDashboardContext } from "../components/DashboardContext";
+import { useDashboardContext } from "../context/DashboardContext";
 
 function TransactionModal({ isOpen, onClose }) {
   const { addTransaction } = useDashboardContext();

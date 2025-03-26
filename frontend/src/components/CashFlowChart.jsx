@@ -8,7 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { useDashboardContext } from "../components/DashboardContext";
+import { useDashboardContext } from "../context/DashboardContext";
 import { useMemo } from "react";
 
 ChartJS.register(
@@ -22,6 +22,7 @@ ChartJS.register(
 
 export default function CashFlowChart() {
   const { transactions } = useDashboardContext();
+  console.log("Transacciones recibidas COMPONENTE:", transactions);
 
   const { incomeData, expenseData } = useMemo(() => {
     const monthlyIncome = Array(12).fill(0);
@@ -36,6 +37,9 @@ export default function CashFlowChart() {
       }
     });
 
+    console.log(12 + 14);
+
+    console.log("Transaction income:", monthlyIncome);
     return { incomeData: monthlyIncome, expenseData: monthlyExpenses };
   }, [transactions]);
 
@@ -57,7 +61,7 @@ export default function CashFlowChart() {
     datasets: [
       {
         label: "Income",
-        data: incomeData,
+        data: [12, 19, 3, 5, 2, 3],
         backgroundColor: "#055765",
       },
       {
