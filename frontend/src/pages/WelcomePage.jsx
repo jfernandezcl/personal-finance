@@ -46,7 +46,7 @@ function WelcomePage() {
         setSuccess("");
         navigate("/dashboard"); // Redirigir al dashboard
       });
-    } catch (err) {
+    } catch {
       setError("Server error. Please try again later.");
       setTimeout(() => setError(""), 3000);
     }
@@ -167,7 +167,7 @@ function WelcomePage() {
                 </button>
                 <div className="mt-6 text-center">
                   <p className="font-medium text-[#788596]">
-                    Don't have any account?
+                    Register new account
                     <a
                       href="/signup"
                       className="text-[#025963] underline cursor-pointer"
