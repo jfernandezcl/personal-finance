@@ -1,7 +1,6 @@
-// src/components/BalanceCard.js
 import { useState } from "react";
 import TransactionModal from "./TransactionModal";
-import { useDashboardContext } from "./DashboardContext"; // Context para el Dashboard
+import { useDashboardContext } from "../context/DashboardContext"; // Context para el Dashboard
 
 export default function BalanceCard() {
   // Quitamos transactions porque ya no lo necesitamos

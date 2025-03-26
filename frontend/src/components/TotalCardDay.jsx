@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import totalCard from "../images/total-card.svg";
-import { useDashboardContext } from "./DashboardContext"; // Obtenemos transacciones desde el contexto
+import { useDashboardContext } from "../context/DashboardContext"; // Obtenemos transacciones desde el contexto
 
 export default function TotalCardDay() {
   const { transactions } = useDashboardContext();

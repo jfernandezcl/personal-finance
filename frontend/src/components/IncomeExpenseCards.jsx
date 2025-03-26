@@ -1,4 +1,4 @@
-import { useDashboardContext } from "./DashboardContext";
+import { useDashboardContext } from "../context/DashboardContext";
 import illustrationcards from "../images/illustration-cards.svg";
 
 export default function IncomeExpenseCards() {
