@@ -5,7 +5,7 @@ import IncomeExpenseCards from "../components/IncomeExpenseCards";
 import TransactionsNotes from "../components/TransactionsNotes";
 import { DashboardProvider } from "../context/DashboardContext"; // Proveedor del contexto
 import TotalCardDay from "../components/TotalCardDay";
-import RequireAuth from "../components/RequireAuth";
+import RequireAuth from "../authenticity/RequireAuth";
 
 export default function Dashboard() {
   return (
