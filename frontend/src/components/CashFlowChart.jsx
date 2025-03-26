@@ -8,7 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { useDashboardContext } from "../components/DashboardContext";
+import { useDashboardContext } from "../context/DashboardContext";
 import { useMemo } from "react";
 
 ChartJS.register(
