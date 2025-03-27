@@ -1,5 +1,6 @@
 import { useEffect, useState, createContext, useContext, useMemo } from "react";
 import { getTransactions } from "../infrastructure/transactions/getTransactions";
+import { addTransaction } from "../infrastructure/transactions/addTransactions";
 
 const DashboardContext = createContext();
 
@@ -13,31 +14,6 @@ export const DashboardProvider = ({ children }) => {
     const data = await getTransactions();
     if (!data) return;
     setTransactions(data);
-  };
-
-  // Agregar una nueva transacción al backend
-  const addTransaction = async (newTransaction) => {
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) return;
-
-      const response = await fetch("http://localhost:3001/api/transactions", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newTransaction),
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al agregar la transacción");
-      }
-
-      setTransactions((prev) => [...prev, newTransaction]); // Añadir a la lista
-    } catch (error) {
-      console.error("Error:", error);
-    }
   };
 
   // Cargar transacciones cuando el usuario inicia sesión
@@ -55,7 +31,13 @@ export const DashboardProvider = ({ children }) => {
 
   return (
     <DashboardContext.Provider
-      value={{ transactions, setTransactions, addTransaction, totalBalance }}
+      value={{
+        transactions,
+        setTransactions,
+        addTransaction: (newTransactions) =>
+          addTransaction(newTransactions, setTransactions),
+        totalBalance,
+      }}
     >
       {children}
     </DashboardContext.Provider>
