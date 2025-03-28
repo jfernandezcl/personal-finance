@@ -17,7 +17,7 @@ export const addTransaction = async (newTransaction, setTransactions) => {
     }
 
     setTransactions((prev) => [...prev, newTransaction]); // Añadir a la lista
-  } catch (error) {
-    console.error("Error:", error);
+  } catch {
+    console.error("Error when adding to the list");
   }
 };

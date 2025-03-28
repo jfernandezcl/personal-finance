@@ -12,14 +12,14 @@ export const getTransactions = async () => {
     });
 
     if (!response.ok) {
-      throw new Error("Error al obtener las transacciones");
+      throw new Error("Error in obtaining transactions");
     }
 
     const data = await response.json();
     console.log("Transacciones recibidas desde el backend:", data);
     return data;
-  } catch (error) {
-    console.error("Error:", error);
+  } catch {
+    console.error("Error when obtaining transactions");
     return null;
   }
 };

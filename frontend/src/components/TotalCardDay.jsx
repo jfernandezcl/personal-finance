@@ -16,7 +16,6 @@ export default function TotalCardDay() {
         .split("T")[0];
       return transactionDate === selectedDate;
     });
-    console.log("Filtered Transactions:", filteredTransactions);
 
     // Sumar ingresos y gastos (convirtiendo el monto a número)
     const income = filteredTransactions

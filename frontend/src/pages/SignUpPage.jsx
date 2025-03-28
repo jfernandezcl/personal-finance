@@ -55,7 +55,6 @@ function SignUpPage() {
 
       // Mostrar mensaje de éxito
       setSuccessMessage("Registration successful!");
-      console.log("Success message set:", "Registration successful!"); // Verifica si se ejecuta
 
       // Tiempo para mostrar el mensaje de éxito
       setTimeout(() => {
