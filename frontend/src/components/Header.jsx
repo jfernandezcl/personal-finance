@@ -1,14 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 export default function Header() {
   const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
+  const [username, setUsername] = useState("");
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
     navigate("/");
+  };
+
+  useEffect(() => {
+    const storeUsername = localStorage.getItem("username");
+    if (storeUsername) {
+      setUsername(storeUsername);
+    }
+  }, []);
+
+  // Obtener las iniciales del usuario
+  const getInitials = (name) => {
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
   };
 
   return (
@@ -19,21 +37,10 @@ export default function Header() {
           onClick={() => setModalOpen(!isModalOpen)}
           className="focus:outline-none"
         >
-          {/* Ícono de menú */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 text-white"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 8h16M4 16h16"
-            />
-          </svg>
+          {/* Foto de perfil con iniciales */}
+          <div className="w-10 h-10 flex items-center justify-center bg-gray-300 text-[#025963] font-bold rounded-full text-lg">
+            {getInitials(username)}
+          </div>
         </button>
       </div>
       {isModalOpen && (
