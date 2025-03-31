@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import logoutIcon from "../images/icon-LogOut.svg";
+import profileIcon from "../images/icon-Profile.svg";
 
 export default function Header() {
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
 
@@ -19,7 +21,6 @@ export default function Header() {
     }
   }, []);
 
-  // Obtener las iniciales del usuario
   const getInitials = (name) => {
     return name
       .split(" ")
@@ -33,50 +34,48 @@ export default function Header() {
     <header className="w-full bg-[#025963] shadow-md mb-8 relative">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
         <h1 className="text-white text-xl font-bold">Personal Finance</h1>
-        <button
-          onClick={() => setModalOpen(!isModalOpen)}
-          className="focus:outline-none"
-        >
-          {/* Foto de perfil con iniciales */}
-          <div className="w-10 h-10 flex items-center justify-center bg-gray-300 text-[#025963] font-bold rounded-full text-lg">
-            {getInitials(username)}
-          </div>
-        </button>
-      </div>
-      {isModalOpen && (
-        // Capa de overlay para detectar clicks fuera de la modal
-        <div className="fixed inset-0 z-10" onClick={() => setModalOpen(false)}>
-          <div
-            className="absolute top-24 right-60 bg-white rounded-md shadow p-6 w-52 border-2 border-[#025963]"
-            onClick={(e) => e.stopPropagation()} // Evita que se cierre al hacer click dentro de la modal
+        <div className="relative">
+          <button
+            onClick={() => setDropdownOpen(!isDropdownOpen)}
+            className="focus:outline-none flex items-center gap-x-2"
           >
-            <button
-              className="flex items-center space-x-2 text-[#025963] font-semibold hover:text-[#02c16a] transition-all"
-              onClick={() => {
-                handleLogout();
-                setModalOpen(false);
-              }}
+            <div className="w-10 h-10 flex items-center justify-center bg-gray-300 text-[#025963] font-bold rounded-full text-lg">
+              {getInitials(username)}
+            </div>
+          </button>
+          {isDropdownOpen && (
+            <div
+              className="absolute right-0 mt-2 bg-gray-300 shadow-md rounded-lg w-64 dark:border border-gray-400 z-50"
+              role="menu"
             >
-              {/* Ícono para cerrar sesión */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+              <div className="p-4 flex items-center">
+                <div className="w-12 h-12 flex items-center justify-center bg-gray-400 text-[#025963] font-bold rounded-full text-xl">
+                  {getInitials(username)}
+                </div>
+                <span className="ml-4 text-[#025963] font-semibold">
+                  {username}
+                </span>
+              </div>
+              <hr className="border-gray-400" />
+              <button
+                className="flex items-center space-x-4 p-4 text-[#025963] font-semibold w-full hover:bg-gray-400"
+                onClick={() => setDropdownOpen(false)}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-8V7"
-                />
-              </svg>
-              <span>Log out</span>
-            </button>
-          </div>
+                <img src={profileIcon} alt="Profile Icon" className="h-6 w-6" />
+                <span>Manage your profile</span>
+              </button>
+              <hr className="border-gray-400" />
+              <button
+                className="flex items-center space-x-4 p-4 text-[#025963] font-semibold w-full  hover:bg-gray-400 "
+                onClick={handleLogout}
+              >
+                <img src={logoutIcon} alt="Logout Icon" className="h-6 w-6" />
+                <span>Log out</span>
+              </button>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </header>
   );
 }
