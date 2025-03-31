@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useDashboardContext } from "../context/DashboardContext"; // Importamos el contexto
 
 export default function TransactionsNotes() {
-  const { transactions, setTransactions } = useDashboardContext(); // Obtenemos las transacciones del contexto
-  const [selectedDate, setSelectedDate] = useState("");
+  const { transactions, setTransactions } = useDashboardContext();
+  const today = new Date().toISOString().split("T")[0]; // Obtenemos las transacciones del contexto
+  const [selectedDate, setSelectedDate] = useState(today);
 
   // Organizar las transacciones por fecha sin modificar el estado original
   const sortedTransactions = [...transactions].sort(
@@ -35,7 +36,7 @@ export default function TransactionsNotes() {
         <h2 className="text-2xl font-bold">Transactions</h2>
         <input
           type="date"
-          className="border border-gray-300 rounded-md px-2 py-1"
+          className="bg-gray-100 border border-gray-300 rounded-md px-2 py-1"
           value={selectedDate}
           onChange={(e) => setSelectedDate(e.target.value)}
         />

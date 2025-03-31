@@ -5,17 +5,18 @@ function TransactionModal({ isOpen, onClose }) {
   const { addTransaction } = useDashboardContext();
   const [amount, setAmount] = useState("");
   const [type, setType] = useState("income");
-  const [date, setDate] = useState("");
+  const today = new Date().toISOString().split("T")[0];
+  const [date, setDate] = useState(today);
   const [description, setDescription] = useState("");
 
   useEffect(() => {
     if (!isOpen) {
       setAmount("");
       setType("income");
-      setDate("");
+      setDate(today);
       setDescription("");
     }
-  }, [isOpen]);
+  }, [isOpen, today]);
 
   if (!isOpen) return null;
 
