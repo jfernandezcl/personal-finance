@@ -16,7 +16,6 @@ export const getTransactions = async () => {
     }
 
     const data = await response.json();
-    console.log("Transacciones recibidas desde el backend:", data);
     return data;
   } catch {
     console.error("Error when obtaining transactions");
