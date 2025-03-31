@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import logoutIcon from "../images/icon-LogOut.svg";
 import profileIcon from "../images/icon-Profile.svg";
@@ -7,6 +7,7 @@ export default function Header() {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
+  const dropdownRef = useRef(null);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -30,6 +31,19 @@ export default function Header() {
       .slice(0, 2);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
+
   return (
     <header className="w-full bg-[#025963] shadow-md mb-8 relative">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
@@ -47,6 +61,7 @@ export default function Header() {
             <div
               className="absolute right-0 mt-2 bg-gray-300 shadow-md rounded-lg w-64 dark:border border-gray-400 z-50"
               role="menu"
+              ref={dropdownRef}
             >
               <div className="p-4 flex items-center">
                 <div className="w-12 h-12 flex items-center justify-center bg-gray-400 text-[#025963] font-bold rounded-full text-xl">
