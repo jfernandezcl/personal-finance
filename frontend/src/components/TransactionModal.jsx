@@ -64,6 +64,7 @@ function TransactionModal({ isOpen, onClose }) {
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
+          onFocus={(e) => e.target.showPicker && e.target.showPicker()}
           className="w-full p-2 mb-2 border rounded text-black cursor-pointer"
         />
         <input
