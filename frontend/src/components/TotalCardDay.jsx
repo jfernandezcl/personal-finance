@@ -34,7 +34,7 @@ export default function TotalCardDay() {
         {/* Selector de fecha */}
         <input
           type="date"
-          className="absolute top-4 right-4 bg-gray-100 border border-gray-300 rounded-md px-2 py-1 text-sm"
+          className="absolute top-4 right-4 bg-gray-100 border border-gray-300 rounded-md px-2 py-1 text-sm cursor-pointer"
           value={selectedDate}
           onChange={(e) => setSelectedDate(e.target.value)}
         />

@@ -36,7 +36,7 @@ export default function TransactionsNotes() {
         <h2 className="text-2xl font-bold">Transactions</h2>
         <input
           type="date"
-          className="bg-gray-100 border border-gray-300 rounded-md px-2 py-1"
+          className="bg-gray-100 border border-gray-300 rounded-md px-2 py-1 cursor-pointer"
           value={selectedDate}
           onChange={(e) => setSelectedDate(e.target.value)}
         />

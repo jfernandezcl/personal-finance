@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  /* Aplica cursor-pointer al icono del calendario en navegadores WebKit */
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    @apply cursor-pointer;
+  }
+}
