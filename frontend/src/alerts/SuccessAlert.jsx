@@ -1,10 +1,10 @@
-const SuccessAlert = ({ message, onClose }) => {
+const SuccessAlert = ({ message }) => {
   if (!message) return null;
 
   return (
     <div
       id="alert-success"
-      className="fixed top-4 right-4 flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+      className="fixed top-7 right-12 flex items-center p-5 mb-10 text-green-700 rounded-lg bg-gray-300 "
       role="alert"
     >
       <svg
@@ -18,23 +18,6 @@ const SuccessAlert = ({ message, onClose }) => {
       </svg>
       <span className="sr-only">Success</span>
       <div className="ml-3 text-sm font-medium">{message}</div>
-      <button
-        type="button"
-        className="ml-auto -mr-1 -my-1 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
-        onClick={onClose}
-        aria-label="Close"
-      >
-        <span className="sr-only">Dismiss</span>
-        <svg
-          className="w-3 h-3"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 14 14"
-        >
-          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-        </svg>
-      </button>
     </div>
   );
 };
