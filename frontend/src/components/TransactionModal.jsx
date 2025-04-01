@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDashboardContext } from "../context/DashboardContext";
+import ErrorAlert from "../alerts/ErrorAlert";
 
 function TransactionModal({ isOpen, onClose }) {
   const { addTransaction } = useDashboardContext();
@@ -8,6 +9,7 @@ function TransactionModal({ isOpen, onClose }) {
   const today = new Date().toISOString().split("T")[0];
   const [date, setDate] = useState(today);
   const [description, setDescription] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (!isOpen) {
@@ -21,7 +23,11 @@ function TransactionModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   const handleSave = async () => {
-    if (!amount || isNaN(amount)) return;
+    if (!amount || isNaN(amount)) {
+      setError("Please enter a valid amount.");
+      setTimeout(() => setError(""), 3000);
+      return;
+    }
 
     const newTransaction = {
       amount: parseFloat(amount),
@@ -88,6 +94,7 @@ function TransactionModal({ isOpen, onClose }) {
             Save
           </button>
         </div>
+        {error && <ErrorAlert error={error} onClose={() => setError("")} />}
       </div>
     </div>
   );
