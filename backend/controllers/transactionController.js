@@ -22,6 +22,27 @@ export const addTransaction = async (req, res) => {
   }
 };
 
+export const deleteTransaction = async (req, res) => {
+  const { id } = req.params;
+  const user_id = Buffer.from(req.userId, "hex");
+
+  try {
+    const [result] = await pool.execute(
+      "DELETE FROM transactions WHERE BIN_TO_UUID(id) = ? AND user_id = ?",
+      [id, user_id]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ msg: "Transaction not found" });
+    }
+
+    res.json({ msg: "Transaction deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Server error" });
+  }
+};
+
 // Obtener transacciones del usuario autenticado
 export const getTransactions = async (req, res) => {
   const user_id = Buffer.from(req.userId, "hex");
