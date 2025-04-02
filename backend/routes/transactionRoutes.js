@@ -12,7 +12,7 @@ const router = express.Router();
 router.post("/", authMiddleware, addTransaction);
 
 // Eliminar una transacción
-router.delete("/transactions/:id", authMiddleware, deleteTransaction);
+router.delete("/:id", authMiddleware, deleteTransaction);
 
 // Obtener transacciones del usuario autenticado
 router.get("/", authMiddleware, getTransactions);
