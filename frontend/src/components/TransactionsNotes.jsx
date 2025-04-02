@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDashboardContext } from "../context/DashboardContext"; // Importamos el contexto
 
 export default function TransactionsNotes() {
-  const { transactions, setTransactions } = useDashboardContext();
+  const { transactions, removeTransaction } = useDashboardContext();
   const today = new Date().toISOString().split("T")[0]; // Obtenemos las transacciones del contexto
   const [selectedDate, setSelectedDate] = useState(today);
 
@@ -23,10 +23,8 @@ export default function TransactionsNotes() {
     : sortedTransactions;
 
   // Función para eliminar una transacción
-  const handleDelete = (id) => {
-    setTransactions((prevTransactions) =>
-      prevTransactions.filter((transaction) => transaction.id !== id)
-    );
+  const handleDelete = async (id) => {
+    await removeTransaction(id);
   };
 
   return (

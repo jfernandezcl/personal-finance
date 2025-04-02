@@ -1,6 +1,7 @@
 import { useEffect, useState, createContext, useContext, useMemo } from "react";
 import { getTransactions } from "../infrastructure/transactions/getTransactions";
 import { addTransaction } from "../infrastructure/transactions/addTransactions";
+import { deleteTransactions } from "../infrastructure/transactions/deleteTransactions";
 
 const DashboardContext = createContext();
 
@@ -21,6 +22,16 @@ export const DashboardProvider = ({ children }) => {
     fetchTransactions();
   }, []);
 
+  //Función para eliminar una transacción
+  const removeTransaction = async (id) => {
+    const success = await deleteTransactions(id);
+    if (success) {
+      setTransactions((prevTransactions) =>
+        prevTransactions.filter((transaction) => transaction.id !== id)
+      );
+    }
+  };
+
   // Calculamos el balance total usando useMemo
   const totalBalance = useMemo(() => {
     return transactions.reduce((total, transaction) => {
@@ -36,6 +47,7 @@ export const DashboardProvider = ({ children }) => {
         setTransactions,
         addTransaction: (newTransactions) =>
           addTransaction(newTransactions, setTransactions),
+        removeTransaction,
         totalBalance,
       }}
     >
