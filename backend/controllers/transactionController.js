@@ -28,7 +28,7 @@ export const deleteTransaction = async (req, res) => {
 
   try {
     const [result] = await pool.execute(
-      "DELETE FROM transactions WHERE BIN_TO_UUID(id) = ? AND user_id = ?",
+      "DELETE FROM transactions WHERE id = UUID_TO_BIN(?) AND user_id = ?",
       [id, user_id]
     );
 
