@@ -10,7 +10,7 @@ export const addTransaction = async (req, res) => {
   }
 
   try {
-    await pool.execute(
+    const [result] = await pool.execute(
       "INSERT INTO transactions (user_id, type, amount, description, date) VALUES (?, ?, ?, ?, ?)",
       [user_id, type, amount, description, date]
     );
