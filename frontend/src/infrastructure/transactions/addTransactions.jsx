@@ -16,6 +16,9 @@ export const addTransaction = async (newTransaction, setTransactions) => {
       throw new Error("Error al agregar la transacción");
     }
 
+    const data = await response.json();
+    newTransaction.id = data.id; // Asignar el ID devuelto por el servidor
+
     setTransactions((prev) => [...prev, newTransaction]); // Añadir a la lista
   } catch {
     console.error("Error when adding to the list");
