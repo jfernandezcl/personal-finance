@@ -15,7 +15,18 @@ export const addTransaction = async (req, res) => {
       [user_id, type, amount, description, date]
     );
 
-    res.status(201).json({ msg: "Transaction added successfully" });
+    const [rows] = await pool.execute(
+      "SELECT BIN_TO_UUID(id) AS id FROM transactions WHERE id = ?",
+      [result.insertId]
+    );
+
+    if (rows.length === 0) {
+      throw new Error("Transaction not found after insert");
+    }
+
+    res
+      .status(201)
+      .json({ id: rows[0].id, msg: "Transaction added successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: "Server error" });
