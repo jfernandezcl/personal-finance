@@ -11,15 +11,14 @@ export const addTransaction = async (req, res) => {
 
   try {
     const [result] = await pool.execute(
-      "INSERT INTO transactions (user_id, type, amount, description, date) VALUES (?, ?, ?, ?, ?)",
+      "INSERT INTO transactions (id, user_id, type, amount, description, date) VALUES (UUID_TO_BIN(UUID()), ?, ?, ?, ?, ?)",
       [user_id, type, amount, description, date]
     );
 
     const [rows] = await pool.execute(
-      "SELECT BIN_TO_UUID(id) AS id FROM transactions WHERE id = ?",
-      [result.insertId]
+      "SELECT BIN_TO_UUID(id) AS id FROM transactions WHERE user_id = ? ORDER BY date DESC LIMIT 1",
+      [user_id]
     );
-
     if (rows.length === 0) {
       throw new Error("Transaction not found after insert");
     }
