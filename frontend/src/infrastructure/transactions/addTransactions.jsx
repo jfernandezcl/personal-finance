@@ -1,7 +1,9 @@
+import { getTransactions } from "./getTransactions";
+
 export const addTransaction = async (newTransaction, setTransactions) => {
   try {
     const token = localStorage.getItem("token");
-    if (!token) return;
+    if (!token) throw new Error("No token found");
 
     const response = await fetch("http://localhost:3001/api/transactions", {
       method: "POST",
@@ -13,14 +15,18 @@ export const addTransaction = async (newTransaction, setTransactions) => {
     });
 
     if (!response.ok) {
-      throw new Error("Error al agregar la transacción");
+      const errorMessage = await response.text(); // Captura el mensaje de error del backend
+      throw new Error(
+        `Error en la solicitud: ${response.status} - ${errorMessage}`
+      );
     }
 
-    const data = await response.json();
-    newTransaction.id = data.id; // Asignar el ID devuelto por el servidor
-
-    setTransactions((prev) => [...prev, newTransaction]); // Añadir a la lista
-  } catch {
-    console.error("Error when adding to the list");
+    // Recargar la lista de transacciones desde el backend
+    const updatedTransactions = await getTransactions();
+    if (updatedTransactions) {
+      setTransactions(updatedTransactions);
+    }
+  } catch (error) {
+    console.error("Error when adding to the list:", error.message);
   }
 };
