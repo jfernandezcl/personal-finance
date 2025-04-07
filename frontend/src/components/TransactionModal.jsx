@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDashboardContext } from "../context/DashboardContext";
-import ErrorAlert from "../alerts/ErrorAlert";
+import ErrorAlert from "../alerts/CompleteFields";
 
 function TransactionModal({ isOpen, onClose }) {
   const { addTransaction } = useDashboardContext();
@@ -25,6 +25,18 @@ function TransactionModal({ isOpen, onClose }) {
   const handleSave = async () => {
     if (!amount || isNaN(amount)) {
       setError("Please enter a valid amount.");
+      setTimeout(() => setError(""), 3000);
+      return;
+    }
+
+    if (!description.trim()) {
+      setError("Description is required.");
+      setTimeout(() => setError(""), 3000);
+      return;
+    }
+
+    if (!date) {
+      setError("Date is required.");
       setTimeout(() => setError(""), 3000);
       return;
     }
