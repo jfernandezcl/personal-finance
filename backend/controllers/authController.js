@@ -1,5 +1,8 @@
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import {
+  generateToken,
+  verifyToken as verifyTokenUtil,
+} from "../utils/tokenUtils.js";
 import pool from "../database/db.js";
 
 export const register = async (req, res) => {
@@ -59,32 +62,9 @@ export const login = async (req, res) => {
       return res.status(401).json({ msg: "Email or password is incorrect" });
     }
 
-    // crear token
-    const token = jwt.sign(
-      { id: user.id, username: user.username, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
-
+    const token = generateToken(user);
     res.status(200).json({ token, username: user.username });
-  } catch (error) {
-    console.log(error);
+  } catch {
     res.status(500).json({ msg: "Server error" });
-  }
-};
-
-// verificar token
-export const verifyToken = (req, res) => {
-  const token = req.headers.authorization?.split(" ")[1];
-
-  if (!token) {
-    return res.status(401).json({ msg: "No token provided" });
-  }
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    res.status(200).json({ valid: true, user: decoded });
-  } catch (error) {
-    res.status(401).json({ msg: "Invalid token" });
   }
 };
