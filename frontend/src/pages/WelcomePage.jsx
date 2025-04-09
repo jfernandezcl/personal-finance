@@ -1,11 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import iconEmail from "../images/icon-email.svg";
 import iconPassword from "../images/icon-password.svg";
 import iconGoogle from "../images/icon-google.svg";
 import logo from "../images/logo.svg";
+import illustration from "../images/mobile-illustration.svg";
+
 import ErrorAlert from "../alerts/ErrorAlert";
 import SuccessAlert from "../alerts/SuccessAlert";
-import { useNavigate } from "react-router";
+
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../firebase/firebaseConfig";
 
 function WelcomePage() {
   const [error, setError] = useState("");
@@ -44,10 +50,46 @@ function WelcomePage() {
       setSuccess("Login successful!");
       setTimeout(() => {
         setSuccess("");
-        navigate("/dashboard"); // Redirigir al dashboard
-      });
+        navigate("/dashboard");
+      }, 1500);
     } catch {
       setError("Server error. Please try again later.");
+      setTimeout(() => setError(""), 3000);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+
+      const response = await fetch("http://localhost:3001/api/auth/google", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: user.displayName,
+          email: user.email,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.msg || "Google login failed");
+        setTimeout(() => setError(""), 3000);
+        return;
+      }
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("username", data.username);
+
+      setSuccess("Login successful!");
+      setTimeout(() => {
+        setSuccess("");
+        navigate("/dashboard");
+      }, 1500);
+    } catch {
+      setError("Google login failed");
       setTimeout(() => setError(""), 3000);
     }
   };
@@ -74,7 +116,7 @@ function WelcomePage() {
               <span className="mt-20 inline-block">
                 <img
                   className="w-[350px] h-[350px]"
-                  src="src/images/mobile-illustration.svg"
+                  src={illustration}
                   alt="illustration"
                 />
               </span>
@@ -88,7 +130,7 @@ function WelcomePage() {
               <h2 className="mb-9 text-2xl font-bold text-black sm:text-title-xl2">
                 Sign in to Personal finances
               </h2>
-              {/* Formulario con `onSubmit` */}
+
               <form onSubmit={handleLogin}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black">
@@ -99,9 +141,7 @@ function WelcomePage() {
                       type="email"
                       name="email"
                       placeholder="Enter your email"
-                      className="w-full rounded-lg border 
-                      border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary 
-                      focus-visible:shadow-none"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
                       required
                     />
                     <span className="absolute right-4 top-4">
@@ -115,6 +155,7 @@ function WelcomePage() {
                     </span>
                   </div>
                 </div>
+
                 <div className="mb-6">
                   <label className="mb-2.5 block font-medium text-black">
                     Password
@@ -124,9 +165,7 @@ function WelcomePage() {
                       type="password"
                       name="password"
                       placeholder="6+ Characters, 1 Capital letter"
-                      className="w-full rounded-lg border 
-                      border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary 
-                      focus-visible:shadow-none"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
                       required
                     />
                     <span className="absolute right-4 top-4">
@@ -140,19 +179,19 @@ function WelcomePage() {
                     </span>
                   </div>
                 </div>
+
                 <div className="mb-5">
                   <input
                     type="submit"
                     value="Sign In"
-                    className="w-full cursor-pointer rounded-lg 
-                    border border-[#025963] bg-[#025963] p-4 font-medium text-white transition 
-                    hover:bg-opacity-90"
+                    className="w-full cursor-pointer rounded-lg border border-[#025963] bg-[#025963] p-4 font-medium text-white transition hover:bg-opacity-90"
                   />
                 </div>
+
                 <button
-                  className="flex w-full items-center justify-center gap-3.5 rounded-lg 
-                  border border-[#D1D5DB] bg-[#E2E8F0] p-4 font-medium text-[#788596] 
-                  hover:bg-opacity-70"
+                  onClick={handleGoogleLogin}
+                  type="button"
+                  className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-[#D1D5DB] bg-[#E2E8F0] p-4 font-medium text-[#788596] hover:bg-opacity-70"
                 >
                   <span>
                     <img
@@ -165,6 +204,7 @@ function WelcomePage() {
                   </span>
                   Sign in with Google
                 </button>
+
                 <div className="mt-6 text-center">
                   <p className="font-medium text-[#788596]">
                     Register new account
