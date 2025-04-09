@@ -6,6 +6,7 @@ export const generateToken = (user) => {
     process.env.JWT_SECRET,
     { expiresIn: "1h" }
   );
+  return token;
 };
 
 export const verifyToken = (req, res) => {

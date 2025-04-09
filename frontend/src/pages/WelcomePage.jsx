@@ -10,9 +10,6 @@ import illustration from "../images/mobile-illustration.svg";
 import ErrorAlert from "../alerts/ErrorAlert";
 import SuccessAlert from "../alerts/SuccessAlert";
 
-import { signInWithPopup } from "firebase/auth";
-import { auth, googleProvider } from "../firebase/firebaseConfig";
-
 function WelcomePage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -54,42 +51,6 @@ function WelcomePage() {
       }, 1500);
     } catch {
       setError("Server error. Please try again later.");
-      setTimeout(() => setError(""), 3000);
-    }
-  };
-
-  const handleGoogleLogin = async () => {
-    try {
-      const result = await signInWithPopup(auth, googleProvider);
-      const user = result.user;
-
-      const response = await fetch("http://localhost:3001/api/auth/google", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: user.displayName,
-          email: user.email,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(data.msg || "Google login failed");
-        setTimeout(() => setError(""), 3000);
-        return;
-      }
-
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("username", data.username);
-
-      setSuccess("Login successful!");
-      setTimeout(() => {
-        setSuccess("");
-        navigate("/dashboard");
-      }, 1500);
-    } catch {
-      setError("Google login failed");
       setTimeout(() => setError(""), 3000);
     }
   };
@@ -188,11 +149,7 @@ function WelcomePage() {
                   />
                 </div>
 
-                <button
-                  onClick={handleGoogleLogin}
-                  type="button"
-                  className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-[#D1D5DB] bg-[#E2E8F0] p-4 font-medium text-[#788596] hover:bg-opacity-70"
-                >
+                <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-[#D1D5DB] bg-[#E2E8F0] p-4 font-medium text-[#788596] hover:bg-opacity-70">
                   <span>
                     <img
                       className="fill-current"
