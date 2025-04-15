@@ -3,16 +3,16 @@ import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
 import transactionRoutes from "./routes/transactionRoutes.js";
+import corsMiddleware from "./middleware/cors.js";
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(corsMiddleware);
 
 app.use("/api/auth", authRoutes);
-
-// Agregar las rutas de transacciones
 app.use("/api/transactions/", transactionRoutes);
 
 const PORT = process.env.PORT || 5000;
