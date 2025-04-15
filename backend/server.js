@@ -3,6 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
 import transactionRoutes from "./routes/transactionRoutes.js";
+
+import corsMiddleware from "./middleware/cors.js";
 import { googleAuthRoutes } from "./controllers/googleAuthController.js";
 
 dotenv.config();
@@ -10,9 +12,9 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(corsMiddleware);
 
 app.use("/api/auth", authRoutes);
-
 app.use("/api/auth", googleAuthRoutes);
 
 // Agregar las rutas de transacciones
