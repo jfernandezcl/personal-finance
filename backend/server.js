@@ -5,7 +5,7 @@ import authRoutes from "./routes/authRoutes.js";
 import transactionRoutes from "./routes/transactionRoutes.js";
 
 import corsMiddleware from "./middleware/cors.js";
-import { googleAuthRoutes } from "./controllers/googleAuthController.js";
+import loginWithGoogle from "./controllers/googleAuthController.js";
 
 dotenv.config();
 
@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(corsMiddleware);
 
 app.use("/api/auth", authRoutes);
-app.use("/api/auth", googleAuthRoutes);
+app.use("/api/auth", loginWithGoogle);
 
 // Agregar las rutas de transacciones
 app.use("/api/transactions/", transactionRoutes);

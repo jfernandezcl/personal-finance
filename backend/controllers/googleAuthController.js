@@ -43,3 +43,5 @@ export const loginWithGoogle = async (req, res) => {
     res.status(401).json({ msg: "Invalid Google token" });
   }
 };
+
+export default loginWithGoogle;
