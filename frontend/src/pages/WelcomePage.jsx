@@ -10,6 +10,8 @@ import illustration from "../images/mobile-illustration.svg";
 import ErrorAlert from "../alerts/ErrorAlert";
 import SuccessAlert from "../alerts/SuccessAlert";
 
+import { GoogleLogin } from "@react-oauth/google";
+
 function WelcomePage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -27,23 +29,17 @@ function WelcomePage() {
     try {
       const response = await fetch("http://localhost:3001/api/auth/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-
       const data = await response.json();
-
       if (!response.ok) {
         setError("Invalid credentials");
         setTimeout(() => setError(""), 3000);
         return;
       }
-
       localStorage.setItem("token", data.token);
       localStorage.setItem("username", data.username);
-
       setSuccess("Login successful!");
       setTimeout(() => {
         setSuccess("");
@@ -55,14 +51,42 @@ function WelcomePage() {
     }
   };
 
+  const handleGoogleLogin = async (response) => {
+    try {
+      const googleToken = response.credential;
+      const res = await fetch("http://localhost:3001/api/auth/google", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ credential: googleToken }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError("Google login failed. Please try again.");
+        setTimeout(() => setError(""), 3000);
+        return;
+      }
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("username", data.username);
+
+      setSuccess("Login successful!");
+      setTimeout(() => {
+        setSuccess("");
+        navigate("/dashboard");
+      }, 1500);
+    } catch {
+      setError("Server error during Google login. Please try again later.");
+      setTimeout(() => setError(""), 3000);
+    }
+  };
+
   return (
     <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10 mt-20">
-      {/* Alertas */}
       {error && <ErrorAlert error={error} onClose={() => setError("")} />}
       {success && (
         <SuccessAlert message={success} onClose={() => setSuccess("")} />
       )}
-
       <div className="rounded-sm bg-white shadow-default">
         <div className="flex flex-wrap items-center mt-10 pb-10">
           <div className="hidden w-full xl:block xl:w-1/2">
@@ -91,7 +115,6 @@ function WelcomePage() {
               <h2 className="mb-9 text-2xl font-bold text-black sm:text-title-xl2">
                 Sign in to Personal finances
               </h2>
-
               <form onSubmit={handleLogin}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black">
@@ -116,7 +139,6 @@ function WelcomePage() {
                     </span>
                   </div>
                 </div>
-
                 <div className="mb-6">
                   <label className="mb-2.5 block font-medium text-black">
                     Password
@@ -140,7 +162,6 @@ function WelcomePage() {
                     </span>
                   </div>
                 </div>
-
                 <div className="mb-5">
                   <input
                     type="submit"
@@ -148,20 +169,35 @@ function WelcomePage() {
                     className="w-full cursor-pointer rounded-lg border border-[#025963] bg-[#025963] p-4 font-medium text-white transition hover:bg-opacity-90"
                   />
                 </div>
-
-                <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-[#D1D5DB] bg-[#E2E8F0] p-4 font-medium text-[#788596] hover:bg-opacity-70">
-                  <span>
-                    <img
-                      className="fill-current"
-                      width="20"
-                      height="20"
-                      src={iconGoogle}
-                      alt="google icon"
-                    />
-                  </span>
-                  Sign in with Google
-                </button>
-
+                <div className="mb-5">
+                  <GoogleLogin
+                    onSuccess={handleGoogleLogin}
+                    onError={() => {
+                      setError("Google login failed");
+                      setTimeout(() => setError(""), 3000);
+                    }}
+                    useOneTap
+                    render={(renderProps) => (
+                      <button
+                        type="button"
+                        onClick={renderProps.onClick}
+                        disabled={renderProps.disabled}
+                        className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-[#D1D5DB] bg-[#E2E8F0] p-4 font-medium text-[#788596] hover:bg-opacity-70"
+                      >
+                        <span>
+                          <img
+                            className="fill-current"
+                            width="20"
+                            height="20"
+                            src={iconGoogle}
+                            alt="google icon"
+                          />
+                        </span>
+                        Sign in with Google
+                      </button>
+                    )}
+                  />
+                </div>
                 <div className="mt-6 text-center">
                   <p className="font-medium text-[#788596]">
                     Register new account
