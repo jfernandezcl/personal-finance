@@ -22,11 +22,10 @@ export const loginWithGoogle = async (req, res) => {
 
     let user = userRows[0];
 
-    // Si no existe, lo creamos automáticamente con un password aleatorio encriptado
     if (!user) {
       const [insertResult] = await pool.execute(
         "INSERT INTO users (sub, username, email) VALUES (?, ?, ?)",
-        [sub, name, email] // puedes poner un string fijo, ya que no se usará
+        [sub, name, email]
       );
       const [newUserRows] = await pool.execute(
         "SELECT * FROM users WHERE id = ?",
