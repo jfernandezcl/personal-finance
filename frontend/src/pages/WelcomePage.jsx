@@ -12,7 +12,7 @@ import SuccessAlert from "../alerts/SuccessAlert";
 
 import { GoogleLogin } from "@react-oauth/google";
 
-import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 function WelcomePage() {
   const [error, setError] = useState("");
@@ -55,7 +55,7 @@ function WelcomePage() {
 
   const handleGoogleLogin = async (response) => {
     try {
-      const decoded = jwt_decode(response.credential); // Aquí tienes el sub
+      const decoded = jwtDecode(response.credential); // Aquí tienes el sub
       const { sub, email, name } = decoded;
 
       const googleToken = response.credential;
