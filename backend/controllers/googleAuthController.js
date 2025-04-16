@@ -11,7 +11,7 @@ export const loginWithGoogle = async (req, res) => {
   }
 
   try {
-    const { email, name } = await verifyGoogleToken(credential);
+    const { sub, email, name } = await verifyGoogleToken(credential);
 
     // Verificar si el usuario ya existe
     const [userRows] = await pool.execute(
@@ -24,8 +24,8 @@ export const loginWithGoogle = async (req, res) => {
     // Si no existe, lo creamos automáticamente con un password aleatorio encriptado
     if (!user) {
       const [insertResult] = await pool.execute(
-        "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
-        [name, email, "GOOGLE_LOGIN_PLACEHOLDER"] // puedes poner un string fijo, ya que no se usará
+        "INSERT INTO users (sub, username, email) VALUES (?, ?, ?)",
+        [sub, name, email] // puedes poner un string fijo, ya que no se usará
       );
       const [newUserRows] = await pool.execute(
         "SELECT * FROM users WHERE id = ?",
