@@ -11,5 +11,6 @@ export const verifyGoogleToken = async (token) => {
   return {
     email: payload.email,
     name: payload.name,
+    sub: payload.sub,
   };
 };
