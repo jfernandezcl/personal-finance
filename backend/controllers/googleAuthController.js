@@ -4,6 +4,7 @@ import { generateToken } from "./tokenUtils.js";
 import { verifyGoogleToken } from "./authGoogle.js"; // el que tú ya tienes creado
 
 export const loginWithGoogle = async (req, res) => {
+  console.log(req.body);
   const { credential } = req.body;
 
   if (!credential) {

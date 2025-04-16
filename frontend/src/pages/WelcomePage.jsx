@@ -12,8 +12,6 @@ import SuccessAlert from "../alerts/SuccessAlert";
 
 import { GoogleLogin } from "@react-oauth/google";
 
-import { jwtDecode } from "jwt-decode";
-
 function WelcomePage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -55,14 +53,10 @@ function WelcomePage() {
 
   const handleGoogleLogin = async (response) => {
     try {
-      const decoded = jwtDecode(response.credential); // Aquí tienes el sub
-      const { sub, email, name } = decoded;
-
-      const googleToken = response.credential;
       const res = await fetch("http://localhost:3001/api/auth/google", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sub, email, name, googleToken }),
+        body: JSON.stringify({ credential: response.credential }),
       });
 
       const data = await res.json();
@@ -74,7 +68,6 @@ function WelcomePage() {
       }
       localStorage.setItem("token", data.token);
       localStorage.setItem("username", data.username);
-      localStorage.setItem("sub", data.sub);
 
       setSuccess("Login successful!");
       setTimeout(() => {
