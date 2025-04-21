@@ -1,8 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import WelcomePage from "../pages/WelcomePage";
-import SignUpPage from "../pages/SignUpPage";
 import Dashboard from "../pages/Dashboard";
+
 import ProtectedRoute from "../authenticity/ProtectedRoute";
+import SignUpPage from "../pages/SignUpPage";
+import EditProfile from "../pages/EditProfile";
 
 const AppRoutes = () => {
   return (
@@ -14,6 +16,14 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/editprofile"
+        element={
+          <ProtectedRoute>
+            <EditProfile />
           </ProtectedRoute>
         }
       />

@@ -15,6 +15,15 @@ export default function Header() {
     navigate("/");
   };
 
+  const handleEditProfile = () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/editprofile");
+    } else {
+      navigate("/");
+    }
+  };
+
   useEffect(() => {
     const storeUsername = localStorage.getItem("username");
     if (storeUsername) {
@@ -74,7 +83,7 @@ export default function Header() {
               <hr className="border-gray-400" />
               <button
                 className="flex items-center space-x-4 p-4 text-[#025963] font-semibold w-full hover:bg-gray-400"
-                onClick={() => setDropdownOpen(false)}
+                onClick={handleEditProfile}
               >
                 <img src={profileIcon} alt="Profile Icon" className="h-6 w-6" />
                 <span>Manage your profile</span>
