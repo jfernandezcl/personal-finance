@@ -7,12 +7,14 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ErrorAlert from "../alerts/ErrorAlert";
 import SuccessAlert from "../alerts/SuccessAlert";
-import { useGoogleLogin } from "@react-oauth/google";
+
+import { GoogleLogin } from "@react-oauth/google";
 
 function SignUpPage() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [success, setSuccess] = useState("");
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -59,48 +61,41 @@ function SignUpPage() {
     }
   };
 
-  // Función para gestionar el registro con Google
   const handleGoogleLogin = async (response) => {
     try {
-      const googleToken = response.credential;
       const res = await fetch("http://localhost:3001/api/auth/google", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        // Se envía la credencial a la API que se encargará de registrar (o loguear) al usuario
-        body: JSON.stringify({ credential: googleToken }),
+        body: JSON.stringify({ credential: response.credential }),
       });
+
       const data = await res.json();
+
       if (!res.ok) {
-        setError("Google registration failed. Please try again.");
+        setError("Google login failed. Please try again.");
         setTimeout(() => setError(""), 3000);
         return;
       }
       localStorage.setItem("token", data.token);
       localStorage.setItem("username", data.username);
-      setSuccessMessage("Registration successful!");
+
+      setSuccess("Login successful!");
       setTimeout(() => {
-        setSuccessMessage("");
+        setSuccess("");
         navigate("/dashboard");
       }, 1500);
     } catch {
-      setError(
-        "Server error during Google registration. Please try again later."
-      );
+      setError("Server error during Google login. Please try again later.");
       setTimeout(() => setError(""), 3000);
     }
   };
 
-  // Configura el hook para el registro con Google
-  const googleLogin = useGoogleLogin({
-    onSuccess: handleGoogleLogin,
-    onError: () => {
-      setError("Google registration failed. Please try again.");
-      setTimeout(() => setError(""), 3000);
-    },
-  });
-
   return (
     <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10 mt-20">
+      {error && <ErrorAlert error={error} onClose={() => setError("")} />}
+      {success && (
+        <SuccessAlert message={success} onClose={() => setSuccess("")} />
+      )}
       <div className="rounded-sm bg-white shadow-default">
         <div className="flex flex-wrap items-center mt-10 pb-10">
           <div className="hidden w-full xl:block xl:w-1/2">
@@ -234,23 +229,35 @@ function SignUpPage() {
                     Create account
                   </button>
                 </div>
+
                 <div className="mb-5">
-                  <button
-                    type="button"
-                    onClick={googleLogin}
-                    className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-[#D1D5DB] bg-[#E2E8F0] p-4 font-medium text-[#788596] hover:bg-opacity-70"
-                  >
-                    <span>
-                      <img
-                        className="fill-current"
-                        width="20"
-                        height="20"
-                        src={iconGoogle}
-                        alt="google icon"
-                      />
-                    </span>
-                    Sign in with Google
-                  </button>
+                  <GoogleLogin
+                    onSuccess={handleGoogleLogin}
+                    onError={() => {
+                      setError("Google login failed");
+                      setTimeout(() => setError(""), 3000);
+                    }}
+                    useOneTap
+                    render={(renderProps) => (
+                      <button
+                        type="button"
+                        onClick={renderProps.onClick}
+                        disabled={renderProps.disabled}
+                        className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-[#D1D5DB] bg-[#E2E8F0] p-4 font-medium text-[#788596] hover:bg-opacity-70"
+                      >
+                        <span>
+                          <img
+                            className="fill-current"
+                            width="20"
+                            height="20"
+                            src={iconGoogle}
+                            alt="google icon"
+                          />
+                        </span>
+                        Sign in with Google
+                      </button>
+                    )}
+                  />
                 </div>
                 <div className="mt-6 text-center">
                   <p className="font-medium text-[#788596]">
@@ -265,7 +272,6 @@ function SignUpPage() {
                   </p>
                 </div>
               </form>
-              <ErrorAlert error={error} onClose={() => setError("")} />
               {successMessage && (
                 <SuccessAlert
                   message={successMessage}

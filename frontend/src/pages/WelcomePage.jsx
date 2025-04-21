@@ -168,6 +168,7 @@ function WelcomePage() {
                     className="w-full cursor-pointer rounded-lg border border-[#025963] bg-[#025963] p-4 font-medium text-white transition hover:bg-opacity-90"
                   />
                 </div>
+
                 <div className="mb-5">
                   <GoogleLogin
                     onSuccess={handleGoogleLogin}
@@ -197,6 +198,7 @@ function WelcomePage() {
                     )}
                   />
                 </div>
+
                 <div className="mt-6 text-center">
                   <p className="font-medium text-[#788596]">
                     Register new account
