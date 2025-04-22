@@ -1,10 +1,9 @@
 import { useState } from "react";
 import TransactionModal from "./TransactionModal";
-import { useDashboardContext } from "../context/DashboardContext"; // Context para el Dashboard
+import { useDashboardContext } from "../context/DashboardContext";
 
 export default function BalanceCard() {
-  // Quitamos transactions porque ya no lo necesitamos
-  const { setTransactions, totalBalance } = useDashboardContext(); // Obtenemos el contexto
+  const { setTransactions, totalBalance } = useDashboardContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSave = (transaction) => {
@@ -18,7 +17,6 @@ export default function BalanceCard() {
         <div>
           Total Balance
           <div className="flex items-baseline space-x-2">
-            {/* Mostramos el totalBalance dinámico */}
             <h1 className="text-2xl font-bold">
               {isNaN(totalBalance) ? "0.00" : totalBalance.toFixed(2)} €
             </h1>
@@ -37,7 +35,7 @@ export default function BalanceCard() {
           <button
             className="bg-[#00d57d] hover:bg-[#00b569] transition px-4 py-2 rounded-md"
             onClick={(e) => {
-              e.stopPropagation(); // Evita la propagación del evento
+              e.stopPropagation();
               setIsModalOpen(true);
             }}
           >

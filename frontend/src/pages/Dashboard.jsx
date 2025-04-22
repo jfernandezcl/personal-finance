@@ -3,7 +3,7 @@ import BalanceCard from "../components/BalanceCard";
 import CashFlowChart from "../components/CashFlowChart";
 import IncomeExpenseCards from "../components/IncomeExpenseCards";
 import TransactionsNotes from "../components/TransactionsNotes";
-import { DashboardProvider } from "../context/DashboardContext"; // Proveedor del contexto
+import { DashboardProvider } from "../context/DashboardContext";
 import TotalCardDay from "../components/TotalCardDay";
 import RequireAuth from "../authenticity/RequireAuth";
 

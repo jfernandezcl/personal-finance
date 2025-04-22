@@ -13,7 +13,6 @@ const ProtectedRoute = ({ children }) => {
       }
 
       try {
-        // 🆕 Llamada al backend para verificar el token
         const res = await fetch("http://localhost:3001/api/auth/verify", {
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -31,7 +30,7 @@ const ProtectedRoute = ({ children }) => {
     verify();
   }, []);
 
-  if (isValid === null) return <p>Loading...</p>; // 🆕 Espera a que se valide
+  if (isValid === null) return <p>Loading...</p>;
   if (!isValid) return <Navigate to="/" replace />;
   return children;
 };

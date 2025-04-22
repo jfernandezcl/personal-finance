@@ -10,19 +10,16 @@ export const useDashboardContext = () => useContext(DashboardContext);
 export const DashboardProvider = ({ children }) => {
   const [transactions, setTransactions] = useState([]);
 
-  // Función para obtener las transacciones del usuario desde el backend
   const fetchTransactions = async () => {
     const data = await getTransactions();
     if (!data) return;
     setTransactions(data);
   };
 
-  // Cargar transacciones cuando el usuario inicia sesión
   useEffect(() => {
     fetchTransactions();
   }, []);
 
-  //Función para eliminar una transacción
   const removeTransaction = async (id) => {
     const success = await deleteTransactions(id);
     if (success) {
@@ -32,7 +29,6 @@ export const DashboardProvider = ({ children }) => {
     }
   };
 
-  // Calculamos el balance total usando useMemo
   const totalBalance = useMemo(() => {
     return transactions.reduce((total, transaction) => {
       const amt = Number(transaction.amount);

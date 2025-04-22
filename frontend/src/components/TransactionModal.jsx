@@ -50,7 +50,7 @@ function TransactionModal({ isOpen, onClose }) {
 
     await addTransaction(newTransaction);
 
-    onClose(); // Cerrar la modal después de guardar
+    onClose();
   };
 
   return (

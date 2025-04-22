@@ -27,7 +27,6 @@ function SignUpPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Validar que las contraseñas coinciden
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
       setTimeout(() => setError(""), 3000);

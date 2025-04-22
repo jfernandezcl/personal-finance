@@ -7,7 +7,7 @@ const RequireAuth = ({ children }) => {
   useEffect(() => {
     const user = localStorage.getItem("token");
     if (!user) {
-      navigate("/"); // Redirige al WelcomePage si no hay usuario
+      navigate("/");
     }
   }, [navigate]);
 

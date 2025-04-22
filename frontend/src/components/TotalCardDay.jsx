@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import totalCard from "../images/total-card.svg";
-import { useDashboardContext } from "../context/DashboardContext"; // Obtenemos transacciones desde el contexto
+import { useDashboardContext } from "../context/DashboardContext";
 
 export default function TotalCardDay() {
   const { transactions } = useDashboardContext();
-  const today = new Date().toISOString().split("T")[0]; // Fecha actual en formato YYYY-MM-DD
-  const [selectedDate, setSelectedDate] = useState(today); // Estado para la fecha seleccionada
-  const [dailyData, setDailyData] = useState({ income: 0, expense: 0 }); // Datos de ingresos y gastos
+  const today = new Date().toISOString().split("T")[0];
+  const [selectedDate, setSelectedDate] = useState(today);
+  const [dailyData, setDailyData] = useState({ income: 0, expense: 0 });
 
   useEffect(() => {
-    // Filtrar transacciones del día seleccionado
     const filteredTransactions = (transactions || []).filter((transaction) => {
       const transactionDate = new Date(transaction.date)
         .toISOString()
@@ -17,7 +16,6 @@ export default function TotalCardDay() {
       return transactionDate === selectedDate;
     });
 
-    // Sumar ingresos y gastos (convirtiendo el monto a número)
     const income = filteredTransactions
       .filter((t) => t.type === "income")
       .reduce((acc, t) => acc + Number(t.amount), 0);
@@ -31,7 +29,6 @@ export default function TotalCardDay() {
   return (
     <div className="flex flex-col flex-grow">
       <div className="bg-white rounded-lg shadow p-6 h-full relative">
-        {/* Selector de fecha */}
         <input
           type="date"
           className="absolute top-4 right-4 bg-gray-100 border border-gray-300 rounded-md px-2 py-1 text-sm cursor-pointer"
@@ -39,7 +36,6 @@ export default function TotalCardDay() {
           onChange={(e) => setSelectedDate(e.target.value)}
         />
 
-        {/* Mostrar ingresos y gastos si hay datos */}
         <p className="text-sm font-semibold text-black">Daily Overview</p>
 
         <div className="mt-4">
@@ -70,7 +66,6 @@ export default function TotalCardDay() {
           )}
         </div>
 
-        {/* Imagen en la esquina inferior derecha */}
         <img
           src={totalCard}
           alt="illustration card"

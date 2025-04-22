@@ -15,13 +15,12 @@ export const addTransaction = async (newTransaction, setTransactions) => {
     });
 
     if (!response.ok) {
-      const errorMessage = await response.text(); // Captura el mensaje de error del backend
+      const errorMessage = await response.text();
       throw new Error(
         `Error en la solicitud: ${response.status} - ${errorMessage}`
       );
     }
 
-    // Recargar la lista de transacciones desde el backend
     const updatedTransactions = await getTransactions();
     if (updatedTransactions) {
       setTransactions(updatedTransactions);
