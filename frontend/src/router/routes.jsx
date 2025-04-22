@@ -20,7 +20,7 @@ const AppRoutes = () => {
         }
       />
       <Route
-        path="/editprofile"
+        path="/profile"
         element={
           <ProtectedRoute>
             <EditProfile />

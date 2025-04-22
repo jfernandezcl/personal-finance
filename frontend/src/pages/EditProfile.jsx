@@ -14,7 +14,7 @@ function EditProfile() {
           <h3 className="text-lg font-semibold text-gray-800">Profile</h3>
           <nav>
             <a
-              className="inline-flex items-center gap-1.5 text-lg text-gray-400"
+              className="inline-flex items-center gap-1.5 text-lg text-gray-400 hover:text-gray-800"
               href="/dashboard"
             >
               Home

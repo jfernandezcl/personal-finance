@@ -18,7 +18,7 @@ export default function Header() {
   const handleEditProfile = () => {
     const token = localStorage.getItem("token");
     if (token) {
-      navigate("/editprofile");
+      navigate("/profile");
     } else {
       navigate("/");
     }
@@ -56,7 +56,11 @@ export default function Header() {
   return (
     <header className="w-full bg-[#025963] shadow-md mb-8 relative">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-        <h1 className="text-white text-xl font-bold">Personal Finance</h1>
+        <h1 className="text-white text-xl font-bold">
+          <a className="hover:text-gray-300" href="/dashboard">
+            Personal Finance
+          </a>
+        </h1>
         <div className="relative">
           <button
             onClick={() => setDropdownOpen(!isDropdownOpen)}
