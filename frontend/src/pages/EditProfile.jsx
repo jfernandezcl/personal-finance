@@ -2,6 +2,8 @@ import Header from "../components/Header";
 import RequireAuth from "../authenticity/RequireAuth";
 import { useState } from "react";
 
+import editPencil from "../images/editPencil.svg";
+
 function EditProfile() {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -46,14 +48,13 @@ function EditProfile() {
                 className="flex w-full items-center justify-center gap-2 rounded-full border border-gray-300
                bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 lg:inline-flex lg:w-auto"
               >
-                <svg
+                <img
                   className="fill-current"
                   width="18"
                   height="18"
-                  viewBox="0 0 18 18"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                ></svg>
+                  src={editPencil}
+                  alt="edit icon"
+                ></img>
                 Edit
               </button>
             </div>
@@ -111,14 +112,13 @@ function EditProfile() {
               className="flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 
             text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 lg:inline-flex lg:w-auto"
             >
-              <svg
+              <img
                 className="fill-current"
                 width="18"
                 height="18"
-                viewBox="0 0 18 18"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              ></svg>
+                src={editPencil}
+                alt="edit icon"
+              ></img>
               Edit
             </button>
           </div>
