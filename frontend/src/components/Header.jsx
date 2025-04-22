@@ -63,7 +63,8 @@ export default function Header() {
         </h1>
         <div className="relative">
           <button
-            onClick={() => setDropdownOpen(!isDropdownOpen)}
+            onMouseDown={(e) => e.stopPropagation()}
+            onClick={() => setDropdownOpen((prev) => !prev)}
             className="focus:outline-none flex items-center gap-x-2"
           >
             <div className="w-10 h-10 flex items-center justify-center bg-gray-300 text-[#025963] font-bold rounded-full text-lg">
