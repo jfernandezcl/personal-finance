@@ -37,7 +37,7 @@ export const loginWithGoogle = async (req, res) => {
     // Generar JWT como en el login normal
     const token = generateToken(user);
 
-    res.status(200).json({ token, username: user.username });
+    res.status(200).json({ token, username: user.username, email: user.email });
   } catch (err) {
     console.error(err);
     res.status(401).json({ msg: "Invalid Google token" });
