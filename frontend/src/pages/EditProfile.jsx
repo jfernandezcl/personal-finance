@@ -4,6 +4,8 @@ import { useState } from "react";
 
 import editPencil from "../images/editPencil.svg";
 
+import ProfileUserName from "../components/ProfileUserName";
+
 function EditProfile() {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -24,42 +26,8 @@ function EditProfile() {
           </nav>
         </div>
 
-        {/* Caja de perfil y redes */}
-        <div className="p-5 mb-6 border border-gray-200 rounded-2xl lg:p-6">
-          <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
-            <div className="flex flex-col items-center w-full gap-6 xl:flex-row">
-              {/*imagen del perfil, por defecto las letras del nombre */}
-              <div className="w-20 h-20 overflow-hidden border border-gray-200 rounded-full">
-                <img
-                  className="object-cover w-full h-full"
-                  src="https://i.pinimg.com/564x/4c/0b/2f/4c0b2f1a3d5e6a7d8e9f1a3d5e6a7d8.jpg"
-                />
-              </div>
-              <div className="order-3 xl:order-2">
-                <h4 className="mb-2 text-lg font-semibold text-center text-gray-800 xl:text-left">
-                  User name
-                </h4>
-                <p className="text-sm text-gray-600">Email</p>
-              </div>
-            </div>
-
-            <div className="flex items-center order-2 gap-2 grow xl:order-3 xl:justify-end">
-              <button
-                className="flex w-full items-center justify-center gap-2 rounded-full border border-gray-300
-               bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 lg:inline-flex lg:w-auto"
-              >
-                <img
-                  className="fill-current"
-                  width="18"
-                  height="18"
-                  src={editPencil}
-                  alt="edit icon"
-                ></img>
-                Edit
-              </button>
-            </div>
-          </div>
-        </div>
+        {/* Caja de perfil-nombre */}
+        <ProfileUserName />
 
         {/* Formulario de datos personales */}
         <div className="p-5 mb-6 border border-gray-200 rounded-2xl lg:p-6">
