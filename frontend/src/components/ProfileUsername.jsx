@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import editPencil from "../images/editPencil.svg";
+import ProfileUserNameModal from "./ProfileUsernameModal";
 
 export default function ProfileUserName() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const storeUsername = localStorage.getItem("username");
@@ -20,6 +22,15 @@ export default function ProfileUserName() {
       .join("")
       .toUpperCase()
       .slice(0, 2);
+  };
+
+  {
+    /*Revisar esta parte*/
+  }
+  const handleSave = (newUsername) => {
+    setUsername(newUsername);
+    localStorage.setItem("username", newUsername);
+    setIsModalOpen(false);
   };
 
   return (
@@ -42,6 +53,10 @@ export default function ProfileUserName() {
           <button
             className="flex w-full items-center justify-center gap-2 rounded-full border border-gray-300
          bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 lg:inline-flex lg:w-auto"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsModalOpen(true);
+            }}
           >
             <img
               className="fill-current"
@@ -54,6 +69,12 @@ export default function ProfileUserName() {
           </button>
         </div>
       </div>
+      {/*Modal*/}
+      <ProfileUserNameModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSave={handleSave}
+      />
     </div>
   );
 }
