@@ -38,8 +38,11 @@ function WelcomePage() {
         setTimeout(() => setError(""), 3000);
         return;
       }
+
       localStorage.setItem("token", data.token);
       localStorage.setItem("username", data.username);
+      localStorage.setItem("email", data.email);
+
       setSuccess("Login successful!");
       setTimeout(() => {
         setSuccess("");
@@ -68,6 +71,7 @@ function WelcomePage() {
       }
       localStorage.setItem("token", data.token);
       localStorage.setItem("username", data.username);
+      localStorage.setItem("email", data.email);
 
       setSuccess("Login successful!");
       setTimeout(() => {
