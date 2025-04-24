@@ -1,5 +1,9 @@
 import express from "express";
-import { register, login } from "../controllers/authController.js";
+import {
+  register,
+  login,
+  updateUsername,
+} from "../controllers/authController.js";
 import { verifyToken } from "../controllers/tokenUtils.js";
 import { loginWithGoogle } from "../controllers/googleAuthController.js";
 
