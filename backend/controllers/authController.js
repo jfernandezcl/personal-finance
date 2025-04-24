@@ -65,3 +65,27 @@ export const login = async (req, res) => {
     res.status(500).json({ msg: "Server error" });
   }
 };
+
+export const updateUsername = async (req, res) => {
+  const { email, newUsername } = req.body;
+  if (!email || !newUsername) {
+    return res.status(400).json({ msg: "Email and new username are required" });
+  }
+
+  try {
+    const [existingUser] = await pool.execute(
+      "SELECT * FROM users WHERE email = ?",
+      [email]
+    );
+    if (existingUser.length === 0) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+    await pool.execute("UPDATE users SET username = ? WHERE email = ?", [
+      newUsername,
+      email,
+    ]);
+    res.status(200).json({ msg: "Username updated successfully" });
+  } catch {
+    res.status(500).json({ msg: "Server error" });
+  }
+};
