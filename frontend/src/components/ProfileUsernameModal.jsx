@@ -24,7 +24,22 @@ export default function ProfileUserNameModal({ isOpen, onClose, onSave }) {
       return;
     }
 
-    onSave(newUsername.trim());
+    try {
+      const response = fetch("http://localhost:3001/api/user", {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: newUsername.trim() }),
+      });
+
+      if (!response.ok) throw new Error("Error updating username");
+      onSave(newUsername.trim());
+    } catch {
+      setError("Error updating username. Please try again.");
+      setTimeout(() => setError(""), 3000);
+    }
   };
 
   return (
