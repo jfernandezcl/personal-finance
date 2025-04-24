@@ -67,22 +67,22 @@ export const login = async (req, res) => {
 };
 
 export const updateUsername = async (req, res) => {
-  const { email, newUsername } = req.body;
-  if (!email || !newUsername) {
-    return res.status(400).json({ msg: "Email and new username are required" });
+  const { id, newUsername } = req.body;
+  if (!id || !newUsername) {
+    return res.status(400).json({ msg: "The new name is mandatory" });
   }
 
   try {
     const [existingUser] = await pool.execute(
-      "SELECT * FROM users WHERE email = ?",
-      [email]
+      "SELECT * FROM users WHERE id = ?",
+      [id]
     );
     if (existingUser.length === 0) {
       return res.status(404).json({ msg: "User not found" });
     }
-    await pool.execute("UPDATE users SET username = ? WHERE email = ?", [
+    await pool.execute("UPDATE users SET username = ? WHERE id = ?", [
       newUsername,
-      email,
+      id,
     ]);
     res.status(200).json({ msg: "Username updated successfully" });
   } catch {
