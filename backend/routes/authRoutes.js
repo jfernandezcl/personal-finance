@@ -13,6 +13,6 @@ router.post("/register", register);
 router.post("/login", login);
 router.get("/verify", verifyToken);
 router.post("/google", loginWithGoogle);
-router.put("/user", updateUsername); // importar
+router.put("/user", updateUsername);
 
 export default router;

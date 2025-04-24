@@ -17,7 +17,7 @@ export default function ProfileUserNameModal({ isOpen, onClose, onSave }) {
 
   if (!isOpen) return null;
 
-  const handleSaveClick = () => {
+  const handleSaveClick = async () => {
     if (!newUsername.trim()) {
       setError("Username is required.");
       setTimeout(() => setError(""), 3000);
@@ -25,13 +25,16 @@ export default function ProfileUserNameModal({ isOpen, onClose, onSave }) {
     }
 
     try {
-      const response = fetch("http://localhost:3001/api/user", {
+      const response = await fetch("http://localhost:3001/api/auth/user", {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username: newUsername.trim() }),
+        body: JSON.stringify({
+          newUsername: newUsername.trim(),
+          email: localStorage.getItem("email"),
+        }),
       });
 
       if (!response.ok) throw new Error("Error updating username");
