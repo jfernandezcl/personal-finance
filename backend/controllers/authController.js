@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import { generateToken, verifyToken as verifyTokenUtil } from "./tokenUtils.js";
 import pool from "../database/db.js";
+import { parse } from "uuid";
 
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
@@ -61,31 +62,36 @@ export const login = async (req, res) => {
 
     const token = generateToken(user);
     res.status(200).json({ token, username: user.username, email: user.email });
-  } catch {
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ msg: "Server error" });
   }
 };
 
 export const updateUsername = async (req, res) => {
   const { id, newUsername } = req.body;
+
   if (!id || !newUsername) {
     return res.status(400).json({ msg: "The new name is mandatory" });
   }
 
   try {
+    const userId = parse(id);
+
     const [existingUser] = await pool.execute(
       "SELECT * FROM users WHERE id = ?",
-      [id]
+      [userId]
     );
     if (existingUser.length === 0) {
       return res.status(404).json({ msg: "User not found" });
     }
     await pool.execute("UPDATE users SET username = ? WHERE id = ?", [
       newUsername,
-      id,
+      userId,
     ]);
     res.status(200).json({ msg: "Username updated successfully" });
-  } catch {
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ msg: "Server error" });
   }
 };
