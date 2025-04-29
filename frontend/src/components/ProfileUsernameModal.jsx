@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import ErrorAlert from "../alerts/CompleteFields";
+import { getUserIdFromToken } from "../utils/getUserIdFromToken";
 
 export default function ProfileUserNameModal({ isOpen, onClose, onSave }) {
   const [newUsername, setNewUsername] = useState("");
   const [error, setError] = useState("");
+
+  const userId = getUserIdFromToken();
 
   useEffect(() => {
     if (isOpen) {
@@ -33,7 +36,7 @@ export default function ProfileUserNameModal({ isOpen, onClose, onSave }) {
         },
         body: JSON.stringify({
           newUsername: newUsername.trim(),
-          email: localStorage.getItem("email"),
+          id: userId,
         }),
       });
 
