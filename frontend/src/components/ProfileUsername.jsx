@@ -24,9 +24,6 @@ export default function ProfileUserName() {
       .slice(0, 2);
   };
 
-  {
-    /*Revisar esta parte*/
-  }
   const handleSave = (newUsername) => {
     setUsername(newUsername);
     localStorage.setItem("username", newUsername);
