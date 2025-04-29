@@ -2,9 +2,8 @@ import Header from "../components/Header";
 import RequireAuth from "../authenticity/RequireAuth";
 import { useState } from "react";
 
-import editPencil from "../images/editPencil.svg";
-
 import ProfileUserName from "../components/ProfileUserName";
+import PersonalInformation from "../components/PersonalInformation";
 
 function EditProfile() {
   const [showPassword, setShowPassword] = useState(false);
@@ -14,7 +13,6 @@ function EditProfile() {
       <Header />
       <div className="rounded-2xl border border-gray-200 bg-white p-6 max-w-6xl mx-auto shadow mb-8">
         <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-          {/* Titulo de la pagina */}
           <h3 className="text-lg font-semibold text-gray-800">Profile</h3>
           <nav>
             <a
@@ -29,68 +27,8 @@ function EditProfile() {
         {/* Caja de perfil-nombre */}
         <ProfileUserName />
 
-        {/* Formulario de datos personales */}
-        <div className="p-5 mb-6 border border-gray-200 rounded-2xl lg:p-6">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-            <div>
-              <h4 className="text-lg font-semibold text-gray-800 lg:mb-6">
-                Personal Information
-              </h4>
-              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-7 2xl:gap-x-32">
-                <div>
-                  <p className="mb-2 text-xs leading-normal text-gray-500">
-                    First Name
-                  </p>
-                  <p className="text-sm font-medium text-gray-800">Javi</p>
-                </div>
-                <div>
-                  <p className="mb-2 text-xs leading-normal text-gray-500">
-                    Last Name
-                  </p>
-                  <p className="text-sm font-medium text-gray-800">Fdzcl</p>
-                </div>
-                <div>
-                  <p className="mb-2 text-xs leading-normal text-gray-500">
-                    Email address
-                  </p>
-                  <p className="text-sm font-medium text-gray-800">
-                    javier78@...gmail.com
-                  </p>
-                </div>
-                <div>
-                  <p className="mb-2 text-xs leading-normal text-gray-500">
-                    Phone
-                  </p>
-                  <p className="text-sm font-medium text-gray-800">
-                    6444585216
-                  </p>
-                </div>
-                <div>
-                  <p className="mb-2 text-xs leading-normal text-gray-500">
-                    Biography
-                  </p>
-                  <p className="text-sm font-medium text-gray-800">
-                    Team Manager
-                  </p>
-                </div>
-              </div>
-            </div>
-            {/* Boton para editar los datos personales */}
-            <button
-              className="flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 
-            text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 lg:inline-flex lg:w-auto"
-            >
-              <img
-                className="fill-current"
-                width="18"
-                height="18"
-                src={editPencil}
-                alt="edit icon"
-              ></img>
-              Edit
-            </button>
-          </div>
-        </div>
+        {/* Caja de información personal */}
+        <PersonalInformation />
 
         {/* Formulario de cambiar contraseña */}
         <div className="p-5 mb-6 border border-gray-200 rounded-2xl lg:p-6">
