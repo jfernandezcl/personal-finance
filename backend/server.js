@@ -13,7 +13,6 @@ app.use(corsMiddleware);
 
 app.use("/api/auth", authRoutes);
 
-// Agregar las rutas de transacciones
 app.use("/api/transactions/", transactionRoutes);
 
 const PORT = process.env.PORT || 3001;

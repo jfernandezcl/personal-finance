@@ -20,7 +20,6 @@ const authMiddleware = (req, res, next) => {
       });
     }
 
-    // convertir user.id a string
     req.userId = Buffer.isBuffer(user.id) ? stringify(user.id) : user.id;
 
     next();
