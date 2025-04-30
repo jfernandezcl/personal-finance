@@ -68,11 +68,12 @@ export const login = async (req, res) => {
   }
 };
 
-export const updateUsername = async (req, res) => {
-  const { id, newUsername } = req.body;
+export const updateUserProfile = async (req, res) => {
+  const { username, email, phone, bio } = req.body;
+  const { id } = req.params;
 
-  if (!id || !newUsername) {
-    return res.status(400).json({ msg: "The new name is mandatory" });
+  if (!id) {
+    return res.status(400).json({ msg: "User ID is required" });
   }
 
   try {
@@ -85,10 +86,10 @@ export const updateUsername = async (req, res) => {
     if (existingUser.length === 0) {
       return res.status(404).json({ msg: "User not found" });
     }
-    await pool.execute("UPDATE users SET username = ? WHERE id = ?", [
-      newUsername,
-      userId,
-    ]);
+    await pool.execute(
+      "UPDATE users SET username = ?, email = ?, phone = ?, bio = ? WHERE id = ?",
+      [username, email, phone, bio, userId]
+    );
     res.status(200).json({ msg: "Username updated successfully" });
   } catch (error) {
     console.error(error);
