@@ -1,9 +1,8 @@
 import pool from "../database/db.js";
 
-//Agregar una nueva transacción
 export const addTransaction = async (req, res) => {
   const { type, amount, description, date } = req.body;
-  const user_id = Buffer.from(req.userId, "hex"); // Lo obtenemos del middleware de autenticación
+  const user_id = Buffer.from(req.userId, "hex");
 
   if (!type || !amount || !description) {
     return res.status(400).json({ msg: "All fields are required" });
@@ -53,7 +52,6 @@ export const deleteTransaction = async (req, res) => {
   }
 };
 
-// Obtener transacciones del usuario autenticado
 export const getTransactions = async (req, res) => {
   const user_id = Buffer.from(req.userId, "hex");
 
@@ -63,10 +61,9 @@ export const getTransactions = async (req, res) => {
       [user_id]
     );
 
-    // Convierte amount a un número antes de enviarlo al frontend
     const formattedTransactions = transactions.map((t) => ({
       ...t,
-      amount: parseFloat(t.amount), // Convertimos amount a número
+      amount: parseFloat(t.amount),
     }));
 
     res.json(formattedTransactions);
