@@ -24,19 +24,15 @@ function EditProfile() {
           </nav>
         </div>
 
-        {/* Caja de perfil-nombre */}
         <ProfileUserName />
 
-        {/* Caja de información personal */}
         <PersonalInformation />
 
-        {/* Formulario de cambiar contraseña */}
         <div className="p-5 mb-6 border border-gray-200 rounded-2xl lg:p-6">
           <h4 className="text-lg font-semibold text-gray-800 mb-6">
             Change Password
           </h4>
           <div className="space-y-5">
-            {/* Contraseña actual */}
             <div>
               <label className="mb-2 block text-sm font-medium text-gray-700">
                 Current password
@@ -57,7 +53,6 @@ function EditProfile() {
               </div>
             </div>
 
-            {/* Nueva contraseña */}
             <div>
               <label className="mb-2 block text-sm font-medium text-gray-700">
                 New password
@@ -69,7 +64,6 @@ function EditProfile() {
               />
             </div>
 
-            {/* Confirmar nueva contraseña */}
             <div>
               <label className="mb-2 block text-sm font-medium text-gray-700">
                 Repeat new password
@@ -81,7 +75,6 @@ function EditProfile() {
               />
             </div>
 
-            {/* Botón para confirmar cambio */}
             <div>
               <button
                 className="inline-flex items-center justify-center rounded-full border border-gray-300 bg-white 
