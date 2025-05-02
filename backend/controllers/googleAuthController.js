@@ -1,7 +1,6 @@
-// controllers/googleAuthController.js
 import pool from "../database/db.js";
 import { generateToken } from "./tokenUtils.js";
-import { verifyGoogleToken } from "./authGoogle.js"; // el que tú ya tienes creado
+import { verifyGoogleToken } from "./authGoogle.js";
 
 export const loginWithGoogle = async (req, res) => {
   console.log(req.body);
@@ -14,7 +13,6 @@ export const loginWithGoogle = async (req, res) => {
   try {
     const { sub, email, name } = await verifyGoogleToken(credential);
 
-    // Verificar si el usuario ya existe
     const [userRows] = await pool.execute(
       "SELECT * FROM users WHERE email = ?",
       [email]
@@ -34,7 +32,6 @@ export const loginWithGoogle = async (req, res) => {
       user = newUserRows[0];
     }
 
-    // Generar JWT como en el login normal
     const token = generateToken(user);
 
     res.status(200).json({ token, username: user.username, email: user.email });
