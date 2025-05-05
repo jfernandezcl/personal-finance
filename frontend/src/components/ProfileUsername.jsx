@@ -26,7 +26,7 @@ export default function ProfileUserName() {
       <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
         <div className="flex flex-col items-center w-full gap-6 xl:flex-row">
           <div className="w-20 h-20 flex items-center justify-center bg-gray-300 text-[#025963] font-bold rounded-full text-3xl">
-            {getInitials(username)}
+            {username ? getInitials(username) : "??"}
           </div>
 
           <div className="order-3 xl:order-2">
