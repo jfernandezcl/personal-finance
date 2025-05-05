@@ -38,11 +38,10 @@ export default function PersonalInformationModal({ isOpen, onClose, onSave }) {
   if (!isOpen) return null;
 
   const handleSaveClick = async () => {
-    if (!username.trim() || !email.trim() || !phone.trim()) {
-      setError("Todos los campos excepto la biografía son obligatorios.");
-      setTimeout(() => setError(""), 3000);
-      return;
-    }
+    const updatedUsername = username.trim();
+    const updatedEmail = email.trim();
+    const updatedPhone = phone.trim();
+    const updatedBio = bio.trim();
 
     if (bio.trim().split(/\s+/).length > 50) {
       setError("La biografía no puede superar las 50 palabras.");
@@ -53,14 +52,14 @@ export default function PersonalInformationModal({ isOpen, onClose, onSave }) {
     try {
       const response = await updateUserProfile(
         userId,
-        username,
-        email,
-        phone,
-        bio
+        updatedUsername,
+        updatedEmail,
+        updatedPhone,
+        updatedBio
       );
       if (!response.ok) throw new Error("Error updating profile");
 
-      onSave(username.trim(), email.trim(), phone.trim(), bio.trim());
+      onSave(updatedUsername, updatedEmail, updatedPhone, updatedBio);
     } catch (error) {
       console.error("Error updating profile:", error);
       setError("Error updating profile. Please try again.");
