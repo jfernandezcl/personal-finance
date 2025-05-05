@@ -3,6 +3,7 @@ import {
   register,
   login,
   updateUserProfile,
+  getUserProfile,
 } from "../controllers/authController.js";
 import { verifyToken } from "../controllers/tokenUtils.js";
 import { loginWithGoogle } from "../controllers/googleAuthController.js";
@@ -13,7 +14,7 @@ router.post("/register", register);
 router.post("/login", login);
 router.get("/verify", verifyToken);
 router.post("/google", loginWithGoogle);
-//router.put("/user", updateUsername);
+router.get("/user", getUserProfile);
 router.put("/user/:id", updateUserProfile);
 
 export default router;

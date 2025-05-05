@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import { generateToken, verifyToken as verifyTokenUtil } from "./tokenUtils.js";
 import pool from "../database/db.js";
 import { parse } from "uuid";
+import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
@@ -94,5 +95,29 @@ export const updateUserProfile = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: "Server error" });
+  }
+};
+
+export const getUserProfile = async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
+    if (!token) {
+      return res.status(401).json({ msg: "No token provided" });
+    }
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = parse(decoded.id);
+
+    const [rows] = await pool.execute(
+      "SELECT username, email, phone, bio FROM users WHERE id = ?",
+      [userId]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+    return res.status(200).json(rows[0]);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ msg: "Server error" });
   }
 };
