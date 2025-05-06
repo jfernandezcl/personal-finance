@@ -121,3 +121,42 @@ export const getUserProfile = async (req, res) => {
     return res.status(500).json({ msg: "Server error" });
   }
 };
+
+export const changePassword = async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  const userId = req.user?.id;
+
+  if (!userId) {
+    return res.status(401).json({ msg: "Unauthorized" });
+  }
+
+  try {
+    const [rows] = await pool.execute(
+      "SELECT password FROM users WHERE id = ?",
+      [parse(userId)]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+    const user = rows[0];
+    const isValidPassword = await bcrypt.compare(
+      currentPassword,
+      user.password
+    );
+    if (!isValidPassword) {
+      return res.status(401).json({ msg: "Current password is incorrect" });
+    }
+
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+    await pool.execute("UPDATE users SET password = ? WHERE id = ?", [
+      hashedNewPassword,
+      parse(userId),
+    ]);
+
+    return res.status(200).json({ msg: "Password updated successfully" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ msg: "Server error" });
+  }
+};
