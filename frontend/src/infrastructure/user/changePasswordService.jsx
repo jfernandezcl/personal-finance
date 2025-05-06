@@ -1,7 +1,7 @@
 export const changePasswordService = async (currentPassword, newPassword) => {
   const token = localStorage.getItem("token");
   const response = await fetch(
-    "http://localhost:3001/api/auth/change-password",
+    "http://localhost:3001/api/auth/changepassword",
     {
       method: "PUT",
       headers: {
