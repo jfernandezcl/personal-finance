@@ -44,7 +44,7 @@ export default function PersonalInformationModal({ isOpen, onClose, onSave }) {
     const updatedBio = bio.trim();
 
     if (bio.trim().split(/\s+/).length > 50) {
-      setError("La biografía no puede superar las 50 palabras.");
+      setError("The biography should not exceed 50 words.");
       setTimeout(() => setError(""), 3000);
       return;
     }
