@@ -17,6 +17,6 @@ router.get("/verify", verifyToken);
 router.post("/google", loginWithGoogle);
 router.get("/user", getUserProfile);
 router.put("/user/:id", updateUserProfile);
-router.put("/user/changepassword", changePassword);
+router.put("/changepassword", changePassword);
 
 export default router;
