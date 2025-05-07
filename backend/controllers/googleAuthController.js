@@ -32,6 +32,7 @@ export const loginWithGoogle = async (req, res) => {
       user = newUserRows[0];
     }
 
+    user.provider = "google";
     const token = generateToken(user);
 
     res.status(200).json({ token, username: user.username, email: user.email });

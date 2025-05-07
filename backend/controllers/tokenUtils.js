@@ -1,17 +1,20 @@
 import jwt from "jsonwebtoken";
 import { stringify } from "uuid";
+import dotenv from "dotenv";
+
+dotenv.config(); // si no lo has cargado en este archivo
 
 export const generateToken = (user) => {
-  const token = jwt.sign(
+  return jwt.sign(
     {
       id: stringify(user.id),
       username: user.username,
       email: user.email,
+      provider: user.provider, // Asegúrate que user.provider venga de tu DB
     },
     process.env.JWT_SECRET,
     { expiresIn: "1h" }
   );
-  return token;
 };
 
 export const verifyToken = (req, res) => {
