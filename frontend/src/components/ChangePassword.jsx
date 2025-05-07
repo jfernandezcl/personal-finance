@@ -3,6 +3,8 @@ import { changePasswordService } from "../infrastructure/user/changePasswordServ
 
 export default function ChangePassword() {
   const [showPassword, setShowPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
@@ -81,28 +83,48 @@ export default function ChangePassword() {
           <label className="mb-2 block text-sm font-medium text-gray-700">
             New password
           </label>
-          <input
-            type="password"
-            className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm"
-            placeholder="New password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            disabled={isGoogleUser}
-          />
+          <div className="relative">
+            <input
+              type={showNewPassword ? "text" : "password"}
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm"
+              placeholder="New password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              disabled={isGoogleUser}
+            />
+            <button
+              type="button"
+              onClick={() => setShowNewPassword(!showNewPassword)}
+              className="absolute inset-y-0 right-2 flex items-center text-sm text-gray-600 hover:text-gray-900"
+              disabled={isGoogleUser}
+            >
+              {showNewPassword ? "Hide" : "Show"}
+            </button>
+          </div>
         </div>
 
         <div>
           <label className="mb-2 block text-sm font-medium text-gray-700">
             Repeat new password
           </label>
-          <input
-            type="password"
-            className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm"
-            placeholder="Repeat the password"
-            value={repeatPassword}
-            onChange={(e) => setRepeatPassword(e.target.value)}
-            disabled={isGoogleUser}
-          />
+          <div className="relative">
+            <input
+              type={showRepeatPassword ? "text" : "password"}
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm"
+              placeholder="Repeat the password"
+              value={repeatPassword}
+              onChange={(e) => setRepeatPassword(e.target.value)}
+              disabled={isGoogleUser}
+            />
+            <button
+              type="button"
+              onClick={() => setShowRepeatPassword(!showRepeatPassword)}
+              className="absolute inset-y-0 right-2 flex items-center text-sm text-gray-600 hover:text-gray-900"
+              disabled={isGoogleUser}
+            >
+              {showRepeatPassword ? "Hide" : "Show"}
+            </button>
+          </div>
         </div>
 
         <div>
