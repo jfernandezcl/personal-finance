@@ -6,6 +6,7 @@ import {
   getUserProfile,
   changePassword,
 } from "../controllers/authController.js";
+import authMiddleware from "../middleware/authMiddleware.js";
 import { verifyToken } from "../controllers/tokenUtils.js";
 import { loginWithGoogle } from "../controllers/googleAuthController.js";
 
@@ -15,8 +16,10 @@ router.post("/register", register);
 router.post("/login", login);
 router.get("/verify", verifyToken);
 router.post("/google", loginWithGoogle);
-router.get("/user", getUserProfile);
-router.put("/user/:id", updateUserProfile);
-router.put("/changepassword", changePassword);
+
+// ————— RUTAS PROTEGIDAS —————
+router.get("/user", authMiddleware, getUserProfile);
+router.put("/user/:id", authMiddleware, updateUserProfile);
+router.put("/changepassword", authMiddleware, changePassword);
 
 export default router;

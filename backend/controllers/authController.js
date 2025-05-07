@@ -100,63 +100,53 @@ export const updateUserProfile = async (req, res) => {
 
 export const getUserProfile = async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1];
-    if (!token) {
-      return res.status(401).json({ msg: "No token provided" });
+    const userIdString = req.userId;
+    if (!userIdString) {
+      return res.status(401).json({ msg: "Unauthorized" });
     }
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = parse(decoded.id);
-
+    const userId = parse(userIdString);
     const [rows] = await pool.execute(
       "SELECT username, email, phone, bio FROM users WHERE id = ?",
       [userId]
     );
-
     if (rows.length === 0) {
       return res.status(404).json({ msg: "User not found" });
     }
-    return res.status(200).json(rows[0]);
+    res.status(200).json(rows[0]);
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ msg: "Server error" });
+    res.status(500).json({ msg: "Server error" });
   }
 };
 
 export const changePassword = async (req, res) => {
   const { currentPassword, newPassword } = req.body;
-  const userId = req.user?.id;
-
-  if (!userId) {
+  const userIdString = req.userId;
+  if (!userIdString) {
     return res.status(401).json({ msg: "Unauthorized" });
   }
-
   try {
+    const userId = parse(userIdString);
     const [rows] = await pool.execute(
       "SELECT password FROM users WHERE id = ?",
-      [parse(userId)]
+      [userId]
     );
-
     if (rows.length === 0) {
       return res.status(404).json({ msg: "User not found" });
     }
     const user = rows[0];
-    const isValidPassword = await bcrypt.compare(
-      currentPassword,
-      user.password
-    );
-    if (!isValidPassword) {
-      return res.status(401).json({ msg: "Current password is incorrect" });
+    const isValid = await bcrypt.compare(currentPassword, user.password);
+    if (!isValid) {
+      return res.status(400).json({ msg: "Current password is incorrect" });
     }
-
-    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
     await pool.execute("UPDATE users SET password = ? WHERE id = ?", [
-      hashedNewPassword,
-      parse(userId),
+      hashedPassword,
+      userId,
     ]);
-
-    return res.status(200).json({ msg: "Password updated successfully" });
+    res.status(200).json({ msg: "Password updated successfully" });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ msg: "Server error" });
+    res.status(500).json({ msg: "Server error" });
   }
 };
