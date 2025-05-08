@@ -1,21 +1,22 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import iconEmail from "../images/icon-email.svg";
-import iconPassword from "../images/icon-password.svg";
 import iconGoogle from "../images/icon-google.svg";
 import logo from "../images/logo.svg";
 import illustration from "../images/mobile-illustration.svg";
-
 import ErrorAlert from "../alerts/ErrorAlert";
 import SuccessAlert from "../alerts/SuccessAlert";
-
 import { GoogleLogin } from "@react-oauth/google";
+
+import hideEye from "../images/hide-eye.svg";
+import showEye from "../images/show-eye.svg";
 
 function WelcomePage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -142,29 +143,33 @@ function WelcomePage() {
                     </span>
                   </div>
                 </div>
+
                 <div className="mb-6">
                   <label className="mb-2.5 block font-medium text-black">
                     Password
                   </label>
-                  <div className="relative">
+                  <div className="relative flex items-center">
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       name="password"
                       placeholder="6+ Characters, 1 Capital letter"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-32 outline-none focus:border-primary focus-visible:shadow-none"
                       required
                     />
-                    <span className="absolute right-4 top-4">
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-4 top-5 text-sm"
+                    >
                       <img
-                        className="fill-current"
-                        width="22"
-                        height="22"
-                        src={iconPassword}
-                        alt="password icon"
+                        src={showPassword ? hideEye : showEye}
+                        alt={showPassword ? "Hide password" : "Show password"}
+                        className="w-6 h-6"
                       />
-                    </span>
+                    </button>
                   </div>
                 </div>
+
                 <div className="mb-5">
                   <input
                     type="submit"
