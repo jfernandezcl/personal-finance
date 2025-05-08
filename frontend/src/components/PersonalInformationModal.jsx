@@ -10,8 +10,10 @@ export default function PersonalInformationModal({ isOpen, onClose, onSave }) {
   const [phone, setPhone] = useState("");
   const [bio, setBio] = useState("");
   const [error, setError] = useState("");
-
   const userId = getUserIdFromToken();
+
+  const [usernameError, setUsernameError] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -38,16 +40,32 @@ export default function PersonalInformationModal({ isOpen, onClose, onSave }) {
   if (!isOpen) return null;
 
   const handleSaveClick = async () => {
+    let hasError = false;
+    setUsernameError("");
+    setEmailError("");
+    setError("");
+
     const updatedUsername = username.trim();
     const updatedEmail = email.trim();
     const updatedPhone = phone.trim();
     const updatedBio = bio.trim();
 
+    if (!updatedUsername) {
+      setUsernameError("Username is required.");
+      hasError = true;
+    }
+
+    if (!updatedEmail) {
+      setEmailError("Email is required.");
+      hasError = true;
+    }
+
     if (bio.trim().split(/\s+/).length > 50) {
       setError("The biography should not exceed 50 words.");
       setTimeout(() => setError(""), 3000);
-      return;
+      hasError = true;
     }
+    if (hasError) return;
 
     try {
       const response = await updateUserProfile(
@@ -87,6 +105,9 @@ export default function PersonalInformationModal({ isOpen, onClose, onSave }) {
           onChange={(e) => setUsername(e.target.value)}
           className="w-full p-2 mb-2 border rounded text-black"
         />
+        {usernameError && (
+          <p className="text-red-500 text-sm mb-2">{usernameError}</p>
+        )}
 
         <input
           type="email"
@@ -95,6 +116,9 @@ export default function PersonalInformationModal({ isOpen, onClose, onSave }) {
           onChange={(e) => setEmail(e.target.value)}
           className="w-full p-2 mb-2 border rounded text-black"
         />
+        {emailError && (
+          <p className="text-red-500 text-sm mb-2">{emailError}</p>
+        )}
 
         <input
           type="text"
