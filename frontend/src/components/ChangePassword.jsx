@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { changePasswordService } from "../infrastructure/user/changePasswordService";
 
+import hideEye from "../images/hide-eye.svg";
+import showEye from "../images/show-eye.svg";
+
 export default function ChangePassword() {
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -71,10 +74,13 @@ export default function ChangePassword() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute inset-y-0 right-2 flex items-center text-sm text-gray-600 hover:text-gray-900"
-              disabled={isGoogleUser}
+              className="absolute right-4 top-2 text-sm"
             >
-              {showPassword ? "Hide" : "Show"}
+              <img
+                src={showPassword ? showEye : hideEye}
+                alt={showPassword ? "Show password" : "Hide password"}
+                className="w-6 h-6"
+              />
             </button>
           </div>
         </div>
@@ -95,10 +101,13 @@ export default function ChangePassword() {
             <button
               type="button"
               onClick={() => setShowNewPassword(!showNewPassword)}
-              className="absolute inset-y-0 right-2 flex items-center text-sm text-gray-600 hover:text-gray-900"
-              disabled={isGoogleUser}
+              className="absolute right-4 top-2 text-sm"
             >
-              {showNewPassword ? "Hide" : "Show"}
+              <img
+                src={showNewPassword ? showEye : hideEye}
+                alt={showNewPassword ? "Show password" : "Hide password"}
+                className="w-6 h-6"
+              />
             </button>
           </div>
         </div>
@@ -119,10 +128,13 @@ export default function ChangePassword() {
             <button
               type="button"
               onClick={() => setShowRepeatPassword(!showRepeatPassword)}
-              className="absolute inset-y-0 right-2 flex items-center text-sm text-gray-600 hover:text-gray-900"
-              disabled={isGoogleUser}
+              className="absolute right-4 top-2 text-sm"
             >
-              {showRepeatPassword ? "Hide" : "Show"}
+              <img
+                src={showRepeatPassword ? showEye : hideEye}
+                alt={showRepeatPassword ? "Show password" : "Hide password"}
+                className="w-6 h-6"
+              />
             </button>
           </div>
         </div>
