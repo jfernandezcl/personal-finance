@@ -1,14 +1,15 @@
 import logo from "../images/logo.svg";
 import iconEmail from "../images/icon-email.svg";
-import iconPassword from "../images/icon-password.svg";
 import iconGoogle from "../images/icon-google.svg";
 import iconUser from "../images/icon-user.svg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ErrorAlert from "../alerts/ErrorAlert";
 import SuccessAlert from "../alerts/SuccessAlert";
-
 import { GoogleLogin } from "@react-oauth/google";
+
+import hideEye from "../images/hide-eye.svg";
+import showEye from "../images/show-eye.svg";
 
 function SignUpPage() {
   const navigate = useNavigate();
@@ -21,6 +22,8 @@ function SignUpPage() {
     password: "",
     confirmPassword: "",
   });
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -178,22 +181,24 @@ function SignUpPage() {
                   </label>
                   <div className="relative">
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       name="password"
                       placeholder="Enter your password"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
                       onChange={handleChange}
                       value={formData.password}
                     />
-                    <span className="absolute right-4 top-4">
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-4 top-5 text-sm"
+                    >
                       <img
-                        className="fill-current"
-                        width="22"
-                        height="22"
-                        src={iconPassword}
-                        alt="password icon"
+                        src={showPassword ? showEye : hideEye}
+                        alt={showPassword ? "Show password" : "Hide password"}
+                        className="w-6 h-6"
                       />
-                    </span>
+                    </button>
                   </div>
                 </div>
                 <div className="mb-6">
@@ -202,22 +207,24 @@ function SignUpPage() {
                   </label>
                   <div className="relative">
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       name="confirmPassword"
                       placeholder="Re-enter your password"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
                       onChange={handleChange}
                       value={formData.confirmPassword}
                     />
-                    <span className="absolute right-4 top-4">
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-4 top-5 text-sm"
+                    >
                       <img
-                        className="fill-current"
-                        width="22"
-                        height="22"
-                        src={iconPassword}
-                        alt="password icon"
+                        src={showPassword ? showEye : hideEye}
+                        alt={showPassword ? "Show password" : "Hide password"}
+                        className="w-6 h-6"
                       />
-                    </span>
+                    </button>
                   </div>
                 </div>
                 <div className="mb-5">
