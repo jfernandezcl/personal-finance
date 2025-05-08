@@ -162,8 +162,8 @@ function WelcomePage() {
                       className="absolute right-4 top-5 text-sm"
                     >
                       <img
-                        src={showPassword ? hideEye : showEye}
-                        alt={showPassword ? "Hide password" : "Show password"}
+                        src={showPassword ? showEye : hideEye}
+                        alt={showPassword ? "Show password" : "Hide password"}
                         className="w-6 h-6"
                       />
                     </button>
