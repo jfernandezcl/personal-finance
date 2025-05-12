@@ -48,7 +48,7 @@ function WelcomePage() {
       setTimeout(() => {
         setSuccess("");
         navigate("/dashboard");
-      }, 1500);
+      }, 1000);
     } catch {
       setError("Server error. Please try again later.");
       setTimeout(() => setError(""), 3000);
