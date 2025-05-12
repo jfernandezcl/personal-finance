@@ -4,11 +4,11 @@ const ErrorAlert = ({ error }) => {
   return (
     <div
       id="alert-danger"
-      className="fixed top-7 right-12 flex items-center p-5 mb-10 text-[#025963] rounded-lg bg-gray-300"
+      className="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 shadow-sm"
       role="alert"
     >
       <svg
-        className="shrink-0 w-4 h-4"
+        className="w-5 h-5 mr-2"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="currentColor"
@@ -16,8 +16,7 @@ const ErrorAlert = ({ error }) => {
       >
         <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
       </svg>
-      <span className="sr-only">Error</span>
-      <div className="ml-3 text-sm font-medium">{error}</div>
+      <span className="font-medium">{error}</span>
     </div>
   );
 };
