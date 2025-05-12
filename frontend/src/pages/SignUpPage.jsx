@@ -98,6 +98,12 @@ function SignUpPage() {
       {success && (
         <SuccessAlert message={success} onClose={() => setSuccess("")} />
       )}
+      {successMessage && (
+        <SuccessAlert
+          message={successMessage}
+          onClose={() => setSuccessMessage("")}
+        />
+      )}
       <div className="rounded-sm bg-white shadow-default">
         <div className="flex flex-wrap items-center mt-10 pb-10">
           <div className="hidden w-full xl:block xl:w-1/2">
@@ -278,12 +284,6 @@ function SignUpPage() {
                   </p>
                 </div>
               </form>
-              {successMessage && (
-                <SuccessAlert
-                  message={successMessage}
-                  onClose={() => setSuccessMessage("")}
-                />
-              )}
             </div>
           </div>
         </div>
