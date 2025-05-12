@@ -3,6 +3,7 @@ import { changePasswordService } from "../infrastructure/user/changePasswordServ
 
 import hideEye from "../images/hide-eye.svg";
 import showEye from "../images/show-eye.svg";
+import UpdatePasswordAlert from "../alerts/UpdatePasswordAlert";
 
 export default function ChangePassword() {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,7 +14,9 @@ export default function ChangePassword() {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [isGoogleUser, setIsGoogleUser] = useState(false);
 
-  // Decodifica el JWT para determinar el proveedor (provider)
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState(""); // "success" | "error"
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) return;
@@ -27,21 +30,26 @@ export default function ChangePassword() {
 
   const handleSavePassword = async () => {
     if (!currentPassword || !newPassword || !repeatPassword) {
-      alert("Please fill in all fields.");
+      setAlertMessage("Please fill in all fields.");
+      setAlertType("error");
       return;
     }
     if (newPassword !== repeatPassword) {
-      alert("New password and repeat password do not match.");
+      setAlertMessage("New password and repeat password do not match.");
+      setAlertType("error");
       return;
     }
     try {
       await changePasswordService(currentPassword, newPassword);
-      alert("Password changed successfully.");
+      setAlertMessage("Password changed successfully.");
+      setAlertType("success");
+
       setCurrentPassword("");
       setNewPassword("");
       setRepeatPassword("");
     } catch {
-      alert("Error changing password. Please try again.");
+      setAlertMessage("Error changing password. Please try again.");
+      setAlertType("error");
     }
   };
 
@@ -50,6 +58,8 @@ export default function ChangePassword() {
       <h4 className="text-lg font-semibold text-gray-800 mb-6">
         Change Password
       </h4>
+
+      <UpdatePasswordAlert message={alertMessage} type={alertType} />
 
       {isGoogleUser && (
         <div className="mb-4 rounded-md bg-yellow-50 p-4 border border-yellow-200 text-sm text-yellow-800">
