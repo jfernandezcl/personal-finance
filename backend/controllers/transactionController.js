@@ -2,7 +2,7 @@ import pool from "../database/db.js";
 
 export const addTransaction = async (req, res) => {
   const { type, amount, description, date } = req.body;
-  const user_id = Buffer.from(req.userId, "hex");
+  const user_id = req.userId;
 
   if (!type || !amount || !description) {
     return res.status(400).json({ msg: "All fields are required" });
@@ -10,14 +10,15 @@ export const addTransaction = async (req, res) => {
 
   try {
     const [result] = await pool.execute(
-      "INSERT INTO transactions (id, user_id, type, amount, description, date) VALUES (UUID_TO_BIN(UUID()), ?, ?, ?, ?, ?)",
+      "INSERT INTO transactions (id, user_id, type, amount, description, date) VALUES (UUID_TO_BIN(UUID()), UUID_TO_BIN(?), ?, ?, ?, ?)",
       [user_id, type, amount, description, date]
     );
 
     const [rows] = await pool.execute(
-      "SELECT BIN_TO_UUID(id) AS id FROM transactions WHERE user_id = ? ORDER BY date DESC LIMIT 1",
+      "SELECT BIN_TO_UUID(id) AS id FROM transactions WHERE user_id = UUID_TO_BIN(?) ORDER BY date DESC LIMIT 1",
       [user_id]
     );
+
     if (rows.length === 0) {
       throw new Error("Transaction not found after insert");
     }
@@ -33,11 +34,11 @@ export const addTransaction = async (req, res) => {
 
 export const deleteTransaction = async (req, res) => {
   const { id } = req.params;
-  const user_id = Buffer.from(req.userId, "hex");
+  const user_id = req.userId;
 
   try {
     const [result] = await pool.execute(
-      "DELETE FROM transactions WHERE id = UUID_TO_BIN(?) AND user_id = ?",
+      "DELETE FROM transactions WHERE id = UUID_TO_BIN(?) AND user_id = UUID_TO_BIN(?)",
       [id, user_id]
     );
 
@@ -53,11 +54,11 @@ export const deleteTransaction = async (req, res) => {
 };
 
 export const getTransactions = async (req, res) => {
-  const user_id = Buffer.from(req.userId, "hex");
+  const user_id = req.userId;
 
   try {
     const [transactions] = await pool.execute(
-      "SELECT BIN_TO_UUID(id) as id, type, amount, description, date FROM transactions WHERE user_id = ?",
+      "SELECT BIN_TO_UUID(id) as id, type, amount, description, date FROM transactions WHERE user_id = UUID_TO_BIN(?)",
       [user_id]
     );
 
