@@ -69,7 +69,7 @@ export default function TotalCardDay() {
         <img
           src={totalCard}
           alt="illustration card"
-          className="absolute bottom-7 right-7 w-28 h-28 opacity-70"
+          className="absolute bottom-7 right-3 w-28 h-28 opacity-70"
         />
       </div>
     </div>
