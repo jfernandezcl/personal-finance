@@ -5,12 +5,12 @@ import IncomeExpenseCards from "../components/IncomeExpenseCards";
 import TransactionsNotes from "../components/TransactionsNotes";
 import { DashboardProvider } from "../context/DashboardContext";
 import TotalCardDay from "../components/TotalCardDay";
-import RequireAuth from "../authenticity/RequireAuth";
+import ProtectedRoute from "../authenticity/ProtectedRoute";
 
 export default function Dashboard() {
   return (
     <DashboardProvider>
-      <RequireAuth>
+      <ProtectedRoute>
         <div className="min-h-screen bg-gray-50 pb-14">
           <Header />
           <BalanceCard />
@@ -27,7 +27,7 @@ export default function Dashboard() {
             <TransactionsNotes />
           </main>
         </div>
-      </RequireAuth>
+      </ProtectedRoute>
     </DashboardProvider>
   );
 }
