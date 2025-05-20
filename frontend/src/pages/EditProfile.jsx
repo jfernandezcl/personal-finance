@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import RequireAuth from "../authenticity/RequireAuth";
+import ProtectedRoute from "../authenticity/ProtectedRoute";
 
 import ProfileUserName from "../components/ProfileUserName";
 import PersonalInformation from "../components/PersonalInformation";
@@ -7,7 +7,7 @@ import ChangePassword from "../components/ChangePassword";
 
 function EditProfile() {
   return (
-    <RequireAuth>
+    <ProtectedRoute>
       <Header />
       <div className="rounded-2xl border border-gray-200 bg-white p-6 max-w-6xl mx-auto shadow mb-8">
         <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
@@ -28,7 +28,7 @@ function EditProfile() {
 
         <ChangePassword />
       </div>
-    </RequireAuth>
+    </ProtectedRoute>
   );
 }
 
