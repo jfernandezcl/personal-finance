@@ -1,7 +1,7 @@
 export const deleteTransactions = async (id) => {
   try {
     const token = localStorage.getItem("token");
-    if (!token) return;
+    if (!token) throw new Error("No token found");
 
     const response = await fetch(
       `http://localhost:3001/api/transactions/${id}`,
