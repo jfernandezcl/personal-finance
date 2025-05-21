@@ -1,6 +1,6 @@
 export function getUserIdFromToken() {
   const token = localStorage.getItem("token");
-  if (!token) return null;
+  if (!token) throw new Error("No token found");
 
   try {
     const payload = token.split(".")[1];
