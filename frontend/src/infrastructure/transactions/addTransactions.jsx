@@ -17,7 +17,7 @@ export const addTransaction = async (newTransaction, setTransactions) => {
     if (!response.ok) {
       const errorMessage = await response.text();
       throw new Error(
-        `Error en la solicitud: ${response.status} - ${errorMessage}`
+        `Error in the request: ${response.status} - ${errorMessage}`
       );
     }
 
