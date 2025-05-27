@@ -12,7 +12,6 @@ export const register = async (req, res) => {
   }
 
   try {
-    // verificar si existe el usuario
     const [existinUser] = await pool.execute(
       "SELECT * FROM users WHERE email = ?",
       [email]
@@ -21,10 +20,8 @@ export const register = async (req, res) => {
       return res.status(409).json({ msg: "The user already exists" });
     }
 
-    // encriptar contraseña
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // guardar usuario en la base de datos
     const [result] = await pool.execute(
       "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
       [username, email, hashedPassword]
@@ -44,7 +41,6 @@ export const login = async (req, res) => {
   }
 
   try {
-    // verificar si existe el usuario
     const [existingUser] = await pool.execute(
       "SELECT * FROM users WHERE email = ?",
       [email]
@@ -55,7 +51,6 @@ export const login = async (req, res) => {
     }
     const user = existingUser[0];
 
-    // verificar contraseña
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
       return res.status(401).json({ msg: "Email or password is incorrect" });
