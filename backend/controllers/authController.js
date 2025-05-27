@@ -1,8 +1,7 @@
 import bcrypt from "bcryptjs";
-import { generateToken, verifyToken as verifyTokenUtil } from "./tokenUtils.js";
+import { generateToken } from "./tokenUtils.js";
 import pool from "../database/db.js";
 import { parse } from "uuid";
-import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
