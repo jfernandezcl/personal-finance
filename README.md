@@ -36,6 +36,15 @@ The project is divided into two main parts:
 
 ---
 
+## 🚀 How to Use
+
+1. Set up and start the backend server (see the backend README)
+2. Set up and start the frontend client (see the frontend README)
+3. Register or log in using your email/password or Google account
+4. Start managing your financial transactions easily and securely
+
+---
+
 ## 🔧 Technologies
 
 - Node.js, Express, MySQL, JWT, bcrypt, Google OAuth
@@ -46,5 +55,3 @@ The project is divided into two main parts:
 ## 👤 Author
 
 Javi Fernández
-
----
