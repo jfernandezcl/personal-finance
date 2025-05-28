@@ -1,49 +1,49 @@
-# 💸 Aplicación de Finanzas Personales
+# 💸 Personal Finance Application
 
-Esta aplicación permite a los usuarios gestionar sus transacciones financieras, registrarse e iniciar sesión de forma segura, incluyendo autenticación con Google.
-
----
-
-## 📝 Resumen
-
-La aplicación permite a los usuarios:
-
-- Registrarse e iniciar sesión con email y contraseña
-- Iniciar sesión con su cuenta de Google usando OAuth 2.0
-- Gestionar transacciones financieras agregando, visualizando y eliminando ingresos o gastos
-- Actualizar su perfil y cambiar su contraseña de forma segura
-- Interactuar con una interfaz amigable, moderna y responsiva
+This app allows users to manage their financial transactions, securely register and log in, including authentication with Google.
 
 ---
 
-## ⚙️ Arquitectura
+## 📝 Overview
 
-El proyecto está dividido en dos partes principales:
+The application enables users to:
+
+- Register and log in with email and password
+- Log in using their Google account via OAuth 2.0
+- Manage financial transactions by adding, viewing, and deleting income or expenses
+- Update their profile and securely change their password
+- Interact with a friendly, modern, and responsive interface
+
+---
+
+## ⚙️ Architecture
+
+The project is divided into two main parts:
 
 ### Backend
 
-- Construido con **Node.js**, **Express** y **MySQL**
-- Provee endpoints RESTful para autenticación, gestión de usuarios y transacciones
-- Maneja la encriptación de contraseñas con **bcrypt** y la autenticación mediante **JWT**
-- Soporta inicio de sesión vía Google OAuth 2.0
+- Built with **Node.js**, **Express**, and **MySQL**
+- Provides RESTful endpoints for authentication, user management, and transactions
+- Handles password encryption with **bcrypt** and authentication using **JWT**
+- Supports login via Google OAuth 2.0
 
 ### Frontend
 
-- Construido con **React** y **Vite**
-- Utiliza la API **fetch** para comunicarse con el backend
-- Estilizado con **Tailwind CSS** para una UI moderna y responsiva
-- Soporta flujos de autenticación y gestión de transacciones
+- Built with **React** and **Vite**
+- Uses the **fetch API** to communicate with the backend
+- Styled with **Tailwind CSS** for a modern and responsive UI
+- Supports authentication flows and transaction management
 
 ---
 
-## 🔧 Tecnologías
+## 🔧 Technologies
 
 - Node.js, Express, MySQL, JWT, bcrypt, Google OAuth
 - React, Vite, Tailwind CSS, Fetch API
 
 ---
 
-## 👤 Autor
+## 👤 Author
 
 Javi Fernández
 
