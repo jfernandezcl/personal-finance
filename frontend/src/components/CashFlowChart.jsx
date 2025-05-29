@@ -28,7 +28,13 @@ export default function CashFlowChart() {
     const monthlyExpenses = Array(12).fill(0);
 
     transactions.forEach(({ amount, type, date }) => {
-      const month = new Date(date).getMonth();
+      const parsedDate = new Date(date);
+      if (isNaN(parsedDate.getTime())) {
+        console.error(`Invalid date: ${date}`);
+        return;
+      }
+      const month = parsedDate.getMonth();
+
       if (type === "income") {
         monthlyIncome[month] += amount;
       } else {
