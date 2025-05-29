@@ -7,8 +7,17 @@ export default function BalanceCard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSave = (transaction) => {
-    setTransactions((prevTransactions) => [...prevTransactions, transaction]);
-    setIsModalOpen(false);
+    try {
+      if (!transaction) {
+        throw new Error("Transaction data is required");
+      }
+
+      setTransactions((prevTransactions) => [...prevTransactions, transaction]);
+    } catch (error) {
+      console.error("Error saving transaction:", error);
+    } finally {
+      setIsModalOpen(false);
+    }
   };
 
   return (
