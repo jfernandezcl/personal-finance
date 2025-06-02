@@ -3,7 +3,6 @@ import { generateToken } from "./tokenUtils.js";
 import { verifyGoogleToken } from "./authGoogle.js";
 
 export const loginWithGoogle = async (req, res) => {
-  console.log(req.body);
   const { credential } = req.body;
 
   if (!credential) {
