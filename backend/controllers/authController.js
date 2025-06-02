@@ -144,3 +144,21 @@ export const changePassword = async (req, res) => {
     res.status(500).json({ msg: "Server error" });
   }
 };
+
+export const deleteAccount = async (req, res) => {
+  const userId = req.userId;
+
+  if (!userId) {
+    return res.status(401).json({ msg: "Unauthorized" });
+  }
+
+  try {
+    await pool.execute("DELETE FROM transactions WHERE user_id = ?", [userId]);
+
+    await pool.execute("DELETE FROM users WHERE id = ?", [userId]);
+    res.status(200).json({ msg: "Account deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Server error" });
+  }
+};

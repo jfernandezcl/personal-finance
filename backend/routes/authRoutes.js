@@ -5,6 +5,7 @@ import {
   updateUserProfile,
   getUserProfile,
   changePassword,
+  deleteAccount,
 } from "../controllers/authController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 import { verifyToken } from "../controllers/tokenUtils.js";
@@ -21,5 +22,6 @@ router.post("/google", loginWithGoogle);
 router.get("/user", authMiddleware, getUserProfile);
 router.put("/user/:id", authMiddleware, updateUserProfile);
 router.put("/changepassword", authMiddleware, changePassword);
+router.delete("/delete", authMiddleware, deleteAccount);
 
 export default router;
