@@ -4,6 +4,7 @@ import ProtectedRoute from "../authenticity/ProtectedRoute";
 import ProfileUserName from "../components/ProfileUserName";
 import PersonalInformation from "../components/PersonalInformation";
 import ChangePassword from "../components/ChangePassword";
+import DeleteAccount from "../infrastructure/user/DeleteAccount";
 
 function EditProfile() {
   return (
@@ -27,6 +28,8 @@ function EditProfile() {
         <PersonalInformation />
 
         <ChangePassword />
+
+        <DeleteAccount />
       </div>
     </ProtectedRoute>
   );

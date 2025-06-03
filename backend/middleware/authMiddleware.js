@@ -21,7 +21,7 @@ const authMiddleware = (req, res, next) => {
     }
 
     req.userId = Buffer.isBuffer(user.id) ? stringify(user.id) : user.id;
-
+    req.user = user;
     next();
   });
 };
