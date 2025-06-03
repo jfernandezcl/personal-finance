@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import { generateToken } from "./tokenUtils.js";
 import pool from "../database/db.js";
-import { parse } from "uuid";
+import { parse as uuidParse } from "uuid";
 
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
@@ -155,7 +155,8 @@ export const deleteAccount = async (req, res) => {
   try {
     await pool.execute("DELETE FROM transactions WHERE user_id = ?", [userId]);
 
-    await pool.execute("DELETE FROM users WHERE id = ?", [userId]);
+    const userIdBinary = Buffer.from(uuidParse(userId));
+    await pool.execute("DELETE FROM users WHERE id = ?", [userIdBinary]);
     res.status(200).json({ msg: "Account deleted successfully" });
   } catch (error) {
     console.error(error);
