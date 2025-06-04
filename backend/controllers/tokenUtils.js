@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { stringify } from "uuid";
 import dotenv from "dotenv";
 
-dotenv.config(); // si no lo has cargado en este archivo
+dotenv.config();
 
 export const generateToken = (user) => {
   return jwt.sign(
@@ -10,7 +10,7 @@ export const generateToken = (user) => {
       id: stringify(user.id),
       username: user.username,
       email: user.email,
-      provider: user.provider, // Asegúrate que user.provider venga de tu DB
+      provider: user.provider,
     },
     process.env.JWT_SECRET,
     { expiresIn: "1h" }
