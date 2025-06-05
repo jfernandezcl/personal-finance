@@ -7,10 +7,13 @@ import reactRefresh from "eslint-plugin-react-refresh";
 export default [
   { ignores: ["dist"] },
   {
-    files: ["**/*.{js,jsx}"],
+    files: ["**/*.test.{js,jsx}"],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {
+        ...globals.jest,
+        ...globals.browser,
+      },
       parserOptions: {
         ecmaVersion: "latest",
         ecmaFeatures: { jsx: true },
@@ -31,6 +34,7 @@ export default [
       "react/jsx-no-target-blank": "off",
       "react-refresh/only-export-components": "off",
       "react/prop-types": ["off"],
+      "no-unused-vars": ["error", { varsIgnorePattern: "^React$" }],
     },
   },
 ];
