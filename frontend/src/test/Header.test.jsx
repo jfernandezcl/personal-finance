@@ -51,7 +51,7 @@ test("toggles dropdown menu when avatar button is clicked", async () => {
   expect(screen.queryByRole("menu")).not.toBeInTheDocument();
 });
 
-test.only("logout button clears localStorage and navigates to /", async () => {
+test("logout button clears localStorage and navigates to /", async () => {
   localStorage.setItem("username", "Jane Smith");
   localStorage.setItem("token", "false-token");
   renderHeader();
