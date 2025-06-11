@@ -39,7 +39,7 @@ test("find the text ‘Personal finances’ on the WelcomePage", () => {
   expect(screen.getByText("Personal finances")).toBeInTheDocument();
 });
 
-test.only("logs in user and shows success message", async () => {
+test("logs in user and shows success message", async () => {
   renderWelcomePage();
 
   fireEvent.change(screen.getByPlaceholderText("Enter your email"), {
