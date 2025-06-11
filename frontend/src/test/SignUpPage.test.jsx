@@ -39,7 +39,7 @@ test("find the text ‘Personal finances’ on the SignUpPage", () => {
   expect(screen.getByText("Personal finances")).toBeInTheDocument();
 });
 
-test.only("logs in user and shows success message", async () => {
+test("logs in user and shows success message", async () => {
   fireEvent.change(screen.getByPlaceholderText("Enter your full name"), {
     target: { value: "Mock User" },
   });
