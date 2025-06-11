@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import logoutIcon from "../images/icon-LogOut.svg";
 import profileIcon from "../images/icon-Profile.svg";
 
