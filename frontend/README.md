@@ -25,3 +25,9 @@ This is the frontend of the personal finance application, where users can regist
 - JWT (frontend token handling)
 - Google Identity Services
 - Tailwind CSS
+
+---
+
+## ⚙️ Environment Configuration
+
+To run the backend locally, create a `.env` file inside the `frontend` folder based on the provided `.env.example`
