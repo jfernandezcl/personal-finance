@@ -29,3 +29,7 @@ This is the backend for a personal finance application that allows users to auth
 - UUID (used with `UUID_TO_BIN` in MySQL)
 
 ---
+
+## ⚙️ Environment Configuration
+
+To run the backend locally, create a `.env` file inside the `backend` folder based on the provided `.env.example`
