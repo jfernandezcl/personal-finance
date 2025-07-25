@@ -56,6 +56,16 @@ The project is divided into two main parts:
 
 ---
 
-## 👤 Author
+<img src="./frontend/src/assets/imagen-login.png" alt="Task Tracker Preview" width="100%" />
 
-Javi Fernández
+---
+
+<img src="./frontend/src/assets/imagen-register.png" alt="Task Tracker Preview" width="100%" />
+
+---
+
+<img src="./frontend/src/assets/imagen-graphic.png" alt="Task Tracker Preview" width="100%" />
+
+---
+
+<img src="./frontend/src/assets/imagen-info.png" alt="Task Tracker Preview" width="100%" />
