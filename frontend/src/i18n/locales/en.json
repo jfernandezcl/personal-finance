@@ -17,5 +17,8 @@
     "server_error": "Server error. Please try again later.",
     "google_failed": "Google login failed. Please try again.",
     "error_google_login": "Server error during Google login. Please try again later."
+  },
+  "success": {
+    "login_successful": "Login successful!"
   }
 }

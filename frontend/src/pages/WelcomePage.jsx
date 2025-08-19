@@ -39,7 +39,7 @@ function WelcomePage() {
       });
       const data = await response.json();
       if (!response.ok) {
-        setError(t("invalid_credentials"));
+        setError(t("errors.invalid_credentials"));
         setTimeout(() => setError(""), 3000);
         return;
       }
@@ -48,13 +48,13 @@ function WelcomePage() {
       localStorage.setItem("username", data.username);
       localStorage.setItem("email", data.email);
 
-      setSuccess(t("login_successful"));
+      setSuccess(t("success.login_successful"));
       setTimeout(() => {
         setSuccess("");
         navigate("/dashboard");
       }, 1000);
     } catch {
-      setError(t("server_error"));
+      setError(t("errors.server_error"));
       setTimeout(() => setError(""), 3000);
     }
   };
@@ -70,7 +70,7 @@ function WelcomePage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(t("google_failed"));
+        setError(t("errors.google_failed"));
         setTimeout(() => setError(""), 3000);
         return;
       }
@@ -78,13 +78,13 @@ function WelcomePage() {
       localStorage.setItem("username", data.username);
       localStorage.setItem("email", data.email);
 
-      setSuccess(t("login_successful"));
+      setSuccess(t("success.login_successful"));
       setTimeout(() => {
         setSuccess("");
         navigate("/dashboard");
       }, 1500);
     } catch {
-      setError(t("error_google_login"));
+      setError(t("errors.error_google_login"));
       setTimeout(() => setError(""), 3000);
     }
   };
@@ -199,7 +199,7 @@ function WelcomePage() {
                   <GoogleLogin
                     onSuccess={handleGoogleLogin}
                     onError={() => {
-                      setError(t("google_failed"));
+                      setError(t("errors.google_failed"));
                       setTimeout(() => setError(""), 3000);
                     }}
                     useOneTap

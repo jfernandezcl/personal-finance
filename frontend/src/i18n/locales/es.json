@@ -13,9 +13,11 @@
   "signup": "Regístrate",
   "errors": {
     "invalid_credentials": "Credenciales no válidas",
-    "login_successful": "¡Inicio de sesión correcto!",
     "server_error": "Error del servidor. Inténtalo de nuevo más tarde.",
     "google_failed": "El inicio de sesión en Google ha fallado. Inténtalo de nuevo.",
     "error_google_login": "Error del servidor durante el inicio de sesión en Google. Inténtalo de nuevo más tarde."
+  },
+  "success": {
+    "login_successful": "¡Inicio de sesión correcto!"
   }
 }
