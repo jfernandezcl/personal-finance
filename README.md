@@ -34,6 +34,7 @@ The project is divided into two main parts:
 - Uses the **fetch API** to communicate with the backend
 - Styled with **Tailwind CSS** for a modern and responsive UI
 - Supports authentication flows and transaction management
+- Includes language buttons to switch the interface between multiple languages dynamically
 - **Includes comprehensive unit and integration tests using Jest and React Testing Library to maintain high code quality and prevent regressions**
 
 ---
