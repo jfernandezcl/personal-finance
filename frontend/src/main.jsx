@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import i18n from "./i18n/index.js";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

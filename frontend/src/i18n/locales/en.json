@@ -1,0 +1,21 @@
+{
+  "name": "Personal finances",
+  "informacion": "Manage your personal finances easily and efficiently.",
+  "welcome": "Sign in to Personal finances",
+  "start": "Start for free",
+  "email": "Email",
+  "placeholder_Email": "Enter your email",
+  "password": "Password",
+  "placeholder_Password": "6+ Characters, 1 Capital letter",
+  "signin": "Sign In",
+  "signin_google": "Sign in with Google",
+  "register": "Register new account",
+  "signup": "Sign Up",
+  "errors": {
+    "invalid_credentials": "Invalid credentials",
+    "login_successful": "Login successful!",
+    "server_error": "Server error. Please try again later.",
+    "google_failed": "Google login failed. Please try again.",
+    "error_google_login": "Server error during Google login. Please try again later."
+  }
+}
