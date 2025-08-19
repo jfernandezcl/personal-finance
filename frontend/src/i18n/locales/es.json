@@ -1,0 +1,21 @@
+{
+  "name": "Finanzas personales",
+  "informacion": "Administra tus finanzas personales de manera fácil y eficiente.",
+  "welcome": "Inicia sesión en Finanzas personales",
+  "start": "Empieza gratis",
+  "email": "Correo electrónico",
+  "placeholder_Email": "Introduzca su correo electrónico",
+  "password": "Contraseña",
+  "placeholder_Password": "6+ caracteres, 1 letra mayúscula",
+  "signin": "Iniciar sesión",
+  "signin_google": "Iniciar con Google",
+  "register": "Registrar nueva cuenta",
+  "signup": "Regístrate",
+  "errors": {
+    "invalid_credentials": "Credenciales no válidas",
+    "login_successful": "¡Inicio de sesión correcto!",
+    "server_error": "Error del servidor. Inténtalo de nuevo más tarde.",
+    "google_failed": "El inicio de sesión en Google ha fallado. Inténtalo de nuevo.",
+    "error_google_login": "Error del servidor durante el inicio de sesión en Google. Inténtalo de nuevo más tarde."
+  }
+}

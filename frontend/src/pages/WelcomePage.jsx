@@ -11,12 +11,16 @@ import { GoogleLogin } from "@react-oauth/google";
 import hideEye from "../images/hide-eye.svg";
 import showEye from "../images/show-eye.svg";
 
+import { useTranslation } from "react-i18next";
+
 function WelcomePage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
+
+  const { t, i18n } = useTranslation();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -35,7 +39,7 @@ function WelcomePage() {
       });
       const data = await response.json();
       if (!response.ok) {
-        setError("Invalid credentials");
+        setError(t("invalid_credentials"));
         setTimeout(() => setError(""), 3000);
         return;
       }
@@ -44,13 +48,13 @@ function WelcomePage() {
       localStorage.setItem("username", data.username);
       localStorage.setItem("email", data.email);
 
-      setSuccess("Login successful!");
+      setSuccess(t("login_successful"));
       setTimeout(() => {
         setSuccess("");
         navigate("/dashboard");
       }, 1000);
     } catch {
-      setError("Server error. Please try again later.");
+      setError(t("server_error"));
       setTimeout(() => setError(""), 3000);
     }
   };
@@ -66,7 +70,7 @@ function WelcomePage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError("Google login failed. Please try again.");
+        setError(t("google_failed"));
         setTimeout(() => setError(""), 3000);
         return;
       }
@@ -74,13 +78,13 @@ function WelcomePage() {
       localStorage.setItem("username", data.username);
       localStorage.setItem("email", data.email);
 
-      setSuccess("Login successful!");
+      setSuccess(t("login_successful"));
       setTimeout(() => {
         setSuccess("");
         navigate("/dashboard");
       }, 1500);
     } catch {
-      setError("Server error during Google login. Please try again later.");
+      setError(t("error_google_login"));
       setTimeout(() => setError(""), 3000);
     }
   };
@@ -91,17 +95,16 @@ function WelcomePage() {
       {success && (
         <SuccessAlert message={success} onClose={() => setSuccess("")} />
       )}
+
       <div className="rounded-sm bg-white shadow-default">
         <div className="flex flex-wrap items-center mt-10 pb-10">
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="px-26 py-17.5 text-center">
               <a className="mb-5.5 flex items-center justify-center gap-2">
                 <img className="w-10 h-auto" src={logo} alt="logo" />
-                <span className="text-lg font-semibold">Personal finances</span>
+                <span className="text-lg font-semibold">{t("name")}</span>
               </a>
-              <p className="font-medium 2xl:px-20 mt-6">
-                Manage your personal finances easily and efficiently.
-              </p>
+              <p className="font-medium 2xl:px-20 mt-6">{t("informacion")}</p>
               <span className="mt-20 inline-block">
                 <img
                   className="w-[350px] h-[350px]"
@@ -112,23 +115,37 @@ function WelcomePage() {
             </div>
           </div>
           <div className="w-full border-stroke xl:w-1/2 xl:border-l-2 px-[70px]">
+            <div className="flex justify-end">
+              <button
+                className="px-4 py-1 m-2 cursor-pointer rounded-lg border border-[#025963] bg-[#025963] p- font-medium text-white transition hover:bg-opacity-90"
+                onClick={() => i18n.changeLanguage("en")}
+              >
+                EN
+              </button>
+              <button
+                className="px-4 py-1 m-2 cursor-pointer rounded-lg border border-[#025963] bg-[#025963] p- font-medium text-white transition hover:bg-opacity-90"
+                onClick={() => i18n.changeLanguage("es")}
+              >
+                ES
+              </button>
+            </div>
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
               <span className="mb-1.5 block font-medium text-[#788596]">
-                Start for free
+                {t("start")}
               </span>
               <h2 className="mb-9 text-2xl font-bold text-black sm:text-title-xl2">
-                Sign in to Personal finances
+                {t("welcome")}
               </h2>
               <form onSubmit={handleLogin}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black">
-                    Email
+                    {t("email")}
                   </label>
                   <div className="relative">
                     <input
                       type="email"
                       name="email"
-                      placeholder="Enter your email"
+                      placeholder={t("placeholder_Email")}
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
                       required
                     />
@@ -146,13 +163,13 @@ function WelcomePage() {
 
                 <div className="mb-6">
                   <label className="mb-2.5 block font-medium text-black">
-                    Password
+                    {t("password")}
                   </label>
                   <div className="relative flex items-center">
                     <input
                       type={showPassword ? "text" : "password"}
                       name="password"
-                      placeholder="6+ Characters, 1 Capital letter"
+                      placeholder={t("placeholder_Password")}
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-32 outline-none focus:border-primary focus-visible:shadow-none"
                       required
                     />
@@ -173,7 +190,7 @@ function WelcomePage() {
                 <div className="mb-5">
                   <input
                     type="submit"
-                    value="Sign In"
+                    value={t("signin")}
                     className="w-full cursor-pointer rounded-lg border border-[#025963] bg-[#025963] p-4 font-medium text-white transition hover:bg-opacity-90"
                   />
                 </div>
@@ -182,7 +199,7 @@ function WelcomePage() {
                   <GoogleLogin
                     onSuccess={handleGoogleLogin}
                     onError={() => {
-                      setError("Google login failed");
+                      setError(t("google_failed"));
                       setTimeout(() => setError(""), 3000);
                     }}
                     useOneTap
@@ -202,7 +219,7 @@ function WelcomePage() {
                             alt="google icon"
                           />
                         </span>
-                        Sign in with Google
+                        {t("signin_google")}
                       </button>
                     )}
                   />
@@ -210,13 +227,13 @@ function WelcomePage() {
 
                 <div className="mt-6 text-center">
                   <p className="font-medium text-[#788596]">
-                    Register new account
+                    {t("register")}
                     <a
                       href="/signup"
                       className="text-[#025963] underline cursor-pointer"
                     >
                       {" "}
-                      Sign Up
+                      {t("signup")}
                     </a>
                   </p>
                 </div>
