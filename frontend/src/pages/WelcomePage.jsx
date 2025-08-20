@@ -102,9 +102,13 @@ function WelcomePage() {
             <div className="px-26 py-17.5 text-center">
               <a className="mb-5.5 flex items-center justify-center gap-2">
                 <img className="w-10 h-auto" src={logo} alt="logo" />
-                <span className="text-lg font-semibold">{t("name")}</span>
+                <span className="text-lg font-semibold">
+                  {t("common.appName")}
+                </span>
               </a>
-              <p className="font-medium 2xl:px-20 mt-6">{t("informacion")}</p>
+              <p className="font-medium 2xl:px-20 mt-6">
+                {t("common.information")}
+              </p>
               <span className="mt-20 inline-block">
                 <img
                   className="w-[350px] h-[350px]"
@@ -131,21 +135,21 @@ function WelcomePage() {
             </div>
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
               <span className="mb-1.5 block font-medium text-[#788596]">
-                {t("start")}
+                {t("common.start")}
               </span>
               <h2 className="mb-9 text-2xl font-bold text-black sm:text-title-xl2">
-                {t("welcome")}
+                {t("welcomePage.auth.welcome")}
               </h2>
               <form onSubmit={handleLogin}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black">
-                    {t("email")}
+                    {t("common.email.label")}
                   </label>
                   <div className="relative">
                     <input
                       type="email"
                       name="email"
-                      placeholder={t("placeholder_Email")}
+                      placeholder={t("common.email.placeholder")}
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
                       required
                     />
@@ -163,13 +167,13 @@ function WelcomePage() {
 
                 <div className="mb-6">
                   <label className="mb-2.5 block font-medium text-black">
-                    {t("password")}
+                    {t("common.password.label")}
                   </label>
                   <div className="relative flex items-center">
                     <input
                       type={showPassword ? "text" : "password"}
                       name="password"
-                      placeholder={t("placeholder_Password")}
+                      placeholder={t("common.password.placeholder")}
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-32 outline-none focus:border-primary focus-visible:shadow-none"
                       required
                     />
@@ -190,12 +194,12 @@ function WelcomePage() {
                 <div className="mb-5">
                   <input
                     type="submit"
-                    value={t("signin")}
+                    value={t("welcomePage.auth.signin")}
                     className="w-full cursor-pointer rounded-lg border border-[#025963] bg-[#025963] p-4 font-medium text-white transition hover:bg-opacity-90"
                   />
                 </div>
 
-                <div className="mb-5">
+                <div key={i18n.language} className="mb-5">
                   <GoogleLogin
                     onSuccess={handleGoogleLogin}
                     onError={() => {
@@ -219,7 +223,7 @@ function WelcomePage() {
                             alt="google icon"
                           />
                         </span>
-                        {t("signin_google")}
+                        {t("welcomePage.auth.signin_google")}
                       </button>
                     )}
                   />
@@ -227,13 +231,13 @@ function WelcomePage() {
 
                 <div className="mt-6 text-center">
                   <p className="font-medium text-[#788596]">
-                    {t("register")}
+                    {t("welcomePage.auth.register")}
                     <a
                       href="/signup"
                       className="text-[#025963] underline cursor-pointer"
                     >
                       {" "}
-                      {t("signup")}
+                      {t("welcomePage.auth.signup")}
                     </a>
                   </p>
                 </div>
