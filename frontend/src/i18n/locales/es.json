@@ -1,20 +1,20 @@
 {
   "common": {
     "appName": "Finanzas personales",
-    "information": "Gestiona tus finanzas personales de forma fácil y eficiente.",
+    "information": "Administra tus finanzas personales de manera fácil y eficiente.",
     "name": {
       "label": "Nombre",
-      "placeholder": "Introduce tu nombre completo"
+      "placeholder": "Ingresa tu nombre completo"
     },
     "email": {
       "label": "Correo electrónico",
-      "placeholder": "Introduce tu correo electrónico"
+      "placeholder": "Ingresa tu correo electrónico"
     },
     "password": {
       "label": "Contraseña",
       "placeholder": "6+ caracteres, 1 letra mayúscula"
     },
-    "start": "Comenzar gratis",
+    "start": "Empieza gratis",
     "profile": "Perfil",
     "home": "Inicio",
     "edit": "Editar"
@@ -23,16 +23,16 @@
     "auth": {
       "welcome": "Inicia sesión en Finanzas personales",
       "signin": "Iniciar sesión",
-      "signin_google": "Iniciar con Google",
+      "signin_google": "Iniciar sesión con Google",
       "register": "Registrar nueva cuenta",
-      "signup": "Registrarse"
+      "signup": "Regístrate"
     }
   },
   "signUpPage": {
     "signupTitle": "Regístrate en Finanzas personales",
     "repeatPassword": {
       "label": "Repite la contraseña",
-      "placeholder": "Vuelve a introducir tu contraseña"
+      "placeholder": "Vuelve a ingresar tu contraseña"
     },
     "create": "Crear cuenta",
     "signin": "Iniciar sesión",
@@ -42,35 +42,51 @@
     "personal": {
       "title": "Información personal",
       "username": "Nombre",
-      "email": "Correo electrónico",
+      "email": "Dirección de correo electrónico",
       "phone": "Teléfono",
-      "biography": "Biografía"
+      "biography": "Biografía",
+      "edit_title": "Editar información personal",
+      "placeholder_name": "Nombre de usuario",
+      "placeholder_email": "Dirección de correo electrónico",
+      "placeholder_telephone": "Número de teléfono",
+      "placeholder_biography": "Biografía (máx. 50 palabras)"
     },
     "password": {
       "title": "Cambiar contraseña",
       "current": "Contraseña actual",
-      "current_input": "Introduce tu contraseña",
+      "current_input": "Ingresa tu contraseña",
       "new_input": "Nueva contraseña",
       "repeat_input": "Repite la contraseña",
       "new": "Nueva contraseña",
       "repeat": "Repite la nueva contraseña"
     },
-    "save": "Guardar contraseña",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "save_password": "Guardar contraseña",
     "delete": "Eliminar cuenta",
     "disable": "Te registraste con Google y no puedes cambiar tu contraseña."
   },
   "messages": {
     "errors": {
       "invalid_credentials": "Credenciales inválidas",
-      "server_error": "Error del servidor. Inténtalo de nuevo más tarde.",
-      "google_failed": "Error al iniciar sesión con Google. Inténtalo de nuevo.",
-      "error_google_login": "Error del servidor durante el inicio con Google. Inténtalo de nuevo más tarde.",
+      "server_error": "Error del servidor. Intenta nuevamente más tarde.",
+      "google_failed": "Error al iniciar sesión con Google. Intenta de nuevo.",
+      "error_google_login": "Error del servidor durante el inicio de sesión con Google. Intenta más tarde.",
       "password_error": "Las contraseñas no coinciden",
-      "data_message": "El usuario ya existe, introduce otros datos."
+      "data_message": "El usuario ya existe, ingresa otros datos.",
+      "required_name": "El nombre de usuario es obligatorio.",
+      "required_email": "El correo electrónico es obligatorio.",
+      "biography": "La biografía no debe exceder las 50 palabras.",
+      "profile_error": "Error al actualizar el perfil",
+      "update_error": "Error al actualizar el perfil. Intenta nuevamente.",
+      "fill_fields": "Por favor, completa todos los campos.",
+      "password_mismatch": "La nueva contraseña y la contraseña repetida no coinciden.",
+      "change_password_error": "Error al cambiar la contraseña. Intenta de nuevo."
     },
     "success": {
       "login_successful": "¡Inicio de sesión exitoso!",
-      "registration_successful": "¡Registro completado!"
+      "registration_successful": "¡Registro completado!",
+      "password_changed": "Contraseña cambiada con éxito."
     }
   }
 }

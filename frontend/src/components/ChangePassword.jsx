@@ -34,25 +34,25 @@ export default function ChangePassword() {
 
   const handleSavePassword = async () => {
     if (!currentPassword || !newPassword || !repeatPassword) {
-      setAlertMessage("Please fill in all fields.");
+      setAlertMessage(t("fill_fields"));
       setAlertType("error");
       return;
     }
     if (newPassword !== repeatPassword) {
-      setAlertMessage("New password and repeat password do not match.");
+      setAlertMessage(t("messages.errors.password_mismatch"));
       setAlertType("error");
       return;
     }
     try {
       await changePasswordService(currentPassword, newPassword);
-      setAlertMessage("Password changed successfully.");
+      setAlertMessage(t("messages.success.password_changed"));
       setAlertType("success");
 
       setCurrentPassword("");
       setNewPassword("");
       setRepeatPassword("");
     } catch {
-      setAlertMessage("Error changing password. Please try again.");
+      setAlertMessage(t("messages.errors.change_password_error"));
       setAlertType("error");
     }
   };
@@ -164,7 +164,7 @@ export default function ChangePassword() {
                   : "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
               }`}
           >
-            {t("personalInformation.save")}
+            {t("personalInformation.save_password")}
           </button>
         </div>
       </div>
