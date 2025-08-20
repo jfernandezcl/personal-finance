@@ -3,12 +3,16 @@ import editPencil from "../images/editPencil.svg";
 import PersonalInformationModal from "./PersonalInformationModal";
 import { fetchUserProfile } from "../infrastructure/user/fetchUserProfile";
 
+import { useTranslation } from "react-i18next";
+
 export default function PersonalInformation() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [bio, setBio] = useState("");
+
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const loadUserProfile = async () => {
@@ -37,29 +41,31 @@ export default function PersonalInformation() {
       <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <h4 className="text-lg font-semibold text-gray-800 lg:mb-6">
-            Personal Information
+            {t("personalInformation.personal.title")}
           </h4>
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-7 2xl:gap-x-32">
             <div>
               <p className="mb-2 text-xs leading-normal text-gray-500">
-                First Name
+                {t("personalInformation.personal.username")}
               </p>
               <p className="text-sm font-medium text-gray-800">{username}</p>
             </div>
 
             <div>
               <p className="mb-2 text-xs leading-normal text-gray-500">
-                Email address
+                {t("personalInformation.personal.email")}
               </p>
               <p className="text-sm font-medium text-gray-800">{email}</p>
             </div>
             <div>
-              <p className="mb-2 text-xs leading-normal text-gray-500">Phone</p>
+              <p className="mb-2 text-xs leading-normal text-gray-500">
+                {t("personalInformation.personal.phone")}
+              </p>
               <p className="text-sm font-medium text-gray-800">{phone}</p>
             </div>
             <div>
               <p className="mb-2 text-xs leading-normal text-gray-500">
-                Biography
+                {t("personalInformation.personal.biography")}
               </p>
               <p className="text-sm font-medium text-gray-800">{bio}</p>
             </div>
@@ -77,7 +83,7 @@ export default function PersonalInformation() {
             src={editPencil}
             alt="edit icon"
           />
-          Edit
+          {t("common.edit")}
         </button>
       </div>
       <PersonalInformationModal

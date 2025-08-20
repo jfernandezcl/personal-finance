@@ -5,6 +5,8 @@ import hideEye from "../images/hide-eye.svg";
 import showEye from "../images/show-eye.svg";
 import UpdatePasswordAlert from "../alerts/UpdatePasswordAlert";
 
+import { useTranslation } from "react-i18next";
+
 export default function ChangePassword() {
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -15,7 +17,9 @@ export default function ChangePassword() {
   const [isGoogleUser, setIsGoogleUser] = useState(false);
 
   const [alertMessage, setAlertMessage] = useState("");
-  const [alertType, setAlertType] = useState(""); // "success" | "error"
+  const [alertType, setAlertType] = useState("");
+
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -56,21 +60,21 @@ export default function ChangePassword() {
   return (
     <div className="p-5 mb-6 border border-gray-200 rounded-2xl lg:p-6">
       <h4 className="text-lg font-semibold text-gray-800 mb-6">
-        Change Password
+        {t("personalInformation.password.title")}
       </h4>
 
       <UpdatePasswordAlert message={alertMessage} type={alertType} />
 
       {isGoogleUser && (
         <div className="mb-4 rounded-md bg-yellow-50 p-4 border border-yellow-200 text-sm text-yellow-800">
-          You signed up with Google and cannot change your password.
+          {t("personalInformation.disable")}
         </div>
       )}
 
       <div className="space-y-5">
         <div>
           <label className="mb-2 block text-sm font-medium text-gray-700">
-            Current password
+            {t("personalInformation.password.current")}
           </label>
           <div className="relative">
             <input
@@ -97,13 +101,13 @@ export default function ChangePassword() {
 
         <div>
           <label className="mb-2 block text-sm font-medium text-gray-700">
-            New password
+            {t("personalInformation.password.new_input")}
           </label>
           <div className="relative">
             <input
               type={showNewPassword ? "text" : "password"}
               className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm"
-              placeholder="New password"
+              placeholder={t("personalInformation.password.new_input")}
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               disabled={isGoogleUser}
@@ -124,13 +128,13 @@ export default function ChangePassword() {
 
         <div>
           <label className="mb-2 block text-sm font-medium text-gray-700">
-            Repeat new password
+            {t("personalInformation.password.repeat")}
           </label>
           <div className="relative">
             <input
               type={showRepeatPassword ? "text" : "password"}
               className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm"
-              placeholder="Repeat the password"
+              placeholder={t("personalInformation.password.repeat")}
               value={repeatPassword}
               onChange={(e) => setRepeatPassword(e.target.value)}
               disabled={isGoogleUser}
@@ -160,7 +164,7 @@ export default function ChangePassword() {
                   : "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
               }`}
           >
-            Save password
+            {t("personalInformation.save")}
           </button>
         </div>
       </div>
