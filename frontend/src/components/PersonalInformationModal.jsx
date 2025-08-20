@@ -4,6 +4,8 @@ import { getUserIdFromToken } from "../utils/getUserIdFromToken";
 import { fetchUserProfile } from "../infrastructure/user/fetchUserProfile";
 import { updateUserProfile } from "../infrastructure/user/updateUserProfile";
 
+import { useTranslation } from "react-i18next";
+
 export default function PersonalInformationModal({ isOpen, onClose, onSave }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -14,6 +16,8 @@ export default function PersonalInformationModal({ isOpen, onClose, onSave }) {
 
   const [usernameError, setUsernameError] = useState("");
   const [emailError, setEmailError] = useState("");
+
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -51,17 +55,17 @@ export default function PersonalInformationModal({ isOpen, onClose, onSave }) {
     const updatedBio = bio.trim();
 
     if (!updatedUsername) {
-      setUsernameError("Username is required.");
+      setUsernameError(t("messages.errors.required_name"));
       hasError = true;
     }
 
     if (!updatedEmail) {
-      setEmailError("Email is required.");
+      setEmailError(t("messages.errors.required_email"));
       hasError = true;
     }
 
     if (bio.trim().split(/\s+/).length > 50) {
-      setError("The biography should not exceed 50 words.");
+      setError(t("messages.errors.biography"));
       setTimeout(() => setError(""), 3000);
       hasError = true;
     }
@@ -75,12 +79,12 @@ export default function PersonalInformationModal({ isOpen, onClose, onSave }) {
         updatedPhone,
         updatedBio
       );
-      if (!response.ok) throw new Error("Error updating profile");
+      if (!response.ok) throw new Error(t("messages.errors.profile_error"));
 
       onSave(updatedUsername, updatedEmail, updatedPhone, updatedBio);
     } catch (error) {
-      console.error("Error updating profile:", error);
-      setError("Error updating profile. Please try again.");
+      console.error(t("messages.errors.profile_error"), error);
+      setError(t("messages.errors.update_error"));
       setTimeout(() => setError(""), 3000);
     }
   };
@@ -95,12 +99,12 @@ export default function PersonalInformationModal({ isOpen, onClose, onSave }) {
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-lg font-bold mb-4 text-black">
-          Edit personal information
+          {t("personalInformation.personal.edit_title")}
         </h2>
 
         <input
           type="text"
-          placeholder="User name"
+          placeholder={t("personalInformation.personal.placeholder_name")}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           className="w-full p-2 mb-2 border rounded text-black"
@@ -111,7 +115,7 @@ export default function PersonalInformationModal({ isOpen, onClose, onSave }) {
 
         <input
           type="email"
-          placeholder="E-mail address"
+          placeholder={t("personalInformation.personal.placeholder_email")}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="w-full p-2 mb-2 border rounded text-black"
@@ -122,14 +126,14 @@ export default function PersonalInformationModal({ isOpen, onClose, onSave }) {
 
         <input
           type="text"
-          placeholder="Telephone number"
+          placeholder={t("personalInformation.personal.placeholder_telephone")}
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           className="w-full p-2 mb-2 border rounded text-black"
         />
 
         <textarea
-          placeholder="Biography (max. 50 words)"
+          placeholder={t("personalInformation.personal.placeholder_biography")}
           value={bio}
           onChange={(e) => setBio(e.target.value)}
           className="w-full p-2 mb-2 border rounded text-black resize-none"
@@ -141,16 +145,15 @@ export default function PersonalInformationModal({ isOpen, onClose, onSave }) {
             onClick={onClose}
             className="px-4 py-2 bg-gray-400 rounded hover:bg-gray-500"
           >
-            Cancel
+            {t("personalInformation.cancel")}
           </button>
           <button
             onClick={handleSaveClick}
             className="px-4 py-2 bg-[#025963] text-white rounded hover:bg-[#013f48] transition-colors"
           >
-            Save
+            {t("personalInformation.save")}
           </button>
         </div>
-
         {error && <ErrorAlert error={error} onClose={() => setError("")} />}
       </div>
     </div>
