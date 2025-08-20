@@ -1,20 +1,23 @@
 {
   "common": {
     "appName": "Finanzas personales",
-    "information": "Administra tus finanzas personales de manera fácil y eficiente.",
+    "information": "Gestiona tus finanzas personales de forma fácil y eficiente.",
     "name": {
       "label": "Nombre",
-      "placeholder": "Introduzca su nombre completo"
+      "placeholder": "Introduce tu nombre completo"
     },
     "email": {
       "label": "Correo electrónico",
-      "placeholder": "Introduzca su correo electrónico"
+      "placeholder": "Introduce tu correo electrónico"
     },
     "password": {
       "label": "Contraseña",
       "placeholder": "6+ caracteres, 1 letra mayúscula"
     },
-    "start": "Empieza gratis"
+    "start": "Comenzar gratis",
+    "profile": "Perfil",
+    "home": "Inicio",
+    "edit": "Editar"
   },
   "welcomePage": {
     "auth": {
@@ -22,30 +25,51 @@
       "signin": "Iniciar sesión",
       "signin_google": "Iniciar con Google",
       "register": "Registrar nueva cuenta",
-      "signup": "Regístrate"
+      "signup": "Registrarse"
     }
   },
   "signUpPage": {
     "signupTitle": "Regístrate en Finanzas personales",
     "repeatPassword": {
-      "label": "Repetir contraseña",
-      "placeholder": "Vuelve a escribir la contraseña"
+      "label": "Repite la contraseña",
+      "placeholder": "Vuelve a introducir tu contraseña"
     },
     "create": "Crear cuenta",
     "signin": "Iniciar sesión",
     "login": "¿Ya tienes una cuenta?"
   },
+  "personalInformation": {
+    "personal": {
+      "title": "Información personal",
+      "username": "Nombre",
+      "email": "Correo electrónico",
+      "phone": "Teléfono",
+      "biography": "Biografía"
+    },
+    "password": {
+      "title": "Cambiar contraseña",
+      "current": "Contraseña actual",
+      "current_input": "Introduce tu contraseña",
+      "new_input": "Nueva contraseña",
+      "repeat_input": "Repite la contraseña",
+      "new": "Nueva contraseña",
+      "repeat": "Repite la nueva contraseña"
+    },
+    "save": "Guardar contraseña",
+    "delete": "Eliminar cuenta",
+    "disable": "Te registraste con Google y no puedes cambiar tu contraseña."
+  },
   "messages": {
     "errors": {
-      "invalid_credentials": "Credenciales no válidas",
+      "invalid_credentials": "Credenciales inválidas",
       "server_error": "Error del servidor. Inténtalo de nuevo más tarde.",
-      "google_failed": "El inicio de sesión en Google ha fallado. Inténtalo de nuevo.",
-      "error_google_login": "Error del servidor durante el inicio de sesión en Google. Inténtalo de nuevo más tarde.",
-      "password_error": "Las contraseñas no coinciden.",
-      "data_message": "El usuario ya existe, introduzca otros datos."
+      "google_failed": "Error al iniciar sesión con Google. Inténtalo de nuevo.",
+      "error_google_login": "Error del servidor durante el inicio con Google. Inténtalo de nuevo más tarde.",
+      "password_error": "Las contraseñas no coinciden",
+      "data_message": "El usuario ya existe, introduce otros datos."
     },
     "success": {
-      "login_successful": "¡Inicio de sesión correcto!",
+      "login_successful": "¡Inicio de sesión exitoso!",
       "registration_successful": "¡Registro completado!"
     }
   }

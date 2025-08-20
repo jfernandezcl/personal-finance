@@ -14,7 +14,10 @@
       "label": "Password",
       "placeholder": "6+ Characters, 1 Capital letter"
     },
-    "start": "Start for free"
+    "start": "Start for free",
+    "profile": "Profile",
+    "home": "Home",
+    "edit": "Edit"
   },
   "welcomePage": {
     "auth": {
@@ -34,6 +37,27 @@
     "create": "Create account",
     "signin": "Sign In",
     "login": "Already have an account?"
+  },
+  "personalInformation": {
+    "personal": {
+      "title": "Personal information",
+      "username": "First Name",
+      "email": "Email address",
+      "phone": "Phone",
+      "biography": "Biography"
+    },
+    "password": {
+      "title": "Change Password",
+      "current": "Current password",
+      "current_input": "Enter your password",
+      "new_input": "New password",
+      "repeat_input": "Repeat the password",
+      "new": "New password",
+      "repeat": "Repeat new password"
+    },
+    "save": "Save password",
+    "delete": "Delete account",
+    "disable": "You signed up with Google and cannot change your password."
   },
   "messages": {
     "errors": {
