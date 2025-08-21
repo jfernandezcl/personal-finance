@@ -59,6 +59,10 @@
         "november": "November",
         "december": "December"
       }
+    },
+    "cardIE": {
+      "income": "Income",
+      "expense": "Expense"
     }
   },
   "personalInformation": {
