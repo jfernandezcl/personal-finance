@@ -1,10 +1,13 @@
 import { useState } from "react";
 import TransactionModal from "./TransactionModal";
 import { useDashboardContext } from "../context/DashboardContext";
+import { useTranslation } from "react-i18next";
 
 export default function BalanceCard() {
   const { setTransactions, totalBalance } = useDashboardContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { t, i18n } = useTranslation();
 
   const handleSave = (transaction) => {
     try {
@@ -24,7 +27,7 @@ export default function BalanceCard() {
     <div className="bg-[#025963] text-white p-6 max-w-6xl mx-auto rounded-lg shadow mb-8">
       <div className="flex items-center justify-between">
         <div>
-          Total Balance
+          {t("dashboardPage.balance")}
           <div className="flex items-baseline space-x-2">
             <h1 className="text-2xl font-bold">
               {isNaN(totalBalance) ? "0.00" : totalBalance.toFixed(2)} €
@@ -48,7 +51,7 @@ export default function BalanceCard() {
               setIsModalOpen(true);
             }}
           >
-            + Add
+            {t("dashboardPage.add")}
           </button>
         </div>
       </div>
