@@ -65,6 +65,8 @@
       "message_account": "Esta acción eliminará permanentemente tu cuenta.",
       "sure": "¿Estás seguro?"
     },
+    "logOut": "Cerrar sesión",
+    "manage": "Gestiona tu perfil",
     "cancel": "Cancelar",
     "save": "Guardar",
     "save_password": "Guardar contraseña",

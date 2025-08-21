@@ -65,6 +65,8 @@
       "message_account": "This action will permanently delete your account.",
       "sure": "Are you sure?"
     },
+    "logOut": "Log out",
+    "manage": "Manage your profile",
     "cancel": "Cancel",
     "save": "Save",
     "save_password": "Save password",

@@ -2,12 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logoutIcon from "../images/icon-LogOut.svg";
 import profileIcon from "../images/icon-Profile.svg";
+import { useTranslation } from "react-i18next";
 
 export default function Header() {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const dropdownRef = useRef(null);
+
+  const { t, i18n } = useTranslation();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -58,7 +61,7 @@ export default function Header() {
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
         <h1 className="text-white text-xl font-bold">
           <a className="hover:text-gray-300" href="/dashboard">
-            Personal Finance
+            {t("common.appName")}
           </a>
         </h1>
         <div className="relative">
@@ -91,7 +94,7 @@ export default function Header() {
                 onClick={handleEditProfile}
               >
                 <img src={profileIcon} alt="Profile Icon" className="h-6 w-6" />
-                <span>Manage your profile</span>
+                <span>{t("personalInformation.manage")}</span>
               </button>
               <hr className="border-gray-400" />
               <button
@@ -99,7 +102,7 @@ export default function Header() {
                 onClick={handleLogout}
               >
                 <img src={logoutIcon} alt="Logout Icon" className="h-6 w-6" />
-                <span>Log out</span>
+                <span>{t("personalInformation.logOut")}</span>
               </button>
             </div>
           )}
