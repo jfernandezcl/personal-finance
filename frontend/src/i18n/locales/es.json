@@ -38,6 +38,10 @@
     "signin": "Iniciar sesión",
     "login": "¿Ya tienes una cuenta?"
   },
+  "dashboardPage": {
+    "balance": "Total balance",
+    "add": "Añadir"
+  },
   "personalInformation": {
     "personal": {
       "title": "Información personal",
