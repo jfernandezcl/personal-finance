@@ -39,8 +39,27 @@
     "login": "¿Ya tienes una cuenta?"
   },
   "dashboardPage": {
-    "balance": "Total balance",
-    "add": "Añadir"
+    "balance": "Saldo total",
+    "add": "Añadir",
+    "cashflow": {
+      "title": "Flujo de efectivo",
+      "income": "Ingresos",
+      "expense": "Gastos",
+      "months": {
+        "january": "Enero",
+        "february": "Febrero",
+        "march": "Marzo",
+        "april": "Abril",
+        "may": "Mayo",
+        "june": "Junio",
+        "july": "Julio",
+        "august": "Agosto",
+        "september": "Septiembre",
+        "october": "Octubre",
+        "november": "Noviembre",
+        "december": "Diciembre"
+      }
+    }
   },
   "personalInformation": {
     "personal": {

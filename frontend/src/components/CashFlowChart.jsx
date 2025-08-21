@@ -10,6 +10,7 @@ import {
 } from "chart.js";
 import { useDashboardContext } from "../context/DashboardContext";
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 ChartJS.register(
   CategoryScale,
@@ -22,7 +23,7 @@ ChartJS.register(
 
 export default function CashFlowChart() {
   const { transactions } = useDashboardContext();
-
+  const { t, i18n } = useTranslation();
   const { incomeData, expenseData } = useMemo(() => {
     const monthlyIncome = Array(12).fill(0);
     const monthlyExpenses = Array(12).fill(0);
@@ -47,27 +48,28 @@ export default function CashFlowChart() {
 
   const dataBar = {
     labels: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
+      t("dashboardPage.cashflow.months.january"),
+      t("dashboardPage.cashflow.months.february"),
+      t("dashboardPage.cashflow.months.march"),
+      t("dashboardPage.cashflow.months.april"),
+      t("dashboardPage.cashflow.months.may"),
+      t("dashboardPage.cashflow.months.june"),
+      t("dashboardPage.cashflow.months.july"),
+      t("dashboardPage.cashflow.months.august"),
+      t("dashboardPage.cashflow.months.september"),
+      t("dashboardPage.cashflow.months.october"),
+      t("dashboardPage.cashflow.months.november"),
+      t("dashboardPage.cashflow.months.december"),
     ],
+
     datasets: [
       {
-        label: "Income",
+        label: t("dashboardPage.cashflow.income"),
         data: incomeData,
         backgroundColor: "#055765",
       },
       {
-        label: "Expense",
+        label: t("dashboardPage.cashflow.expense"),
         data: expenseData,
         backgroundColor: "#00d77d",
       },
@@ -90,7 +92,9 @@ export default function CashFlowChart() {
   return (
     <div className="bg-white rounded-lg shadow p-6 w-full h-full">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold text-black">Cash Flow</h2>
+        <h2 className="text-lg font-semibold text-black">
+          {t("dashboardPage.cashflow.title")}
+        </h2>
       </div>
       <Bar data={dataBar} options={optionsBar} />
     </div>
