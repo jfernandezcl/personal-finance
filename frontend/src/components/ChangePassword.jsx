@@ -80,7 +80,7 @@ export default function ChangePassword() {
             <input
               type={showPassword ? "text" : "password"}
               className="w-full rounded-lg border border-gray-300 px-4 py-2 pr-10 text-sm"
-              placeholder="Enter your password"
+              placeholder={t("personalInformation.password.current_input")}
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
               disabled={isGoogleUser}

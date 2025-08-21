@@ -42,12 +42,12 @@
     "personal": {
       "title": "Información personal",
       "username": "Nombre",
-      "email": "Dirección de correo electrónico",
+      "email": "Correo electrónico",
       "phone": "Teléfono",
       "biography": "Biografía",
       "edit_title": "Editar información personal",
       "placeholder_name": "Nombre de usuario",
-      "placeholder_email": "Dirección de correo electrónico",
+      "placeholder_email": "Correo electrónico",
       "placeholder_telephone": "Número de teléfono",
       "placeholder_biography": "Biografía (máx. 50 palabras)"
     },
@@ -60,11 +60,16 @@
       "new": "Nueva contraseña",
       "repeat": "Repite la nueva contraseña"
     },
+    "deleteAccount": {
+      "delete": "Eliminar cuenta",
+      "message_account": "Esta acción eliminará permanentemente tu cuenta.",
+      "sure": "¿Estás seguro?"
+    },
     "cancel": "Cancelar",
     "save": "Guardar",
     "save_password": "Guardar contraseña",
     "delete": "Eliminar cuenta",
-    "disable": "Te registraste con Google y no puedes cambiar tu contraseña."
+    "disable": "Te registraste con Google, no puedes cambiar tu contraseña."
   },
   "messages": {
     "errors": {
