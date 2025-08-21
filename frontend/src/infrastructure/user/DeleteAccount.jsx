@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function DeleteAccount() {
   const token = localStorage.getItem("token");
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { t, i18n } = useTranslation();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -35,27 +38,29 @@ function DeleteAccount() {
         onClick={() => setIsModalOpen(true)}
         className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-xl shadow-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
       >
-        Delete account
+        {t("personalInformation.deleteAccount.delete")}
       </button>
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-xl shadow-xl max-w-sm text-center">
-            <h2 className="text-lg font-bold mb-4">Are you sure?</h2>
+            <h2 className="text-lg font-bold mb-4">
+              {t("personalInformation.deleteAccount.sure")}
+            </h2>
             <p className="mb-6">
-              This action will permanently delete your account.
+              {t("personalInformation.deleteAccount.message_account")}
             </p>
             <div className="flex justify-center gap-4">
               <button
                 onClick={handleDelete}
                 className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
               >
-                Delete account
+                {t("personalInformation.deleteAccount.delete")}
               </button>
               <button
                 onClick={() => setIsModalOpen(false)}
                 className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
               >
-                Cancel
+                {t("personalInformation.cancel")}
               </button>
             </div>
           </div>

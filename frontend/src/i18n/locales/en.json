@@ -60,11 +60,16 @@
       "new": "New password",
       "repeat": "Repeat new password"
     },
+    "deleteAccount": {
+      "delete": "Delete account",
+      "message_account": "This action will permanently delete your account.",
+      "sure": "Are you sure?"
+    },
     "cancel": "Cancel",
     "save": "Save",
     "save_password": "Save password",
     "delete": "Delete account",
-    "disable": "You signed up with Google and cannot change your password."
+    "disable": "You registered with Google, so you cannot change your password."
   },
   "messages": {
     "errors": {
