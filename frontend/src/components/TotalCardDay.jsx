@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import totalCard from "../images/total-card.svg";
 import { useDashboardContext } from "../context/DashboardContext";
+import { useTranslation } from "react-i18next";
 
 export default function TotalCardDay() {
   const { transactions } = useDashboardContext();
   const today = new Date().toISOString().split("T")[0];
   const [selectedDate, setSelectedDate] = useState(today);
   const [dailyData, setDailyData] = useState({ income: 0, expense: 0 });
+
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const filteredTransactions = (transactions || []).filter((transaction) => {
@@ -36,10 +39,14 @@ export default function TotalCardDay() {
           onChange={(e) => setSelectedDate(e.target.value)}
         />
 
-        <p className="text-sm font-semibold text-black">Daily Overview</p>
+        <p className="text-sm font-semibold text-black">
+          {t("dashboardPage.totalCardDay.daily")}
+        </p>
 
         <div className="mt-4">
-          <p className="text-sm font-semibold text-[#025963f8]">Income</p>
+          <p className="text-sm font-semibold text-[#025963f8]">
+            {t("dashboardPage.totalCardDay.income")}
+          </p>
           <h3 className="text-xl font-bold text-black">
             {dailyData.income > 0
               ? `${dailyData.income.toFixed(2)} €`
@@ -53,7 +60,9 @@ export default function TotalCardDay() {
         </div>
 
         <div className="mt-4">
-          <p className="text-sm font-semibold text-green-500">Expense</p>
+          <p className="text-sm font-semibold text-green-500">
+            {t("dashboardPage.totalCardDay.expense")}
+          </p>
           <h3 className="text-xl font-bold text-black">
             {dailyData.expense > 0
               ? `${dailyData.expense.toFixed(2)} €`
