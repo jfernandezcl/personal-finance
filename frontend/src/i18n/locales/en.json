@@ -63,6 +63,11 @@
     "cardIE": {
       "income": "Income",
       "expense": "Expense"
+    },
+    "totalCardDay": {
+      "daily": "Daily Overview",
+      "income": "Income",
+      "expense": "Expense"
     }
   },
   "personalInformation": {
