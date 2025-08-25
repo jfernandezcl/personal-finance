@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useDashboardContext } from "../context/DashboardContext";
+import { useTranslation } from "react-i18next";
 
 export default function TransactionsNotes() {
   const { transactions, removeTransaction } = useDashboardContext();
   const today = new Date().toISOString().split("T")[0];
   const [selectedDate, setSelectedDate] = useState(today);
+  const { t, i18n } = useTranslation();
 
   const sortedTransactions = [...transactions].sort(
     (a, b) => new Date(a.date) - new Date(b.date)
@@ -26,7 +28,9 @@ export default function TransactionsNotes() {
   return (
     <div className="mt-6 mb-8 p-4 bg-white rounded-lg shadow-md">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">Transactions</h2>
+        <h2 className="text-2xl font-bold">
+          {t("dashboardPage.transactionNotes.transactions")}
+        </h2>
         <input
           type="date"
           className="bg-gray-100 border border-gray-300 rounded-md px-2 py-1 cursor-pointer"
@@ -70,13 +74,15 @@ export default function TransactionsNotes() {
                   onClick={() => handleDelete(transaction.id)}
                   className="bg-[#025963] text-white px-3 py-1 rounded-md hover:bg-[#013f48] transition-colors"
                 >
-                  Delete
+                  {t("dashboardPage.transactionNotes.delete")}
                 </button>
               </div>
             </div>
           ))
         ) : (
-          <p className="text-center text-gray-500">No transactions yet.</p>
+          <p className="text-center text-gray-500">
+            {t("dashboardPage.transactionNotes.notransaction")}
+          </p>
         )}
       </div>
     </div>
