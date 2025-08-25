@@ -75,6 +75,11 @@
       "income": "Income",
       "expense": "Expense",
       "descriptionPlaceholder": "Description"
+    },
+    "transactionNotes": {
+      "transactions": "Transactions",
+      "delete": "Delete",
+      "notransaction": "No transactions yet."
     }
   },
   "personalInformation": {
