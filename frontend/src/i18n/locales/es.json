@@ -41,6 +41,8 @@
   "dashboardPage": {
     "balance": "Saldo total",
     "add": "Añadir",
+    "cancel": "Cancelar",
+    "save": "Guardar",
     "cashflow": {
       "title": "Flujo de efectivo",
       "income": "Ingresos",
@@ -68,6 +70,13 @@
       "daily": "Resumen diario",
       "income": "Ingresos",
       "expense": "Gastos"
+    },
+    "transactionModal": {
+      "addTransaction": "Añadir transacción",
+      "amountPlaceholder": "Importe 12,50",
+      "income": "Ingresos",
+      "expense": "Gastos",
+      "descriptionPlaceholder": "Descripción"
     }
   },
   "personalInformation": {

@@ -68,6 +68,13 @@
       "daily": "Daily Overview",
       "income": "Income",
       "expense": "Expense"
+    },
+    "transactionModal": {
+      "addTransaction": "Add Transaction",
+      "amountPlaceholder": "Amount 12.50",
+      "income": "Income",
+      "expense": "Expense",
+      "descriptionPlaceholder": "Description"
     }
   },
   "personalInformation": {
