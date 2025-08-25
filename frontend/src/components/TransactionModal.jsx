@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDashboardContext } from "../context/DashboardContext";
 import ErrorAlert from "../alerts/CompleteFields";
+import { useTranslation } from "react-i18next";
 
 function TransactionModal({ isOpen, onClose }) {
   const { addTransaction } = useDashboardContext();
@@ -10,6 +11,8 @@ function TransactionModal({ isOpen, onClose }) {
   const [date, setDate] = useState(today);
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
+
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     if (!isOpen) {
@@ -62,10 +65,12 @@ function TransactionModal({ isOpen, onClose }) {
         className="bg-white p-6 rounded-lg shadow-lg w-96"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-lg font-bold mb-4 text-black">Add Transaction</h2>
+        <h2 className="text-lg font-bold mb-4 text-black">
+          {t("dashboardPage.transactionModal.addTransaction")}
+        </h2>
         <input
           type="number"
-          placeholder="Amount 12.50"
+          placeholder={t("dashboardPage.transactionModal.amountPlaceholder")}
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           className="w-full p-2 mb-2 border rounded text-black"
@@ -75,8 +80,12 @@ function TransactionModal({ isOpen, onClose }) {
           onChange={(e) => setType(e.target.value)}
           className="w-full p-2 mb-2 border rounded text-black cursor-pointer"
         >
-          <option value="income">Income</option>
-          <option value="expense">Expense</option>
+          <option value="income">
+            {t("dashboardPage.transactionModal.income")}
+          </option>
+          <option value="expense">
+            {t("dashboardPage.transactionModal.expense")}
+          </option>
         </select>
         <input
           type="date"
@@ -87,7 +96,9 @@ function TransactionModal({ isOpen, onClose }) {
         />
         <input
           type="text"
-          placeholder="Description"
+          placeholder={t(
+            "dashboardPage.transactionModal.descriptionPlaceholder"
+          )}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           className="w-full p-2 mb-2 border rounded text-black"
@@ -97,13 +108,13 @@ function TransactionModal({ isOpen, onClose }) {
             onClick={onClose}
             className="px-4 py-2 bg-gray-400 rounded hover:bg-gray-500"
           >
-            Cancel
+            {t("dashboardPage.cancel")}
           </button>
           <button
             onClick={handleSave}
             className="px-4 py-2 bg-[#025963] text-white rounded hover:bg-[#013f48] transition-colors"
           >
-            Save
+            {t("dashboardPage.save")}
           </button>
         </div>
         {error && <ErrorAlert error={error} onClose={() => setError("")} />}
