@@ -132,7 +132,10 @@
       "update_error": "Error updating profile. Please try again.",
       "fill_fields": "Please fill in all fields.",
       "password_mismatch": "New password and repeat password do not match.",
-      "change_password_error": "Error changing password. Please try again."
+      "change_password_error": "Error changing password. Please try again.",
+      "invalid_amount": "Please enter a valid amount.",
+      "required_description": "Description is required.",
+      "required_date": "Date is required."
     },
     "success": {
       "login_successful": "Login successful!",

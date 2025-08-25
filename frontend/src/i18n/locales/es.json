@@ -134,7 +134,10 @@
       "update_error": "Error al actualizar el perfil. Intenta nuevamente.",
       "fill_fields": "Por favor, completa todos los campos.",
       "password_mismatch": "La nueva contraseña y la contraseña repetida no coinciden.",
-      "change_password_error": "Error al cambiar la contraseña. Intenta de nuevo."
+      "change_password_error": "Error al cambiar la contraseña. Intenta de nuevo.",
+      "invalid_amount": "Por favor, ingresa un importe válido.",
+      "required_description": "La descripción es obligatoria.",
+      "required_date": "La fecha es obligatoria."
     },
     "success": {
       "login_successful": "¡Inicio de sesión exitoso!",
