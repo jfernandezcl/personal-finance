@@ -27,19 +27,19 @@ function TransactionModal({ isOpen, onClose }) {
 
   const handleSave = async () => {
     if (!amount || isNaN(amount)) {
-      setError("Please enter a valid amount.");
+      setError(t("messages.errors.invalid_amount"));
       setTimeout(() => setError(""), 3000);
       return;
     }
 
     if (!description.trim()) {
-      setError("Description is required.");
+      setError(t("messages.errors.required_description"));
       setTimeout(() => setError(""), 3000);
       return;
     }
 
     if (!date) {
-      setError("Date is required.");
+      setError(t("messages.errors.required_date"));
       setTimeout(() => setError(""), 3000);
       return;
     }
