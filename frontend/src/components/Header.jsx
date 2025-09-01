@@ -64,6 +64,20 @@ export default function Header() {
             {t("common.appName")}
           </a>
         </h1>
+        <div className="flex ml-auto m-1">
+          <button
+            className="px-4 py-1 m-2 cursor-pointer rounded-lg border border-[#025963] bg-gray-300 p- font-medium text-[#025963] transition hover:bg-opacity-90"
+            onClick={() => i18n.changeLanguage("en")}
+          >
+            EN
+          </button>
+          <button
+            className="px-4 py-1 m-2 cursor-pointer rounded-lg border border-[#025963] bg-gray-300 p- font-medium text-[#025963] transition hover:bg-opacity-90"
+            onClick={() => i18n.changeLanguage("es")}
+          >
+            ES
+          </button>
+        </div>
         <div className="relative">
           <button
             onMouseDown={(e) => e.stopPropagation()}
