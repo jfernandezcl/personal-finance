@@ -65,7 +65,7 @@ The project is divided into two main parts:
 
 ---
 
-<img src="./frontend/src/assets/imagen-graphic.png" alt="Task Tracker Preview" width="100%" />
+<img src="./frontend/src/assets/imagen-dashboard.png" alt="Task Tracker Preview" width="100%" />
 
 ---
 
