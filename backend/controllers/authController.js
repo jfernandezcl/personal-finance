@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import { generateToken } from "./tokenUtils.js";
 import pool from "../database/db.js";
-import { parse as uuidParse } from "uuid";
+import { parse } from "uuid";
 
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
