@@ -66,13 +66,13 @@ export default function Header() {
         </h1>
         <div className="flex ml-auto m-1">
           <button
-            className="px-4 py-1 m-2 cursor-pointer rounded-lg border border-[#025963] bg-gray-300 p- font-medium text-[#025963] transition hover:bg-opacity-90"
+            className="px-3 py-0.5 m-3 cursor-pointer rounded-lg border border-[#025963] bg-gray-300 p- font-medium text-[#025963] transition hover:bg-opacity-90"
             onClick={() => i18n.changeLanguage("en")}
           >
             EN
           </button>
           <button
-            className="px-4 py-1 m-2 cursor-pointer rounded-lg border border-[#025963] bg-gray-300 p- font-medium text-[#025963] transition hover:bg-opacity-90"
+            className="px-3 py-0.5 m-3 cursor-pointer rounded-lg border border-[#025963] bg-gray-300 p- font-medium text-[#025963] transition hover:bg-opacity-90"
             onClick={() => i18n.changeLanguage("es")}
           >
             ES
