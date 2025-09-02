@@ -56,7 +56,7 @@ function SignUpPage() {
         setTimeout(() => setError(""), 3000);
         return;
       }
-      setSuccessMessage(t("success.registration_successful"));
+      setSuccessMessage(t("messages.success.registration_successful"));
       setTimeout(() => {
         setSuccessMessage("");
         navigate("/dashboard");
